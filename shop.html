@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Shop — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="shop-hero">
+    <p class="eyebrow">Shop</p>
+    <h1>Press-on nails, delivered.</h1>
+    <p>Salon-quality sets you can apply at home in minutes. Reusable, damage-free, and made to order.</p>
+  </section>
+
+  <section id="products">
+    <div class="shop-grid" id="shopGrid">
+
+      <div class="product-card">
+        <div class="product-photo">
+          <p>Almond Nude Set</p>
+        </div>
+        <div class="product-info">
+          <h3>Almond Nude Set</h3>
+          <p class="product-desc">Soft nude almond shape, everyday wear.</p>
+          <p class="product-price">$18</p>
+          <button class="add-cart-btn">Add to cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-photo">
+          <p>Milky Chrome French</p>
+        </div>
+        <div class="product-info">
+          <h3>Milky Chrome French</h3>
+          <p class="product-desc">Sheer milky base with a chrome tip.</p>
+          <p class="product-price">$22</p>
+          <button class="add-cart-btn">Add to cart</button>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-photo">
+          <p>Classic Red Coffin</p>
+        </div>
+        <div class="product-info">
+          <h3>Classic Red Coffin</h3>
+          <p class="product-desc">Bold matte red, coffin shape.</p>
+          <p class="product-price">$20</p>
+          <button class="add-cart-btn">Add to cart</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<button id="cartToggle">🛍 Cart <span id="cartCount">0</span></button>
+
+<div id="cartOverlay"></div>
+
+<div id="cartDrawer">
+  <button id="cartClose">&times;</button>
+  <h3>Your cart</h3>
+  <div id="cartItems"></div>
+  <div id="cartTotal"></div>
+</div>
+
+<div class="sticky-book"><a href="booking.html">Book Now</a></div>
+
+<script src="script.js"></script>
+<script src="shop.js"></script>
+
+</body>
+</html>

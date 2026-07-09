@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Model with Us — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="models-hero">
+    <p class="eyebrow">Modeling</p>
+    <h1>Model for The BeautyLoft.</h1>
+    <p>Every few weeks I look for models to try new colors, cuts, and nail designs — usually at a reduced rate or free, in exchange for photos I can share. If that sounds fun, apply below.</p>
+  </section>
+
+ <section id="model-form-section">
+  <form id="modelForm" class="form-grid">
+
+    <div class="field">
+      <label for="mName">Full name</label>
+      <input type="text" id="mName" placeholder="Jane Doe" required>
+    </div>
+
+    <div class="field">
+      <label for="mAge">Age</label>
+      <input type="number" id="mAge" min="18" placeholder="18+" required>
+    </div>
+
+    <div class="field">
+      <label for="mEmail">Email</label>
+      <input type="email" id="mEmail" placeholder="you@email.com" required>
+    </div>
+
+    <div class="field">
+      <label for="mPhone">Phone number</label>
+      <input type="tel" id="mPhone" placeholder="(000) 000-0000" required>
+    </div>
+
+    <div class="field">
+      <label for="mSocial">Instagram / TikTok handle</label>
+      <input type="text" id="mSocial" placeholder="@yourhandle">
+    </div>
+
+    <div class="field">
+      <label for="mInterest">What are you interested in?</label>
+      <select id="mInterest" required>
+        <option value="" disabled selected>Select one</option>
+        <option>Hair</option>
+        <option>Nails</option>
+        <option>Both</option>
+      </select>
+    </div>
+
+    <div class="field full">
+      <label for="mAvailability">Availability</label>
+      <input type="text" id="mAvailability" placeholder="e.g. Weekday afternoons, flexible">
+    </div>
+
+    <div class="field full">
+      <label for="mAbout">Tell us a little about yourself</label>
+      <textarea id="mAbout" placeholder="Hair history, style you're drawn to, anything we should know"></textarea>
+    </div>
+
+    <p class="field full" style="color:var(--ink-soft); font-size:0.85rem;">
+      After submitting, please email 2–3 recent photos of your hair or nails to
+      <strong>hello@thebeautyloft.com</strong> so we can see your starting point.
+    </p>
+
+    <button type="submit" class="field full">Submit application</button>
+  </form>
+</section>
+</main>
+
+<script src="script.js"></script>
+<script src="models.js"></script>
+
+</body>
+</html>

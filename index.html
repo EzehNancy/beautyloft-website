@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    
+<header>
+  <a href="#top">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+<section id="top">
+  <p>Hair &amp; Nail Studio</p>
+  <h1>Soft looks, steady hands.</h1>
+  <p>The BeautyLoft is a small studio for women who want their hair and nails to look effortless — polished without trying too hard.</p>
+  <a href="booking.html" class="btn-primary">Book your appointment</a>
+  <a href="#work" class="btn-secondary">See the work</a>
+</section>
+
+<section id="about">
+  <div class="about-wrap">
+    <div class="about-photo">
+      <p>Your photo here</p>
+    </div>
+    <div class="about-text">
+      <p class="eyebrow">Meet the Artist</p>
+      <h2>Hi, I'm the hands behind The BeautyLoft.</h2>
+      <p>I started doing hair and nails because I loved the moment someone looks in the mirror and actually feels like themselves again — just a little more polished. Years later, that's still the whole point of the studio.</p>
+      <p>Every appointment starts with an honest conversation about what will actually work for your hair or nails — not just what's trending.</p>
+      <p>— Founder, The BeautyLoft</p>
+    </div>
+  </div>
+</section>
+
+<section id="work">
+  <p class="eyebrow">The Work</p>
+  <h2>A studio, in progress.</h2>
+  <p>A running look at recent hair and nail work.</p>
+
+ <div class="filters">
+  <button class="filter-btn active" data-filter="all">All Work</button>
+  <button class="filter-btn" data-filter="hair">Hair</button>
+  <button class="filter-btn" data-filter="nails">Nails</button>
+</div>
+
+<div class="gallery" id="gallery">
+  <div class="g-item" data-category="hair">
+    <span class="tag">Hair</span>
+    <p>Warm balayage</p>
+  </div>
+  <div class="g-item" data-category="nails">
+    <span class="tag">Nails</span>
+    <p>Milky chrome french</p>
+  </div>
+  <div class="g-item" data-category="hair">
+    <span class="tag">Hair</span>
+    <p>Soft glam blowout</p>
+  </div>
+  <div class="g-item" data-category="nails">
+    <span class="tag">Nails</span>
+    <p>Almond gel, nude</p>
+  </div>
+   <div class="g-item" data-category="nails">
+    <span class="tag">Nails</span>
+    <p>Milky chrome french</p>
+  </div>
+  <div class="g-item" data-category="hair">
+    <span class="tag">Hair</span>
+    <p>Soft glam blowout</p>
+  </div>
+</div>
+</section>
+
+<section id="services" class="services-section">
+  <p class="eyebrow">Services & Pricing</p>
+  <h2>What we offer.</h2>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Hair</h3>
+      <div class="service-row"><span>Cut & Style</span><span>from $65</span></div>
+      <div class="service-row"><span>Blowout</span><span>from $45</span></div>
+      <div class="service-row"><span>Full Color</span><span>from $120</span></div>
+      <div class="service-row"><span>Balayage / Highlights</span><span>from $180</span></div>
+    </div>
+
+    <div class="service-card">
+      <h3>Nails</h3>
+      <div class="service-row"><span>Classic Manicure</span><span>from $30</span></div>
+      <div class="service-row"><span>Gel Manicure</span><span>from $45</span></div>
+      <div class="service-row"><span>Full Set (Acrylic/Gel-X)</span><span>from $65</span></div>
+      <div class="service-row"><span>Nail Art</span><span>from $10</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="aftercare">
+  <p class="eyebrow">Aftercare</p>
+  <h2>Make it last.</h2>
+  <p>A few habits that keep your color, cut, and nails looking fresh between visits.</p>
+
+  <div class="services-grid">
+    <div class="service-card">
+      <h3>Hair</h3>
+      <p class="tip">Skip washing for 48 hours after color so it fully sets.</p>
+      <p class="tip">Use a sulfate-free shampoo — sulfates strip color fast.</p>
+      <p class="tip">Always use a heat protectant before hot tools.</p>
+    </div>
+    <div class="service-card">
+      <h3>Nails</h3>
+      <p class="tip">Apply cuticle oil every night — it's the biggest thing for gel longevity.</p>
+      <p class="tip">Wear gloves for cleaning or dishes — chemicals lift gel edges fast.</p>
+      <p class="tip">Never pick or peel gel off — it takes layers of your natural nail with it.</p>
+    </div>
+  </div>
+</section>
+
+<section id="gift-cards" class="gift-banner">
+  <h2>Give the gift of glow.</h2>
+  <p>Gift cards are available for any service or dollar amount.</p>
+  <a href="shop.html" class="btn-primary">Ask about gift cards</a>
+</section>
+
+<section id="faq">
+  <p class="eyebrow">Good to Know</p>
+  <h2>Frequently asked.</h2>
+
+  <details class="faq-item">
+    <summary>Do you take walk-ins?</summary>
+    <p>Walk-ins are welcome when there's an opening, but booking ahead guarantees your spot.</p>
+  </details>
+  <details class="faq-item">
+    <summary>Do I need to pay a deposit?</summary>
+    <p>A small deposit is required for color and full nail set appointments to hold your slot.</p>
+  </details>
+  <details class="faq-item">
+    <summary>What's your cancellation policy?</summary>
+    <p>We ask for at least 24 hours' notice to cancel or reschedule.</p>
+  </details>
+</section>
+
+<section id="testimonials">
+  <p class="eyebrow">Kind Words</p>
+  <h2>From the chair.</h2>
+
+  <div class="testi-grid">
+    <div class="testi-card">
+      <p>"I've never left a salon this relaxed. My color came out exactly like the photo I brought in."</p>
+      <p class="testi-name">— Amara O.</p>
+    </div>
+    <div class="testi-card">
+      <p>"My gel set lasted almost a month with zero chipping."</p>
+      <p class="testi-name">— Chidinma E.</p>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div>
+    <p>The BeautyLoft</p>
+    <p>A hair and nail studio built around one idea: soft looks, done properly.</p>
+  </div>
+  <div>
+    <h4>Visit / Contact</h4>
+    <p>hello@thebeautyloft.com</p>
+    <p>(000) 000-0000</p>
+    <p>123 Studio Lane, Your City</p>
+  </div>
+  <div>
+    <h4>Hours</h4>
+    <p>Tue – Fri: 10am – 7pm</p>
+    <p>Saturday: 9am – 5pm</p>
+    <p>Sun – Mon: Closed</p>
+  </div>
+</footer>
+
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner" id="lightboxInner"></div>
+  <button class="lightbox-close" id="lightboxClose">&times;</button>
+</div>
+
+<script src="script.js"></script> 
+
+</body>
+</html>
