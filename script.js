@@ -29,6 +29,23 @@ filterButtons.forEach(function(btn) {
   });
 });
 
+const lookbookItems = [
+  { label:'Cinnamon balayage',  grad:'linear-gradient(160deg,#B98A82,#5B3A45)' },
+  { label:'Espresso chrome',    grad:'linear-gradient(160deg,#6B5F5A,#2E2622)' },
+  { label:'Copper glow blowout',grad:'linear-gradient(160deg,#C9A876,#98645C)' },
+  { label:'Terracotta nail art',grad:'linear-gradient(160deg,#98645C,#C9A876)' },
+  { label:'Soft caramel roots', grad:'linear-gradient(160deg,#E4D8D2,#B98A82)' },
+];
+const lookbookStrip = document.getElementById('lookbookStrip');
+if (lookbookStrip) {
+  lookbookItems.forEach(item => {
+    const el = document.createElement('div');
+    el.className = 'lookbook-card';
+    el.innerHTML = `<span class="lookbook-badge">Trending</span><div class="ph" style="background:${item.grad}">${item.label}</div>`;
+    lookbookStrip.appendChild(el);
+  });
+}
+
 const lightbox = document.getElementById('lightbox');
 const lightboxInner = document.getElementById('lightboxInner');
 const lightboxClose = document.getElementById('lightboxClose');

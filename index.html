@@ -12,7 +12,7 @@
 <body>
     
 <header>
-  <a href="#top">The BeautyLoft</a>
+  <a href="#top" class="logo">The <span>BeautyLoft</span></a>
   <button id="menuToggle">☰</button>
   <nav>
     <ul id="navList">
@@ -25,12 +25,23 @@
     </ul>
   </nav>
 </header>
-<section id="top">
-  <p>Hair &amp; Nail Studio</p>
-  <h1>Soft looks, steady hands.</h1>
-  <p>The BeautyLoft is a small studio for women who want their hair and nails to look effortless — polished without trying too hard.</p>
-  <a href="booking.html" class="btn-primary">Book your appointment</a>
-  <a href="#work" class="btn-secondary">See the work</a>
+
+<section class="hero">
+    <div>
+      <span class="eyebrow">Hair &amp; Nail Studio</span>
+      <h1>Soft looks,<br><em>steady</em> hands.</h1>
+      <p class="lede">The BeautyLoft is a small studio for women who want their hair and nails to look effortless — polished without trying too hard. Browse the work, then book your seat.</p>
+      <div class="hero-ctas">
+        <a href="booking.html" class="btn-primary">Book your appointment →</a>
+        <a href="#work" class="btn-secondary">See the work</a>
+      </div>
+    </div>
+    <div class="hero-board" aria-hidden="true">
+      <figure class="pin-card pc1"><div class="ph g1"><img src="images/figure2.jpeg" alt="Balayage & Blowout"></div><figcaption>Nails</figcaption></figure>
+      <figure class="pin-card pc2"><div class="ph g2"><img src="images/figure3.jpeg" alt="Almond Gel Set"></div><figcaption>Hair</figcaption></figure>
+      <figure class="pin-card pc3"><div class="ph g3"><img src="images/figure1.jpeg" alt="Soft Glam Updo"></div><figcaption>Nails</figcaption></figure>
+      <figure class="pin-card pc4"><div class="ph g4"><img src="images/figure4.jpeg" alt="Chrome French"></div><figcaption>Hair</figcaption></figure>
+    </div>
 </section>
 
 
@@ -71,6 +82,22 @@
     <img src="images/hair3.jpeg">
   </div>
 </div>
+
+<div class="lookbook-section">
+    <div class="section-head reveal">
+        <span class="eyebrow">Trending Now</span>
+        <h2>This season's lookbook.</h2>
+    </div>
+
+    <div class="lookbook-strip reveal" id="lookbookStrip"></div>
+</div>
+<div style="margin-top:70px;">
+ <div class="section-head reveal" style="margin-bottom:30px;">
+ <span class="eyebrow">Trending Now</span>
+ <h2 style="font-size:1.9rem;">This season's lookbook.</h2>
+ </div>
+ <div class="lookbook-strip reveal" id="lookbookStrip"></div>
+</div>
 </section>
 
 
@@ -101,6 +128,39 @@
   </div>
 </section>
 
+
+
+
+  <section id="aftercare">
+    <div class="section-head reveal">
+      <span class="eyebrow">Aftercare</span>
+      <h2>Make it last.</h2>
+      <p>A few habits that keep your color, cut, and nails looking fresh between visits.</p>
+    </div>
+    <div class="aftercare-grid">
+      <div class="aftercare-card reveal">
+        <h3> Hair</h3>
+        <ul>
+          <li><b>Day 1–2</b>Skip washing for 48 hours after color so it fully sets.</li>
+          <li><b>Wash</b>Use a sulfate-free shampoo — sulfates strip color fast.</li>
+          <li><b>Heat</b>Always use a heat protectant before hot tools, every time.</li>
+          <li><b>Water</b>Rinse with cooler water — hot water opens the cuticle and fades color.</li>
+          <li><b>Refresh</b>Book a gloss or toner every 4–6 weeks to keep balayage from turning brassy.</li>
+        </ul>
+      </div>
+      <div class="aftercare-card reveal">
+        <h3> Nails</h3>
+        <ul>
+          <li><b>First hour</b>Avoid hot water or dishwashing right after a gel set while it fully cures.</li>
+          <li><b>Daily</b>Apply cuticle oil every night — it's the single biggest thing for gel longevity.</li>
+          <li><b>Gloves</b>Wear gloves for cleaning or dishes — chemicals lift gel edges fast.</li>
+          <li><b>Don't peel</b>Never pick or peel gel off — it takes layers of your natural nail with it.</li>
+          <li><b>Timing</b>Rebook fills every 2–3 weeks before lifting turns into breakage.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
 <section id="about">
   <div class="about-wrap">
     <div class="about-photo">
@@ -114,28 +174,7 @@
       <p>— Founder, Ezeh Nancy</p>
     </div>
   </div>
-</section>
-
-<section id="aftercare">
-  <p class="eyebrow">Aftercare</p>
-  <h2>Make it last.</h2>
-  <p>A few habits that keep your color, cut, and nails looking fresh between visits.</p>
-
-  <div class="services-grid">
-    <div class="service-card">
-      <h3>Hair</h3>
-      <p class="tip">Skip washing for 48 hours after color so it fully sets.</p>
-      <p class="tip">Use a sulfate-free shampoo — sulfates strip color fast.</p>
-      <p class="tip">Always use a heat protectant before hot tools.</p>
-    </div>
-    <div class="service-card">
-      <h3>Nails</h3>
-      <p class="tip">Apply cuticle oil every night — it's the biggest thing for gel longevity.</p>
-      <p class="tip">Wear gloves for cleaning or dishes — chemicals lift gel edges fast.</p>
-      <p class="tip">Never pick or peel gel off — it takes layers of your natural nail with it.</p>
-    </div>
-  </div>
-</section>
+</section>  
 
 <section id="gift-cards" class="gift-banner">
   <h2>Give the gift of glow.</h2>
@@ -143,28 +182,48 @@
   <a href="shop.html" class="btn-primary">Ask about gift cards</a>
 </section>
 
-<section id="faq">
-  <p class="eyebrow">Good to Know</p>
-  <h2>Frequently asked.</h2>
+  <section id="faq" style="background:var(--bg-soft);">
+    <div class="section-head reveal">
+      <span class="eyebrow">Good to Know</span>
+      <h2>Frequently asked.</h2>
+    </div>
+    <div class="faq-list">
+      <details class="faq-item reveal">
+        <summary>Do you take walk-ins?</summary>
+        <p>Walk-ins are welcome when there's an opening, but booking ahead guarantees your spot — especially on weekends.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>Do I need to pay a deposit?</summary>
+        <p>A small deposit is required for color and full nail set appointments to hold your slot. It's applied toward your total at checkout.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>How far in advance should I book?</summary>
+        <p>1–2 weeks ahead is ideal, especially for color or special-occasion styling. Weekend slots fill up the fastest.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What should I bring to my appointment?</summary>
+        <p>Inspo photos help a lot — text them ahead of time if you can. For color appointments, come with clean, product-free hair.</p>
+      </details>
+      <details class="faq-item reveal">
+        <summary>What's your cancellation policy?</summary>
+        <p>We ask for at least 24 hours' notice to cancel or reschedule. Late cancellations or no-shows may be charged a fee.</p>
+      </details>
+    </div>
+  </section>
 
-  <details class="faq-item">
-    <summary>Do you take walk-ins?</summary>
-    <p>Not at the moment, but we recommend booking in advance to secure your spot.</p>
-  </details>
-  <details class="faq-item">
-    <summary>Do I need to pay a deposit?</summary>
-    <p>No, we don't require a deposit for any services.</p>
-  </details>
-  <details class="faq-item">
-    <summary>What's your cancellation policy?</summary>
-    <p>We ask for at least 24 hours' notice to cancel or reschedule.</p>
-  </details>
-</section>
-
+  <section id="book">
+    <div class="gift-banner reveal" style="background:linear-gradient(120deg, var(--plum) 0%, var(--rose-deep) 100%);">
+      <div>
+        <h3 style="color:#fff;">Ready to get in the chair?</h3>
+        <p>See real open time slots and pick what works for you — no back-and-forth needed.</p>
+      </div>
+      <a href="booking.html" class="btn-primary" style="background:var(--gold); color:var(--plum);">See available times →</a>
+    </div>
+  </section>
 
 <footer id="contact">
   <div>
-    <p>The BeautyLoft</p>
+    <a href="#top" class="logo">The <span>BeautyLoft</span></a>
     <p>A hair and nail studio built around one idea: soft looks, done properly.</p>
   </div>
   <div>
