@@ -148,11 +148,20 @@ h1, h2, h3 {
     position:absolute; bottom:10px; left:14px; right:14px;
     font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
     color:rgba(255,255,255,0.85); font-weight:600;
+    border-radius:100px; padding:4px 12px; background:rgba(36, 30, 27, 0.3);
+    width:fit-content; margin:10px;
   }
   .pc1{ width:230px; height:290px; top:0; left:10%; transform:rotate(-6deg); z-index:3;  gap:20px; }
-  .pc2{ width:190px; height:230px; top:60px; right:6%; transform:rotate(5deg); z-index:2; }
+  .pc2{ width:190px; height:230px; top:60px; left:56%; transform:rotate(8deg); z-index:2; }
   .pc3{ width:210px; height:180px; bottom:0; left:24%; transform:rotate(3deg); z-index:4; }
-  .pc4{ width:150px; height:150px; bottom:40px; right:20%; transform:rotate(8deg); z-index:5; }
+  .pc4{
+    width:150px;
+    height:150px;
+    bottom:40px;
+    right:20%;
+    transform:translateX(20px) rotate(8deg);
+    z-index:5;
+}
 
   .g1{ background:linear-gradient(150deg,#B98A82,#5B3A45); }
   .g2{ background:linear-gradient(150deg,#C9A876,#98645C); }
@@ -257,6 +266,7 @@ h1, h2, h3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+  margin: 20px;
 }
 
 .g-item {
@@ -267,7 +277,7 @@ h1, h2, h3 {
   display: flex;
   align-items: flex-end;
   padding: 18px;
-  margin-right: 20px;
+
 }
 
 .g-item img {
@@ -633,13 +643,17 @@ h1, h2, h3 {
     padding:60px 20px;
     margin:0 10px;
     border-radius:20px;
+    display: flex;
+
 }
+
 
     #book .gift-banner{
     width:100%;
     max-width:900px; 
     margin:0 auto;
     padding:40px 25px;
+    display:flex;
 }
 
     #book .gift-banner h3{
