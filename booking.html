@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Book an Appointment — The BeautyLoft</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -25,7 +26,7 @@
   </nav>
 </header>
 
-<main>
+<main class="booking-page">
   <section class="page-hero">
     <p class="eyebrow">Booking</p>
     <h1>Pick a time that works.</h1>
@@ -55,7 +56,7 @@
       <form id="bookingForm">
         <div class="field">
           <label for="name">Full name</label>
-          <input type="text" id="name" placeholder="Jane Doe" required>
+          <input type="text" id="name" placeholder="Your Name" required>
         </div>
         <div class="field">
           <label for="phone">Phone number</label>
@@ -70,14 +71,14 @@
           <select id="service" required>
             <option value="" disabled selected>Select a service</option>
             <optgroup label="Hair">
-              <option>Cut & Style</option>
+              <option>Braiding</option>
               <option>Blowout</option>
-              <option>Full Color</option>
+              <option>Wig Install</option>
             </optgroup>
             <optgroup label="Nails">
-              <option>Classic Manicure</option>
-              <option>Gel Manicure</option>
-              <option>Full Set (Acrylic/Gel-X)</option>
+              <option>Acrylic Extension</option>
+              <option>Polygel Extension</option>
+              <option>Gel-X</option>
             </optgroup>
           </select>
         </div>
@@ -94,6 +95,25 @@
   </section>
 
 </main>
+
+<footer id="contact">
+  <div>
+    <a href="#top" class="logo">The <span>BeautyLoft</span></a>
+    <p>A hair and nail studio built around one idea: soft looks, done properly.</p>
+  </div>
+  <div>
+    <h4>Visit / Contact</h4>
+    <p><a href="mailto:beautyloft@gmail.com">beautyloft@gmail.com</a></p>
+    <p><a href="https://wa.me/2348100874920">+234 810 087 4920</a></p>
+    <p>Oni Crescent, Lagos</p>
+  </div>
+  <div>
+    <h4>Hours</h4>
+    <p>Mon – Fri: 10am – 5pm</p>
+    <p>Saturday: 12pm – 5pm</p>
+    <p>Sun: Closed</p>
+  </div>
+</footer>
 
 <script src="script.js"></script>
 <script src="booking.js"></script>
