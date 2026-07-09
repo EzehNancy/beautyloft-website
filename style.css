@@ -93,11 +93,14 @@ h1, h2, h3 {
 
 .about-photo {
   aspect-ratio: 4/5;
-  background: linear-gradient(160deg, #B98A82, #2E2622);
   border-radius: 18px;
-  display: flex;
-  align-items: flex-end;
-  padding: 20px;
+  overflow: hidden;
+}
+
+.about-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .about-photo p {
@@ -157,8 +160,15 @@ h1, h2, h3 {
   display: flex;
   align-items: flex-end;
   padding: 18px;
+  margin-right: 20px;
 }
 
+.g-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
+}
 .g-item p {
   color: white;
   font-style: italic;
@@ -285,7 +295,7 @@ footer {
   display: grid;
   grid-template-columns: 1.3fr 1fr 1fr;
   gap: 40px;
-  padding-top: 70px;
+  padding: 70px;
   border-top: 1px solid #E4D8D2;
 }
 
@@ -695,4 +705,9 @@ footer div:first-child p:first-child {
     padding: 12px 24px;
     border-radius: 100px;
   }
+}
+
+a{
+    text-decoration: none;
+    color: var(--inksoft);
 }

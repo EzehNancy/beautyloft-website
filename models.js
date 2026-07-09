@@ -30,9 +30,8 @@ const body = encodeURIComponent(
   'About: ' + data.about
 );
 
-confirmPanel.innerHTML =
-  '<p>Thanks, ' + data.name + '! Click below to send your application.</p>' +
-  '<a href="mailto:' + BUSINESS_EMAIL + '?subject=' + subject + '&body=' + body + '">Send application via email</a>';
-
+window.location.href =
+        `mailto:${BUSINESS_EMAIL}?subject=${subject}&body=${body}`;
+        
 modelForm.reset();
 });
