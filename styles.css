@@ -139,29 +139,10 @@
     font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase;
     color:rgba(255,255,255,0.85); font-weight:600;
   }
-.pc1{
-    top:0;
-    left:10%;
-    transform:rotate(-6deg);
-}
-
-.pc2{
-    top:50px;
-    right:8%;
-    transform:rotate(5deg);
-}
-
-.pc3{
-    bottom:0;
-    left:22%;
-    transform:rotate(4deg);
-}
-
-.pc4{
-    bottom:40px;
-    right:18%;
-    transform:rotate(8deg);
-}
+  .pc1{ width:230px; height:290px; top:0; left:10%; transform:rotate(-6deg); z-index:3; }
+  .pc2{ width:190px; height:230px; top:60px; right:6%; transform:rotate(5deg); z-index:2; }
+  .pc3{ width:210px; height:180px; bottom:0; left:24%; transform:rotate(3deg); z-index:4; }
+  .pc4{ width:150px; height:150px; bottom:40px; right:20%; transform:rotate(-8deg); z-index:1; }
 
   .g1{ background:linear-gradient(150deg,#B98A82,#5B3A45); }
   .g2{ background:linear-gradient(150deg,#C9A876,#98645C); }

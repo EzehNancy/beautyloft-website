@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book an Appointment — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#work">Work</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="index.html#contact">Contact</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">Booking</p>
+    <h1>Pick a time that works.</h1>
+    <p>Choose an open day and time below — no back-and-forth needed. You'll get a confirmation, and can add it straight to your own calendar.</p>
+  </section>
+
+  <section class="booking-wrap">
+
+    <div class="cal-card">
+      <div class="cal-header">
+        <button id="prevMonth">‹</button>
+        <h3 id="calMonthLabel"></h3>
+        <button id="nextMonth">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+
+      <div id="slotSection" style="display:none;">
+        <h3 id="slotDateLabel"></h3>
+        <div class="slot-grid" id="slotGrid"></div>
+        <p class="slot-hint">Open Tue–Fri 10am–7pm, Sat 9am–5pm. Closed Sun–Mon.</p>
+      </div>
+    </div>
+
+    <div class="booking-form-side">
+      <div id="bookSummary" style="display:none;"></div>
+
+      <form id="bookingForm">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" placeholder="Jane Doe" required>
+        </div>
+        <div class="field">
+          <label for="phone">Phone number</label>
+          <input type="tel" id="phone" placeholder="(000) 000-0000" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="you@email.com" required>
+        </div>
+        <div class="field">
+          <label for="service">Service</label>
+          <select id="service" required>
+            <option value="" disabled selected>Select a service</option>
+            <optgroup label="Hair">
+              <option>Cut & Style</option>
+              <option>Blowout</option>
+              <option>Full Color</option>
+            </optgroup>
+            <optgroup label="Nails">
+              <option>Classic Manicure</option>
+              <option>Gel Manicure</option>
+              <option>Full Set (Acrylic/Gel-X)</option>
+            </optgroup>
+          </select>
+        </div>
+        <div class="field">
+          <label for="notes">Notes (optional)</label>
+          <textarea id="notes" placeholder="Anything we should know"></textarea>
+        </div>
+        <button type="submit" id="confirmBtn" disabled>Select a date and time first</button>
+    </form>
+
+      <div id="confirmPanel"></div>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+<script src="booking.js"></script>
+</body>
+</html>

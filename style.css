@@ -137,7 +137,7 @@ h1, h2, h3 {
     height:520px; 
     margin:0;
     background: #ede2dd;
-    border-radius: 18px;
+    border-radius: 100%;
 }
   .pin-card{
     position:absolute; border-radius:14px; overflow:hidden;
@@ -1098,3 +1098,213 @@ a{
     text-decoration: none;
     color: var(--inksoft);
 }
+
+.page-hero {
+  padding-top: 180px;
+  text-align: center;
+}
+
+.page-hero h1 {
+  font-size: 2.8rem;
+  margin: 10px 0;
+}
+
+.page-hero p {
+  color: var(--ink-soft);
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.booking-wrap {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 50px;
+  align-items: start;
+  padding-top: 0;
+}
+
+@media (max-width: 900px) {
+  .booking-wrap {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cal-card {
+  background: #FBF7F5;
+  border: 1px solid #E4D8D2;
+  border-radius: 18px;
+  padding: 28px;
+}
+
+.cal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 22px;
+}
+
+.cal-header button {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid #E4D8D2;
+  background: white;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.cal-header button:hover {
+  background: var(--ink);
+  color: white;
+}
+
+.cal-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+  text-align: center;
+}
+
+.cal-dow {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  font-weight: 700;
+  padding-bottom: 8px;
+}
+
+.cal-day {
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.cal-day.empty {
+  visibility: hidden;
+  cursor: default;
+}
+
+.cal-day.disabled {
+  color: #E4D8D2;
+  cursor: not-allowed;
+}
+
+.cal-day.available:hover {
+  background: #E4D8D2;
+}
+.cal-day.selected {
+  background: var(--plum);
+  color: white;
+  font-weight: 700;
+}
+
+.slot-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+  margin-bottom: 20px;
+}
+
+.slot-pill {
+  padding: 10px 16px;
+  border-radius: 100px;
+  border: 1px solid #E4D8D2;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: var(--ink);
+  background: white;
+  cursor: pointer;
+}
+
+.slot-pill:hover {
+  border-color: var(--rose-deep);
+}
+
+.slot-pill.selected {
+  background: var(--plum);
+  color: white;
+  border-color: var(--plum);
+}
+
+#confirmBtn {
+  width: 100%;
+  padding: 15px;
+  border-radius: 100px;
+  border: none;
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-top: 10px;
+  background: var(--plum);
+  color: white;
+}
+
+#confirmBtn:disabled {
+  background: #E4D8D2;
+  color: var(--ink-soft);
+  cursor: not-allowed;
+}
+
+#confirmPanel {
+  display: none;
+  background: #FBF7F5;
+  border: 1px solid #E4D8D2;
+  border-radius: 14px;
+  padding: 24px;
+  margin-top: 20px;
+}
+
+#confirmPanel.show {
+  display: block;
+}
+
+#confirmPanel p {
+  margin-bottom: 14px;
+  color: var(--ink);
+}
+
+#confirmPanel a {
+  display: inline-block;
+  background: var(--plum);
+  color: white;
+  text-decoration: none;
+  padding: 13px 24px;
+  border-radius: 100px;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+#bookingIdDisplay {
+  font-family: 'Fraunces', serif;
+  font-size: 2.2rem;
+  font-weight: 600;
+  color: var(--plum);
+  letter-spacing: 0.05em;
+  
+}
+
+#bookingDetailsCard {
+  background: #FBF7F5;
+  border: 1px solid #E4D8D2;
+  border-radius: 16px;
+  padding: 26px;
+  max-width: 400px;
+  margin: 0 auto 30px;
+  text-align: left;
+}
+
+#bookingDetailsCard p {
+  padding: 8px 0;
+  border-top: 1px solid #E4D8D2;
+}
+
+#bookingDetailsCard p:first-child {
+  border-top: none;
+}
+
+
