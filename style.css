@@ -975,7 +975,7 @@ footer div:first-child p:first-child {
 #model-form-section {
   max-width: 600px;
   margin: 0 auto;
-  padding-top: 0;
+  padding: 10px;
 }
 
 .field {
@@ -984,7 +984,7 @@ footer div:first-child p:first-child {
 
 .field label {
   display: block;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-weight: 600;
@@ -1449,3 +1449,86 @@ a{
       margin-bottom: 50px ;
     }
 }
+
+#signupMessage, #loginMessage {
+  display: none;
+  background: #FBF7F5;
+  border: 1px solid #E4D8D2;
+  border-radius: 12px;
+  padding: 16px 20px;
+  margin-top: 16px;
+  color: var(--rose-deep);
+  font-size: 0.9rem;
+  text-align: center;
+
+}
+
+#signupMessage.show, #loginMessage.show {
+  display: block;
+}
+
+#authNavItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.submit-btn{
+    display: block;
+    width: 200px;
+    padding: 12px 24px;
+    border-radius: 100px;
+    background: var(--plum);
+    color: white;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    margin: 20px auto 0;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover{
+    background: var(--rose-deep);
+}
+.submit-btn{
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.submit-btn:hover{
+    background: var(--rose-deep);
+    transform: translateY(-2px);
+}
+#logoutBtn {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+
+}
+
+.profile-card {
+  background: #FBF7F5;
+  border: 1px solid #E4D8D2;
+  border-radius: 18px;
+  padding: 30px;
+  max-width: 600px;
+  margin: 0 auto 24px;
+}
+
+.profile-card h3 {
+  font-size: 1.2rem;
+  margin-bottom: 16px;
+}
+
+.profile-card p {
+  padding: 10px 0;
+  border-top: 1px solid #E4D8D2;
+}
+
+.profile-card p:first-of-type {
+  border-top: none;
+}
+

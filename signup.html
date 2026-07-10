@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li><a href="login.html">Log In</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">Join Us</p>
+    <h1>Create your account.</h1>
+    <p>Save your bookings, orders, and applications all in one place.</p>
+  </section>
+
+  <section style="max-width:480px; margin:0 auto; padding-top:0;">
+    <div class="form-light">
+      <form id="signupForm">
+        <div class="field">
+          <label for="name">Full name</label>
+          <input type="text" id="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        <div class="field">
+          <label for="password">Password</label>
+          <input type="password" id="password" required minlength="8">
+        </div>
+        <button type="submit" class="submit-btn">Create account</button>
+      </form>
+      <div id="signupMessage"></div>
+      <p style="text-align:center; margin-top:18px; font-size:0.9rem; color:var(--ink-soft);">
+        Already have an account? <a href="login.html" style="color:var(--plum); font-weight:600;">Log in</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+<script src="signup.js"></script>
+</body>
+</html>
