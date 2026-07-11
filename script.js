@@ -73,7 +73,7 @@ if (lightbox) {
 const authNavItem = document.getElementById('authNavItem');
 
 if (authNavItem) {
-  fetch('http://127.0.0.1:3000/me', {
+  fetch('https://beautyloft-backend.onrender.com/me', {
     credentials: 'include'
   })
     .then(function(response) {
@@ -95,7 +95,7 @@ if (authNavItem) {
         authNavItem.innerHTML = navHtml;
 
         document.getElementById('logoutBtn').addEventListener('click', function() {
-          fetch('http://127.0.0.1:3000/logout', {
+          fetch('https://beautyloft-backend.onrender.com/logout', {
             method: 'POST',
             credentials: 'include'
           }).then(function() {

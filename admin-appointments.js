@@ -1,5 +1,5 @@
 
-fetch('http://127.0.0.1:3000/me', {
+fetch('https://beautyloft-backend.onrender.com/me', {
   credentials: 'include'
 })
   .then(function(response) {
@@ -21,7 +21,7 @@ fetch('http://127.0.0.1:3000/me', {
   });
 
 document.getElementById('adminLogoutBtn').addEventListener('click', function() {
-  fetch('http://127.0.0.1:3000/logout', {
+  fetch('https://beautyloft-backend.onrender.com/logout', {
     method: 'POST',
     credentials: 'include'
   }).then(function() {
@@ -34,7 +34,7 @@ document.getElementById('mobileSidebarToggle').addEventListener('click', functio
 });
 
 function loadAppointments() {
-  fetch('http://127.0.0.1:3000/admin/appointments', {
+  fetch('https://beautyloft-backend.onrender.com/admin/appointments', {
     credentials: 'include'
   })
     .then(function(response) {
@@ -92,7 +92,7 @@ function attachActionListeners() {
       const id = btn.dataset.id;
       const newStatus = btn.dataset.status;
 
-      fetch('http://127.0.0.1:3000/admin/appointments/' + id, {
+      fetch('https://beautyloft-backend.onrender.com/admin/appointments/' + id, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'include',

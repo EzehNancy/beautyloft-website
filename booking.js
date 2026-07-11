@@ -2,19 +2,22 @@ let viewDate = new Date();
 viewDate.setDate(1);
 let selectedDate = null;
 let selectedTime = null;
+let currentUser = null;
 
 const calGrid = document.getElementById('calGrid');
 const calMonthLabel = document.getElementById('calMonthLabel');
 const slotSection = document.getElementById('slotSection');
 const slotGrid = document.getElementById('slotGrid');
 const slotDateLabel = document.getElementById('slotDateLabel');
+const confirmBtn = document.getElementById('confirmBtn');
+const bookingForm = document.getElementById('bookingForm');
+const confirmPanel = document.getElementById('confirmPanel');
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+const BUSINESS_EMAIL = 'hello@thebeautyloft.com';
 
-let currentUser = null;
-
-fetch('http://127.0.0.1:3000/me', {
+fetch('https://beautyloft-backend.onrender.com/me', {
   credentials: 'include'
 })
   .then(function(response) {
@@ -88,17 +91,7 @@ function selectDate(date, el) {
   el.classList.add('selected');
   selectedDate = date;
   renderSlots(date);
-  function selectDate(date, el) {
-  const previouslySelected = document.querySelector('.cal-day.selected');
-  if (previouslySelected) {
-    previouslySelected.classList.remove('selected');
-  }
-
-  el.classList.add('selected');
-  selectedDate = date;
-  renderSlots(date);
   updateConfirmState();
-}
 }
 
 function hoursForDay(weekday) {
@@ -144,20 +137,6 @@ function renderSlots(date) {
   });
 }
 
-renderCalendar();
-
-document.getElementById('prevMonth').addEventListener('click', function() {
-  viewDate.setMonth(viewDate.getMonth() - 1);
-  renderCalendar();
-});
-
-document.getElementById('nextMonth').addEventListener('click', function() {
-  viewDate.setMonth(viewDate.getMonth() + 1);
-  renderCalendar();
-});
-
-const confirmBtn = document.getElementById('confirmBtn');
-
 function updateConfirmState() {
   if (selectedDate && selectedTime) {
     confirmBtn.disabled = false;
@@ -168,9 +147,17 @@ function updateConfirmState() {
   }
 }
 
-const BUSINESS_EMAIL = 'hello@thebeautyloft.com';
-const bookingForm = document.getElementById('bookingForm');
-const confirmPanel = document.getElementById('confirmPanel');
+function generateBookingId() {
+  const number = Math.floor(100000 + Math.random() * 900000);
+  return 'BL-' + number;
+}
+
+function toISODate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return year + '-' + month + '-' + day;
+}
 
 bookingForm.addEventListener('submit', function(e) {
   e.preventDefault();
@@ -184,6 +171,7 @@ bookingForm.addEventListener('submit', function(e) {
   };
 
   const dateLabel = selectedDate.toDateString();
+  const isoDate = toISODate(selectedDate);
   const bookingId = generateBookingId();
 
   const subject = encodeURIComponent('Appointment request ' + bookingId + ' — ' + data.service);
@@ -212,13 +200,13 @@ bookingForm.addEventListener('submit', function(e) {
     body: body
   };
 
-  fetch('http://127.0.0.1:3000/appointments', {
+  fetch('https://beautyloft-backend.onrender.com/appointments', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
     body: JSON.stringify({
       service: data.service,
-      date: dateLabel,
+      date: isoDate,
       time: selectedTime,
       notes: data.notes,
       bookingRef: bookingId
@@ -233,8 +221,14 @@ bookingForm.addEventListener('submit', function(e) {
     });
 });
 
+renderCalendar();
 
-function generateBookingId() {
-  const number = Math.floor(100000 + Math.random() * 900000);
-  return 'BL-' + number;
-}
+document.getElementById('prevMonth').addEventListener('click', function() {
+  viewDate.setMonth(viewDate.getMonth() - 1);
+  renderCalendar();
+});
+
+document.getElementById('nextMonth').addEventListener('click', function() {
+  viewDate.setMonth(viewDate.getMonth() + 1);
+  renderCalendar();
+});

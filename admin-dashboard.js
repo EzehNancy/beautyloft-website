@@ -1,4 +1,4 @@
-fetch('http://127.0.0.1:3000/me', {
+fetch('https://beautyloft-backend.onrender.com/me', {
   credentials: 'include'
 })
   .then(function(response) {
@@ -21,7 +21,7 @@ fetch('http://127.0.0.1:3000/me', {
     loadStats();
     loadActivity();
     function loadActivity() {
-  fetch('http://127.0.0.1:3000/admin/recent-activity', {
+  fetch('https://beautyloft-backend.onrender.com/admin/recent-activity', {
     credentials: 'include'
   })
     .then(function(response) {
@@ -44,7 +44,7 @@ fetch('http://127.0.0.1:3000/me', {
 
 
 document.getElementById('adminLogoutBtn').addEventListener('click', function() {
-  fetch('http://127.0.0.1:3000/logout', {
+  fetch('https://beautyloft-backend.onrender.com/logout', {
     method: 'POST',
     credentials: 'include'
   }).then(function() {
@@ -57,7 +57,7 @@ document.getElementById('mobileSidebarToggle').addEventListener('click', functio
 });
 
 function loadStats() {
-  fetch('http://127.0.0.1:3000/admin/stats', {
+  fetch('https://beautyloft-backend.onrender.com/admin/stats', {
     credentials: 'include'
   })
     .then(function(response) {

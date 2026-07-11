@@ -1,7 +1,7 @@
 const welcomeHeading = document.getElementById('welcomeHeading');
 const profileContent = document.getElementById('profileContent');
 
-fetch('http://127.0.0.1:3000/me', {
+fetch('https://beautyloft-backend.onrender.com/me', {
   credentials: 'include'
 })
   .then(function(response) {
@@ -32,7 +32,7 @@ fetch('http://127.0.0.1:3000/me', {
   });
 
 function loadAppointments() {
-  fetch('http://127.0.0.1:3000/my-appointments', {
+  fetch('https://beautyloft-backend.onrender.com/my-appointments', {
     credentials: 'include'
   })
     .then(function(response) {
