@@ -84,7 +84,15 @@ if (authNavItem) {
     })
     .then(function(data) {
       if (data && data.user) {
-        authNavItem.innerHTML = '<a href="profile.html">' + data.user.name.split(' ')[0] + '</a> <button id="logoutBtn">Log out</button>';
+        let navHtml = '<a href="profile.html">' + data.user.name.split(' ')[0] + '</a>';
+
+        if (data.user.is_admin) {
+          navHtml += ' <a href="admin-dashboard.html" style="color:var(--gold); font-weight:700;">Admin</a>';
+        }
+
+        navHtml += ' <button id="logoutBtn">Log out</button>';
+
+        authNavItem.innerHTML = navHtml;
 
         document.getElementById('logoutBtn').addEventListener('click', function() {
           fetch('http://127.0.0.1:3000/logout', {

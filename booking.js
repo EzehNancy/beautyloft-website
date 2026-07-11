@@ -12,6 +12,24 @@ const slotDateLabel = document.getElementById('slotDateLabel');
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 
+let currentUser = null;
+
+fetch('http://127.0.0.1:3000/me', {
+  credentials: 'include'
+})
+  .then(function(response) {
+    if (!response.ok) {
+      window.location.href = 'login.html';
+      return null;
+    }
+    return response.json();
+  })
+  .then(function(data) {
+    if (data) {
+      currentUser = data.user;
+    }
+  });
+
 function renderCalendar() {
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
@@ -194,8 +212,25 @@ bookingForm.addEventListener('submit', function(e) {
     body: body
   };
 
-  sessionStorage.setItem('lastBooking', JSON.stringify(bookingDetails));
-  window.location.href = 'confirmation.html';
+  fetch('http://127.0.0.1:3000/appointments', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    credentials: 'include',
+    body: JSON.stringify({
+      service: data.service,
+      date: dateLabel,
+      time: selectedTime,
+      notes: data.notes,
+      bookingRef: bookingId
+    })
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(result) {
+      sessionStorage.setItem('lastBooking', JSON.stringify(bookingDetails));
+      window.location.href = 'confirmation.html';
+    });
 });
 
 
