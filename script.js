@@ -73,35 +73,40 @@ if (lightbox) {
 const authNavItem = document.getElementById('authNavItem');
 
 if (authNavItem) {
-  fetch('https://beautyloft-backend.onrender.com/me', {
-    credentials: 'include'
-  })
-    .then(function(response) {
-      if (response.ok) {
-        return response.json();
-      }
-      return null;
+  const token = localStorage.getItem('authToken');
+
+  if (token) {
+    fetch('https://beautyloft-backend.onrender.com/me', {
+      headers: { 'Authorization': 'Bearer ' + token }
     })
-    .then(function(data) {
-      if (data && data.user) {
-        let navHtml = '<a href="profile.html">' + data.user.name.split(' ')[0] + '</a>';
-
-        if (data.user.is_admin) {
-          navHtml += ' <a href="admin-dashboard.html" style="color:var(--gold); font-weight:700;">Admin</a>';
+      .then(function(response) {
+        if (response.ok) {
+          return response.json();
         }
+        return null;
+      })
+      .then(function(data) {
+        if (data && data.user) {
+          let navHtml = '<a href="profile.html">' + data.user.name.split(' ')[0] + '</a>';
 
-        navHtml += ' <button id="logoutBtn">Log out</button>';
+          if (data.user.is_admin) {
+            navHtml += ' <a href="admin-dashboard.html" style="color:var(--gold); font-weight:700;">Admin</a>';
+          }
 
-        authNavItem.innerHTML = navHtml;
+          navHtml += ' <button id="logoutBtn">Log out</button>';
 
-        document.getElementById('logoutBtn').addEventListener('click', function() {
-          fetch('https://beautyloft-backend.onrender.com/logout', {
-            method: 'POST',
-            credentials: 'include'
-          }).then(function() {
-            window.location.href = 'index.html';
+          authNavItem.innerHTML = navHtml;
+
+          document.getElementById('logoutBtn').addEventListener('click', function() {
+            fetch('https://beautyloft-backend.onrender.com/logout', {
+              method: 'POST',
+              headers: { 'Authorization': 'Bearer ' + token }
+            }).then(function() {
+              localStorage.removeItem('authToken');
+              window.location.href = 'index.html';
+            });
           });
-        });
-      }
-    });
+        }
+      });
+  }
 }

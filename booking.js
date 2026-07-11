@@ -12,13 +12,18 @@ const slotDateLabel = document.getElementById('slotDateLabel');
 const confirmBtn = document.getElementById('confirmBtn');
 const bookingForm = document.getElementById('bookingForm');
 const confirmPanel = document.getElementById('confirmPanel');
+const authToken = localStorage.getItem('authToken');
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
 const BUSINESS_EMAIL = 'hello@thebeautyloft.com';
 
+if (!authToken) {
+  window.location.href = 'login.html';
+}
+
 fetch('https://beautyloft-backend.onrender.com/me', {
-  credentials: 'include'
+  headers: { 'Authorization': 'Bearer ' + authToken }
 })
   .then(function(response) {
     if (!response.ok) {
@@ -202,8 +207,10 @@ bookingForm.addEventListener('submit', function(e) {
 
   fetch('https://beautyloft-backend.onrender.com/appointments', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + authToken
+    },
     body: JSON.stringify({
       service: data.service,
       date: isoDate,

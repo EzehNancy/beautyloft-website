@@ -1,8 +1,13 @@
 const welcomeHeading = document.getElementById('welcomeHeading');
 const profileContent = document.getElementById('profileContent');
+const authToken = localStorage.getItem('authToken');
+
+if (!authToken) {
+  window.location.href = 'login.html';
+}
 
 fetch('https://beautyloft-backend.onrender.com/me', {
-  credentials: 'include'
+  headers: { 'Authorization': 'Bearer ' + authToken }
 })
   .then(function(response) {
     if (!response.ok) {
@@ -33,7 +38,7 @@ fetch('https://beautyloft-backend.onrender.com/me', {
 
 function loadAppointments() {
   fetch('https://beautyloft-backend.onrender.com/my-appointments', {
-    credentials: 'include'
+    headers: { 'Authorization': 'Bearer ' + authToken }
   })
     .then(function(response) {
       return response.json();

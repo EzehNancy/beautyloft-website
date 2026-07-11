@@ -1,5 +1,11 @@
+const authToken = localStorage.getItem('authToken');
+
+if (!authToken) {
+  window.location.href = 'login.html';
+}
+
 fetch('https://beautyloft-backend.onrender.com/me', {
-  credentials: 'include'
+  headers: { 'Authorization': 'Bearer ' + authToken }
 })
   .then(function(response) {
     if (!response.ok) {
@@ -18,36 +24,15 @@ fetch('https://beautyloft-backend.onrender.com/me', {
 
     document.querySelector('.admin-main h1').textContent = 'Welcome back, ' + data.user.name.split(' ')[0] + '.';
     loadStats();
-    loadStats();
     loadActivity();
-    function loadActivity() {
-  fetch('https://beautyloft-backend.onrender.com/admin/recent-activity', {
-    credentials: 'include'
-  })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      const activityList = document.getElementById('activityList');
-
-      if (data.activity.length === 0) {
-        activityList.innerHTML = '<p class="activity-empty">No recent activity yet.</p>';
-        return;
-      }
-
-      activityList.innerHTML = data.activity.map(function(item) {
-        return '<div class="activity-item"><p>' + item.message + '</p><span>' + new Date(item.time).toLocaleString() + '</span></div>';
-      }).join('');
-    });
-}
-  });   
-
+  });
 
 document.getElementById('adminLogoutBtn').addEventListener('click', function() {
   fetch('https://beautyloft-backend.onrender.com/logout', {
     method: 'POST',
-    credentials: 'include'
+    headers: { 'Authorization': 'Bearer ' + authToken }
   }).then(function() {
+    localStorage.removeItem('authToken');
     window.location.href = 'index.html';
   });
 });
@@ -58,7 +43,7 @@ document.getElementById('mobileSidebarToggle').addEventListener('click', functio
 
 function loadStats() {
   fetch('https://beautyloft-backend.onrender.com/admin/stats', {
-    credentials: 'include'
+    headers: { 'Authorization': 'Bearer ' + authToken }
   })
     .then(function(response) {
       return response.json();
@@ -77,4 +62,25 @@ function loadStats() {
 
 function statCard(label, value) {
   return '<div class="stat-card"><p class="stat-label">' + label + '</p><p class="stat-value">' + value + '</p></div>';
+}
+
+function loadActivity() {
+  fetch('https://beautyloft-backend.onrender.com/admin/recent-activity', {
+    headers: { 'Authorization': 'Bearer ' + authToken }
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      const activityList = document.getElementById('activityList');
+
+      if (data.activity.length === 0) {
+        activityList.innerHTML = '<p class="activity-empty">No recent activity yet.</p>';
+        return;
+      }
+
+      activityList.innerHTML = data.activity.map(function(item) {
+        return '<div class="activity-item"><p>' + item.message + '</p><span>' + new Date(item.time).toLocaleString() + '</span></div>';
+      }).join('');
+    });
 }

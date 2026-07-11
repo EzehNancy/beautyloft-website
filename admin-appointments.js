@@ -1,6 +1,11 @@
+const authToken = localStorage.getItem('authToken');
+
+if (!authToken) {
+  window.location.href = 'login.html';
+}
 
 fetch('https://beautyloft-backend.onrender.com/me', {
-  credentials: 'include'
+  headers: { 'Authorization': 'Bearer ' + authToken }
 })
   .then(function(response) {
     if (!response.ok) {
@@ -23,8 +28,9 @@ fetch('https://beautyloft-backend.onrender.com/me', {
 document.getElementById('adminLogoutBtn').addEventListener('click', function() {
   fetch('https://beautyloft-backend.onrender.com/logout', {
     method: 'POST',
-    credentials: 'include'
+    headers: { 'Authorization': 'Bearer ' + authToken }
   }).then(function() {
+    localStorage.removeItem('authToken');
     window.location.href = 'index.html';
   });
 });
@@ -35,7 +41,7 @@ document.getElementById('mobileSidebarToggle').addEventListener('click', functio
 
 function loadAppointments() {
   fetch('https://beautyloft-backend.onrender.com/admin/appointments', {
-    credentials: 'include'
+    headers: { 'Authorization': 'Bearer ' + authToken }
   })
     .then(function(response) {
       return response.json();
@@ -94,8 +100,10 @@ function attachActionListeners() {
 
       fetch('https://beautyloft-backend.onrender.com/admin/appointments/' + id, {
         method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + authToken
+        },
         body: JSON.stringify({ status: newStatus })
       })
         .then(function() {
