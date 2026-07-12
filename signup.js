@@ -12,7 +12,6 @@ signupForm.addEventListener('submit', async function(e) {
     const response = await fetch('https://beautyloft-backend.onrender.com/signup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
       body: JSON.stringify({ name, email, password })
     });
 
