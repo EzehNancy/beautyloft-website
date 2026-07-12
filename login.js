@@ -11,7 +11,6 @@ loginForm.addEventListener('submit', async function(e) {
     const response = await fetch('https://beautyloft-backend.onrender.com/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
       body: JSON.stringify({ email, password })
     });
 
@@ -23,6 +22,7 @@ loginForm.addEventListener('submit', async function(e) {
       return;
     }
 
+    localStorage.setItem('authToken', data.token);
     window.location.href = 'index.html';
 
   } catch (err) {
