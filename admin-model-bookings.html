@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Appointments — Admin — The BeautyLoft</title>
+  <title>Model Bookings — Admin — The BeautyLoft</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,12 +19,10 @@
 
     <nav class="admin-nav">
       <a href="admin-dashboard.html" class="admin-nav-link">Dashboard</a>
-      <a href="admin-appointments.html" class="admin-nav-link active">Appointments</a>
-      <a href="admin-orders.html" class="admin-nav-link">Shop Orders</a>
-      <a href="admin-products.html" class="admin-nav-link">Products</a>
+      <a href="admin-appointments.html" class="admin-nav-link">Appointments</a>
+      <a href="admin-model-bookings.html" class="admin-nav-link active">Model Bookings</a>
       <a href="admin-models.html" class="admin-nav-link">Model Applications</a>
-      <a href="admin-customers.html" class="admin-nav-link">Customers</a>
-      <a href="admin-notifications.html" class="admin-nav-link">Notifications</a>
+      <a href="admin-availability.html" class="admin-nav-link">Availability</a>
       <a href="admin-settings.html" class="admin-nav-link">Settings</a>
     </nav>
 
@@ -34,8 +32,8 @@
   <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">☰ Menu</button>
 
   <main class="admin-main">
-    <h1>Appointments</h1>
-    <div id="appointmentsAdminTable" style="margin-top:30px;">Loading...</div>
+    <h1>Model Bookings</h1>
+    <div id="modelBookingsAdminTable" style="margin-top:30px;">Loading...</div>
   </main>
 
 </div>
@@ -43,7 +41,7 @@
 <div id="rescheduleModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center;">
   <div class="cal-card" style="max-width:360px; width:90%; position:relative;">
     <button id="closeRescheduleModal" style="position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
-    <h3 style="margin-bottom:16px;">Reschedule Appointment</h3>
+    <h3 style="margin-bottom:16px;">Reschedule Session</h3>
     <div class="field">
       <label for="rescheduleDate">New date</label>
       <input type="date" id="rescheduleDate">
@@ -56,6 +54,6 @@
   </div>
 </div>
 
-<script src="admin-appointments.js"></script>
+<script src="admin-model-bookings.js"></script>
 </body>
 </html>

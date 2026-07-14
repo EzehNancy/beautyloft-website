@@ -243,6 +243,7 @@ h1, h2, h3 {
   color: var(--rose-deep);
   font-weight: 600;
   margin-bottom: 10px;
+  text-align: center;
 }
 
 .filters {
@@ -1099,7 +1100,7 @@ a{
     color: var(--inksoft);
 }
 
-.page-hero {
+#page-hero {
   padding-top: 180px;
   text-align: center;
 }
@@ -1785,4 +1786,18 @@ a{
   border-color: #D6D6D6;
   cursor: not-allowed;
   text-decoration: none;
+}
+
+@media (max-width: 600px) {
+  .activity-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    padding: 14px 18px;
+  }
+}
+
+.status-rescheduled {
+  background: #E0D4F5;
+  color: #6B3FA0;
 }

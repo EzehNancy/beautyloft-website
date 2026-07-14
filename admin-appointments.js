@@ -41,7 +41,8 @@ document.getElementById('mobileSidebarToggle').addEventListener('click', functio
 
 function loadAppointments() {
   fetch('https://beautyloft-backend.onrender.com/admin/appointments', {
-    headers: { 'Authorization': 'Bearer ' + authToken }
+    headers: { 'Authorization': 'Bearer ' + authToken },
+    cache: 'no-store'
   })
     .then(function(response) {
       return response.json();
@@ -58,6 +59,7 @@ function loadAppointments() {
       data.appointments.forEach(function(appt) {
         rows +=
           '<tr>' +
+            '<td>' + appt.booking_ref + '</td>' +
             '<td>' + appt.customer_name + '<br><span style="color:var(--ink-soft); font-size:0.8rem;">' + appt.customer_email + '</span></td>' +
             '<td>' + appt.service + '</td>' +
             '<td>' + appt.appointment_date + '<br>' + appt.appointment_time + '</td>' +
@@ -68,7 +70,7 @@ function loadAppointments() {
 
       container.innerHTML =
         '<table class="data-table">' +
-          '<thead><tr><th>Customer</th><th>Service</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr></thead>' +
+          '<thead><tr><th>Booking ID</th><th>Customer</th><th>Service</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr></thead>' +
           '<tbody>' + rows + '</tbody>' +
         '</table>';
 
@@ -87,13 +89,64 @@ function actionButtons(appt) {
   }
   if (appt.status !== 'cancelled' && appt.status !== 'completed') {
     buttons += '<button class="admin-action-btn admin-action-cancel" data-id="' + appt.id + '" data-status="cancelled">Cancel</button>';
+    buttons += '<button class="admin-action-btn reschedule-btn" data-id="' + appt.id + '">Reschedule</button>';
   }
 
   return buttons;
 }
 
+const rescheduleModal = document.getElementById('rescheduleModal');
+let rescheduleApptId = null;
+
+function attachRescheduleListeners() {
+  document.querySelectorAll('.reschedule-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      rescheduleApptId = btn.dataset.id;
+      rescheduleModal.style.display = 'flex';
+    });
+  });
+}
+
+document.getElementById('closeRescheduleModal').addEventListener('click', function() {
+  rescheduleModal.style.display = 'none';
+});
+
+document.getElementById('confirmRescheduleBtn').addEventListener('click', function() {
+  const newDate = document.getElementById('rescheduleDate').value;
+  const newTime = document.getElementById('rescheduleTime').value;
+
+  if (!newDate || !newTime) {
+    alert('Please pick both a date and a time.');
+    return;
+  }
+
+  const formattedTime = formatTimeForDisplay(newTime);
+
+  fetch('https://beautyloft-backend.onrender.com/appointments/' + rescheduleApptId + '/reschedule', {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + authToken
+    },
+    body: JSON.stringify({ date: newDate, time: formattedTime })
+  })
+    .then(function() {
+      rescheduleModal.style.display = 'none';
+      loadAppointments();
+    });
+});
+
+function formatTimeForDisplay(timeValue) {
+  const parts = timeValue.split(':');
+  let hour = parseInt(parts[0], 10);
+  const period = hour >= 12 ? 'PM' : 'AM';
+  let hour12 = hour % 12;
+  if (hour12 === 0) hour12 = 12;
+  return hour12 + ':00 ' + period;
+}
+
 function attachActionListeners() {
-  document.querySelectorAll('.admin-action-btn').forEach(function(btn) {
+  document.querySelectorAll('.admin-action-btn[data-status]').forEach(function(btn) {
     btn.addEventListener('click', function() {
       const id = btn.dataset.id;
       const newStatus = btn.dataset.status;
@@ -111,4 +164,6 @@ function attachActionListeners() {
         });
     });
   });
+
+  attachRescheduleListeners();
 }
