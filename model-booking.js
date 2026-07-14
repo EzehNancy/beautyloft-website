@@ -1,8 +1,13 @@
+const authToken = localStorage.getItem('authToken');
+
+if (!authToken) {
+  window.location.href = 'login.html';
+}
+
 let viewDate = new Date();
 viewDate.setDate(1);
 let selectedDate = null;
 let selectedTime = null;
-let currentUser = null;
 
 const calGrid = document.getElementById('calGrid');
 const calMonthLabel = document.getElementById('calMonthLabel');
@@ -10,19 +15,17 @@ const slotSection = document.getElementById('slotSection');
 const slotGrid = document.getElementById('slotGrid');
 const slotDateLabel = document.getElementById('slotDateLabel');
 const confirmBtn = document.getElementById('confirmBtn');
-const bookingForm = document.getElementById('bookingForm');
+const modelBookingForm = document.getElementById('modelBookingForm');
 const confirmPanel = document.getElementById('confirmPanel');
-const authToken = localStorage.getItem('authToken');
+const bookSummary = document.getElementById('bookSummary');
+const accessMessage = document.getElementById('accessMessage');
+const bookingSection = document.getElementById('bookingSection');
 
 const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
 const DOW = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
-const BUSINESS_EMAIL = 'hello@thebeautyloft.com';
 
-if (!authToken) {
-  window.location.href = 'login.html';
-}
-
-fetch('https://beautyloft-backend.onrender.com/me', {
+// ---------- Step 1: check model status before showing anything ----------
+fetch('https://beautyloft-backend.onrender.com/my-model-status', {
   headers: { 'Authorization': 'Bearer ' + authToken }
 })
   .then(function(response) {
@@ -33,11 +36,22 @@ fetch('https://beautyloft-backend.onrender.com/me', {
     return response.json();
   })
   .then(function(data) {
-    if (data) {
-      currentUser = data.user;
+    if (!data) return;
+
+    if (data.status === 'accepted') {
+      accessMessage.textContent = 'You\'re an approved BeautyLoft model — pick a day and time below.';
+      bookingSection.style.display = 'block';
+      renderCalendar();
+    } else if (data.status === 'pending') {
+      accessMessage.textContent = 'Your model application is still pending review. Once accepted, you\'ll be able to book a session here.';
+    } else if (data.status === 'rejected') {
+      accessMessage.textContent = 'This page is only available to approved BeautyLoft models.';
+    } else {
+      accessMessage.textContent = 'You haven\'t applied to model yet. Visit the Models page to apply.';
     }
   });
 
+// ---------- Calendar rendering (same pattern as booking.js) ----------
 function renderCalendar() {
   const year = viewDate.getFullYear();
   const month = viewDate.getMonth();
@@ -72,9 +86,8 @@ function renderCalendar() {
     el.textContent = day;
 
     const isPast = date < today;
-    const isClosed = date.getDay() === 0;
 
-    if (isPast || isClosed) {
+    if (isPast) {
       el.classList.add('disabled');
     } else {
       el.classList.add('available');
@@ -95,15 +108,9 @@ function selectDate(date, el) {
 
   el.classList.add('selected');
   selectedDate = date;
+  selectedTime = null;
   renderSlots(date);
   updateConfirmState();
-}
-
-function hoursForDay(weekday) {
-  if (weekday === 6) {
-    return [12, 13, 14, 15, 16];
-  }
-  return [10, 11, 12, 13, 14, 15, 16];
 }
 
 function formatHour(h) {
@@ -115,6 +122,14 @@ function formatHour(h) {
   return hour12 + ':00 ' + period;
 }
 
+function toISODate(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return year + '-' + month + '-' + day;
+}
+
+// ---------- Real availability check, same route booking.js uses, but as a model ----------
 function renderSlots(date) {
   slotSection.style.display = 'block';
   slotDateLabel.textContent = date.toDateString();
@@ -122,7 +137,7 @@ function renderSlots(date) {
 
   const isoDate = toISODate(date);
 
-  fetch('https://beautyloft-backend.onrender.com/availability?date=' + isoDate + '&bookingType=customer')
+  fetch('https://beautyloft-backend.onrender.com/availability?date=' + isoDate + '&bookingType=model')
     .then(function(response) {
       return response.json();
     })
@@ -162,89 +177,14 @@ function updateConfirmState() {
   if (selectedDate && selectedTime) {
     confirmBtn.disabled = false;
     confirmBtn.textContent = 'Request ' + selectedDate.toDateString() + ' at ' + selectedTime;
+    bookSummary.style.display = 'block';
+    bookSummary.innerHTML = 'You\'re booking <b>' + selectedDate.toDateString() + '</b> at <b>' + selectedTime + '</b>.';
   } else {
     confirmBtn.disabled = true;
     confirmBtn.textContent = 'Select a date and time first';
+    bookSummary.style.display = 'none';
   }
 }
-
-function generateBookingId() {
-  const number = Math.floor(100000 + Math.random() * 900000);
-  return 'BL-' + number;
-}
-
-function toISODate(date) {
-  const year = date.getFullYear();
-  const month = String(date.getMonth() + 1).padStart(2, '0');
-  const day = String(date.getDate()).padStart(2, '0');
-  return year + '-' + month + '-' + day;
-}
-
-bookingForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-
-  const data = {
-    name: document.getElementById('name').value,
-    phone: document.getElementById('phone').value,
-    email: document.getElementById('email').value,
-    service: document.getElementById('service').value,
-    notes: document.getElementById('notes').value
-  };
-
-  const dateLabel = selectedDate.toDateString();
-  const isoDate = toISODate(selectedDate);
-  const bookingId = generateBookingId();
-
-  const subject = encodeURIComponent('Appointment request ' + bookingId + ' — ' + data.service);
-  const body = encodeURIComponent(
-    'New appointment request:\n\n' +
-    'Booking ID: ' + bookingId + '\n' +
-    'Name: ' + data.name + '\n' +
-    'Phone: ' + data.phone + '\n' +
-    'Email: ' + data.email + '\n' +
-    'Service: ' + data.service + '\n' +
-    'Date: ' + dateLabel + '\n' +
-    'Time: ' + selectedTime + '\n' +
-    'Notes: ' + data.notes
-  );
-
-  const bookingDetails = {
-    id: bookingId,
-    name: data.name,
-    phone: data.phone,
-    email: data.email,
-    service: data.service,
-    date: dateLabel,
-    time: selectedTime,
-    notes: data.notes,
-    subject: subject,
-    body: body
-  };
-
-  fetch('https://beautyloft-backend.onrender.com/appointments', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': 'Bearer ' + authToken
-    },
-    body: JSON.stringify({
-      service: data.service,
-      date: isoDate,
-      time: selectedTime,
-      notes: data.notes,
-      bookingRef: bookingId
-    })
-  })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(result) {
-      sessionStorage.setItem('lastBooking', JSON.stringify(bookingDetails));
-      window.location.href = 'confirmation.html';
-    });
-});
-
-renderCalendar();
 
 document.getElementById('prevMonth').addEventListener('click', function() {
   viewDate.setMonth(viewDate.getMonth() - 1);
@@ -254,4 +194,44 @@ document.getElementById('prevMonth').addEventListener('click', function() {
 document.getElementById('nextMonth').addEventListener('click', function() {
   viewDate.setMonth(viewDate.getMonth() + 1);
   renderCalendar();
+});
+
+// ---------- Submit the model booking ----------
+modelBookingForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  if (!selectedDate || !selectedTime) return;
+
+  const isoDate = toISODate(selectedDate);
+  const notes = document.getElementById('notes').value;
+
+  fetch('https://beautyloft-backend.onrender.com/model-bookings', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + authToken
+    },
+    body: JSON.stringify({
+      date: isoDate,
+      time: selectedTime,
+      notes: notes
+    })
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(result) {
+      confirmPanel.classList.add('show');
+      confirmPanel.innerHTML =
+        '<p><strong>Session booked ✓</strong></p>' +
+        '<p>Your modelling session for ' + selectedDate.toDateString() + ' at ' + selectedTime + ' has been requested. We\'ll confirm shortly.</p>';
+      modelBookingForm.reset();
+      selectedDate = null;
+      selectedTime = null;
+      slotSection.style.display = 'none';
+      updateConfirmState();
+      document.querySelectorAll('.cal-day.selected').forEach(function(el) {
+        el.classList.remove('selected');
+      });
+    });
 });

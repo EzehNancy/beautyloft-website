@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Applications — Admin — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <a href="index.html" class="logo">The <span>BeautyLoft</span></a>
+    <p class="admin-tag">Admin</p>
+
+    <nav class="admin-nav">
+      <a href="admin-dashboard.html" class="admin-nav-link">Dashboard</a>
+      <a href="admin-appointments.html" class="admin-nav-link">Appointments</a>
+      <a href="admin-orders.html" class="admin-nav-link">Shop Orders</a>
+      <a href="admin-products.html" class="admin-nav-link">Products</a>
+      <a href="admin-models.html" class="admin-nav-link active">Model Applications</a>
+      <a href="admin-customers.html" class="admin-nav-link">Customers</a>
+      <a href="admin-notifications.html" class="admin-nav-link">Notifications</a>
+      <a href="admin-settings.html" class="admin-nav-link">Settings</a>
+    </nav>
+
+    <button id="adminLogoutBtn" class="admin-logout">Log out</button>
+  </aside>
+
+  <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">☰ Menu</button>
+
+  <main class="admin-main">
+    <h1>Model Applications</h1>
+    <div id="applicationsAdminTable" style="margin-top:30px;">Loading...</div>
+  </main>
+
+</div>
+
+<script src="admin-models.js"></script>
+</body>
+</html>

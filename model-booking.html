@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Model Booking — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html">Models</a></li>
+      <li id="authNavItem"><a href="login.html">Log In</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="page-hero">
+    <p class="eyebrow">Model Booking</p>
+    <h1>Book your modelling session.</h1>
+    <p id="accessMessage">Checking your model status...</p>
+  </section>
+
+  <section id="bookingSection" style="padding-top:0; display:none;">
+    <div class="booking-wrap">
+      <div>
+        <div class="cal-card">
+          <div class="cal-header">
+            <button class="cal-nav-btn" id="prevMonth">‹</button>
+            <h3 id="calMonthLabel"></h3>
+            <button class="cal-nav-btn" id="nextMonth">›</button>
+          </div>
+          <div class="cal-grid" id="calGrid"></div>
+
+          <div id="slotSection" style="display:none;">
+            <h3 id="slotDateLabel" style="font-size:1.05rem;"></h3>
+            <div class="slot-grid" id="slotGrid"></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="form-light">
+          <div id="bookSummary" style="display:none;"></div>
+
+          <form id="modelBookingForm">
+            <div class="field">
+              <label for="notes">Anything we should know? (optional)</label>
+              <textarea id="notes" placeholder="Availability notes, preferences, etc."></textarea>
+            </div>
+            <button type="submit" class="submit-btn" id="confirmBtn" disabled>Select a date and time first</button>
+          </form>
+
+          <div id="confirmPanel" class="confirm-panel-light"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script src="script.js"></script>
+<script src="model-booking.js"></script>
+</body>
+</html>
