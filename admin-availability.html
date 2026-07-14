@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Availability — Admin — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <a href="index.html" class="logo">The <span>BeautyLoft</span></a>
+    <p class="admin-tag">Admin</p>
+
+    <nav class="admin-nav">
+      <a href="admin-dashboard.html" class="admin-nav-link">Dashboard</a>
+      <a href="admin-appointments.html" class="admin-nav-link">Appointments</a>
+      <a href="admin-orders.html" class="admin-nav-link">Shop Orders</a>
+      <a href="admin-products.html" class="admin-nav-link">Products</a>
+      <a href="admin-models.html" class="admin-nav-link">Model Applications</a>
+      <a href="admin-availability.html" class="admin-nav-link active">Availability</a>
+      <a href="admin-customers.html" class="admin-nav-link">Customers</a>
+      <a href="admin-notifications.html" class="admin-nav-link">Notifications</a>
+      <a href="admin-settings.html" class="admin-nav-link">Settings</a>
+    </nav>
+
+    <button id="adminLogoutBtn" class="admin-logout">Log out</button>
+  </aside>
+
+  <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">☰ Menu</button>
+
+  <main class="admin-main">
+    <h1>Availability</h1>
+    <p style="color:var(--ink-soft); margin-top:10px;">Click any day to mark it Closed or Models Only. Days you don't mark stay open to everyone as normal.</p>
+
+    <div class="cal-card" style="max-width:420px; margin-top:30px;">
+      <div class="cal-header">
+        <button class="cal-nav-btn" id="prevMonth">‹</button>
+        <h3 id="calMonthLabel"></h3>
+        <button class="cal-nav-btn" id="nextMonth">›</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+    </div>
+
+    <div id="dayEditor" style="display:none; margin-top:24px;" class="cal-card">
+      <h3 id="dayEditorLabel" style="margin-bottom:16px;"></h3>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="admin-action-btn" id="setOpenBtn">Set Open</button>
+        <button class="admin-action-btn" id="setModelsOnlyBtn">Set Models Only</button>
+        <button class="admin-action-btn admin-action-cancel" id="setClosedBtn">Set Closed</button>
+      </div>
+    </div>
+  </main>
+
+</div>
+
+<script src="admin-availability.js"></script>
+</body>
+</html>
