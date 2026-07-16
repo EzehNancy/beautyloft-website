@@ -43,19 +43,29 @@
 
 </div>
 
-<div id="rescheduleModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center;">
-  <div class="cal-card" style="max-width:360px; width:90%; position:relative;">
+<div id="rescheduleModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
+  <div class="cal-card" style="max-width:420px; width:100%; max-height:90vh; overflow-y:auto; position:relative;">
     <button id="closeRescheduleModal" style="position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
     <h3 style="margin-bottom:16px;">Reschedule Appointment</h3>
-    <div class="field">
-      <label for="rescheduleDate">New date</label>
-      <input type="date" id="rescheduleDate">
+
+    <div class="cal-header">
+      <button class="cal-nav-btn" id="rescheduleCalPrev">‹</button>
+      <h3 id="rescheduleCalMonthLabel"></h3>
+      <button class="cal-nav-btn" id="rescheduleCalNext">›</button>
     </div>
-    <div class="field">
-      <label for="rescheduleTime">New time</label>
-      <input type="time" id="rescheduleTime">
+    <div class="cal-grid" id="rescheduleCalGrid"></div>
+
+    <div id="rescheduleSlotSection" style="display:none; margin-top:16px;">
+      <h4 id="rescheduleSlotDateLabel" style="font-size:0.95rem; margin-bottom:8px;"></h4>
+      <div class="slot-grid" id="rescheduleSlotGrid"></div>
     </div>
-    <button class="admin-action-btn" id="confirmRescheduleBtn">Confirm Reschedule</button>
+
+    <div class="field" style="margin-top:16px;">
+      <label for="rescheduleReason">Reason for rescheduling (optional)</label>
+      <textarea id="rescheduleReason" placeholder="e.g. client requested a different time"></textarea>
+    </div>
+
+    <button class="admin-action-btn" id="confirmRescheduleBtn" disabled>Select a new date and time</button>
   </div>
 </div>
 
