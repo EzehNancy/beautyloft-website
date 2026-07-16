@@ -4,6 +4,19 @@ if (!authToken) {
   window.location.href = 'login.html';
 }
 
+fetch('https://beautyloft-backend.onrender.com/me', {
+  headers: { 'Authorization': 'Bearer ' + authToken }
+})
+  .then(function(response) {
+    return response.json();
+  })
+  .then(function(data) {
+    if (data && data.user) {
+      document.getElementById('mName').value = data.user.name;
+      document.getElementById('mEmail').value = data.user.email;
+    }
+  });
+
 const modelForm = document.getElementById('modelForm');
 const modelMessage = document.getElementById('modelMessage');
 
@@ -47,3 +60,21 @@ modelForm.addEventListener('submit', async function(e) {
     modelMessage.classList.add('show');
   }
 });
+
+fetch('https://beautyloft-backend.onrender.com/me', {
+  headers: { 'Authorization': 'Bearer ' + authToken }
+})
+  .then(function(response) {
+    if (!response.ok) {
+      window.location.href = 'login.html';
+      return null;
+    }
+    return response.json();
+  })
+  .then(function(data) {
+    if (data) {
+      currentUser = data.user;
+      document.getElementById('name').value = data.user.name;
+      document.getElementById('email').value = data.user.email;
+    }
+  });

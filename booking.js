@@ -35,6 +35,8 @@ fetch('https://beautyloft-backend.onrender.com/me', {
   .then(function(data) {
     if (data) {
       currentUser = data.user;
+      document.getElementById('name').value = data.user.name;
+      document.getElementById('email').value = data.user.email;
     }
   });
 

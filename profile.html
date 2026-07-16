@@ -33,7 +33,21 @@
 
   <section id="profileContent" style="padding-top:0;"></section>
 </main>
-
+<div id="rescheduleModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center;">
+  <div class="cal-card" style="max-width:360px; width:90%; position:relative;">
+    <button id="closeRescheduleModal" style="position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+    <h3 style="margin-bottom:16px;">Reschedule Appointment</h3>
+    <div class="field">
+      <label for="rescheduleDate">New date</label>
+      <input type="date" id="rescheduleDate">
+    </div>
+    <div class="field">
+      <label for="rescheduleTime">New time</label>
+      <input type="time" id="rescheduleTime">
+    </div>
+    <button class="admin-action-btn" id="confirmRescheduleBtn">Confirm Reschedule</button>
+  </div>
+</div>
 <script src="script.js"></script>
 <script src="profile.js"></script>
 </body>

@@ -39,9 +39,17 @@
           <input type="email" id="email" required>
         </div>
         <div class="field">
-          <label for="password">Password</label>
-          <input type="password" id="password" required>
-        </div>
+  <label for="password">Password</label>
+  <div style="position:relative;">
+    <input type="password" id="password" required minlength="8" style="padding-right:46px;">
+    <button type="button" id="togglePassword" aria-label="Show password" style="position:absolute; right:12px; top:50%; transform:translateY(-50%); background:none; border:none; padding:4px; cursor:pointer; color:var(--ink-soft); display:flex;">
+      <svg id="eyeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+        <circle cx="12" cy="12" r="3"></circle>
+      </svg>
+    </button>
+  </div>
+</div>
         <button type="submit" class="submit-btn">Log in</button>
       </form>
       <div id="loginMessage"></div>

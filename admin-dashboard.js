@@ -53,6 +53,7 @@ function loadStats() {
 
       statsGrid.innerHTML =
         statCard('Total Customers', stats.totalCustomers) +
+        statCard('Total Models', stats.totalModels) +
         statCard("Today's Appointments", stats.todaysAppointments) +
         statCard('Pending Orders', stats.pendingOrders) +
         statCard('Total Products', stats.totalProducts) +

@@ -84,7 +84,7 @@ function actionButtons(appt) {
   if (appt.status === 'pending') {
     buttons += '<button class="admin-action-btn" data-id="' + appt.id + '" data-status="confirmed">Approve</button>';
   }
-  if (appt.status === 'confirmed') {
+  if (appt.status === 'confirmed' || appt.status === 'rescheduled') {
     buttons += '<button class="admin-action-btn" data-id="' + appt.id + '" data-status="completed">Complete</button>';
   }
   if (appt.status !== 'cancelled' && appt.status !== 'completed') {
@@ -167,3 +167,57 @@ function attachActionListeners() {
 
   attachRescheduleListeners();
 }
+
+let allAppointments = [];
+
+function loadAppointments() {
+  fetch('https://beautyloft-backend.onrender.com/admin/appointments', {
+    headers: { 'Authorization': 'Bearer ' + authToken },
+    cache: 'no-store'
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      allAppointments = data.appointments;
+      renderAppointmentsTable(allAppointments);
+    });
+}
+
+function renderAppointmentsTable(appointments) {
+  const container = document.getElementById('appointmentsAdminTable');
+
+  if (appointments.length === 0) {
+    container.innerHTML = '<p class="activity-empty">No appointments found.</p>';
+    return;
+  }
+
+  let rows = '';
+  appointments.forEach(function(appt) {
+    rows +=
+      '<tr>' +
+        '<td>' + appt.booking_ref + '</td>' +
+        '<td>' + appt.customer_name + '<br><span style="color:var(--ink-soft); font-size:0.8rem;">' + appt.customer_email + '</span></td>' +
+        '<td>' + appt.service + '</td>' +
+        '<td>' + appt.appointment_date + '<br>' + appt.appointment_time + '</td>' +
+        '<td><span class="status-badge status-' + appt.status + '">' + appt.status + '</span></td>' +
+        '<td>' + actionButtons(appt) + '</td>' +
+      '</tr>';
+  });
+
+  container.innerHTML =
+    '<table class="data-table">' +
+      '<thead><tr><th>Booking ID</th><th>Customer</th><th>Service</th><th>Date & Time</th><th>Status</th><th>Actions</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody>' +
+    '</table>';
+
+  attachActionListeners();
+}
+
+document.getElementById('searchBookingId').addEventListener('input', function() {
+  const query = this.value.trim().toLowerCase();
+  const filtered = allAppointments.filter(function(appt) {
+    return appt.booking_ref.toLowerCase().includes(query);
+  });
+  renderAppointmentsTable(filtered);
+});
