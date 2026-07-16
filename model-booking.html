@@ -30,6 +30,15 @@
     <p class="eyebrow">Model Booking</p>
     <h1 style="text-align:center; margin-top:10px;">Book your modelling session.</h1>
     <p id="accessMessage">Checking your model status...</p>
+    <section id="availabilitySection" style="padding-top:0; display:none;">
+  <div class="cal-card" style="max-width:500px; margin:0 auto 40px;">
+    <h3 style="margin-bottom:10px;">Mark days you're free this month</h3>
+    <p style="color:var(--ink-soft); font-size:0.9rem; margin-bottom:16px;">Click any upcoming day to mark yourself available. The studio will pick from these to schedule your session.</p>
+    <div class="cal-grid" id="availCalGrid"></div>
+    <button class="submit-btn" id="saveAvailabilityBtn" style="margin-top:16px;">Save Availability</button>
+    <div id="myAvailabilityList" style="margin-top:20px;"></div>
+  </div>
+</section>
   </section>
 
   <section id="bookingSection" style="padding-top:0; display:none;">

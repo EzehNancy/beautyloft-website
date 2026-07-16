@@ -35,21 +35,27 @@ fetch('https://beautyloft-backend.onrender.com/my-model-status', {
     }
     return response.json();
   })
-  .then(function(data) {
-    if (!data) return;
+.then(function(data) {
+  if (!data) return;
 
-    if (data.status === 'accepted') {
-      accessMessage.textContent = 'You\'re an approved BeautyLoft model — pick a day and time below.';
-      bookingSection.style.display = 'block';
-      renderCalendar();
-    } else if (data.status === 'pending') {
-      accessMessage.textContent = 'Your model application is still pending review. Once accepted, you\'ll be able to book a session here.';
-    } else if (data.status === 'rejected') {
-      accessMessage.textContent = 'This page is only available to approved BeautyLoft models.';
-    } else {
-      accessMessage.textContent = 'You haven\'t applied to model yet. Visit the Models page to apply.';
-    }
-  });
+  if (data.status === 'accepted') {
+    accessMessage.textContent = 'You\'re an approved BeautyLoft model — pick a day and time below.';
+    bookingSection.style.display = 'block';
+
+    document.getElementById('availabilitySection').style.display = 'block';
+
+    renderCalendar();
+    renderAvailabilityCalendar();
+    loadMyAvailability();
+
+  } else if (data.status === 'pending') {
+    accessMessage.textContent = 'Your model application is still pending review. Once accepted, you\'ll be able to book a session here.';
+  } else if (data.status === 'rejected') {
+    accessMessage.textContent = 'This page is only available to approved BeautyLoft models.';
+  } else {
+    accessMessage.textContent = 'You haven\'t applied to model yet. Visit the Models page to apply.';
+  }
+});
 
 // ---------- Calendar rendering (same pattern as booking.js) ----------
 function renderCalendar() {
@@ -235,3 +241,115 @@ modelBookingForm.addEventListener('submit', function(e) {
       });
     });
 });
+
+let selectedAvailDates = [];
+
+function renderAvailabilityCalendar() {
+  const availCalGrid = document.getElementById('availCalGrid');
+  const year = viewDate.getFullYear();
+  const month = viewDate.getMonth();
+
+  availCalGrid.innerHTML = '';
+
+  DOW.forEach(function(d) {
+    const el = document.createElement('div');
+    el.className = 'cal-dow';
+    el.textContent = d;
+    availCalGrid.appendChild(el);
+  });
+
+  const firstDay = new Date(year, month, 1);
+  const startOffset = firstDay.getDay();
+
+  for (let i = 0; i < startOffset; i++) {
+    const el = document.createElement('div');
+    el.className = 'cal-day empty';
+    availCalGrid.appendChild(el);
+  }
+
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  for (let day = 1; day <= daysInMonth; day++) {
+    const date = new Date(year, month, day);
+    const dateStr = toISODate(date);
+    const el = document.createElement('div');
+    el.className = 'cal-day';
+    el.textContent = day;
+
+    if (date < today) {
+      el.classList.add('disabled');
+    } else {
+      el.classList.add('available');
+      el.addEventListener('click', function() {
+        el.classList.toggle('selected');
+        const index = selectedAvailDates.indexOf(dateStr);
+        if (index === -1) {
+          selectedAvailDates.push(dateStr);
+        } else {
+          selectedAvailDates.splice(index, 1);
+        }
+      });
+    }
+
+    availCalGrid.appendChild(el);
+  }
+}
+
+document.getElementById('saveAvailabilityBtn').addEventListener('click', function() {
+  if (selectedAvailDates.length === 0) {
+    alert('Click at least one day first.');
+    return;
+  }
+
+  fetch('https://beautyloft-backend.onrender.com/model-availability', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': 'Bearer ' + authToken
+    },
+    body: JSON.stringify({ dates: selectedAvailDates })
+  })
+    .then(function() {
+      selectedAvailDates = [];
+      loadMyAvailability();
+      renderAvailabilityCalendar();
+    });
+});
+
+function loadMyAvailability() {
+  fetch('https://beautyloft-backend.onrender.com/my-availability', {
+    headers: { 'Authorization': 'Bearer ' + authToken },
+    cache: 'no-store'
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      const list = document.getElementById('myAvailabilityList');
+
+      if (data.availability.length === 0) {
+        list.innerHTML = '<p class="activity-empty">No availability marked yet.</p>';
+        return;
+      }
+
+      list.innerHTML = data.availability.map(function(a) {
+        return '<span class="slot-pill" style="margin:4px; display:inline-flex; align-items:center; gap:8px;">' +
+          a.available_date +
+          ' <button data-date="' + a.available_date + '" class="remove-avail-btn" style="background:none; border:none; color:var(--rose-deep); cursor:pointer; font-weight:700;">×</button>' +
+        '</span>';
+      }).join('');
+
+      document.querySelectorAll('.remove-avail-btn').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          fetch('https://beautyloft-backend.onrender.com/model-availability/' + btn.dataset.date, {
+            method: 'DELETE',
+            headers: { 'Authorization': 'Bearer ' + authToken }
+          }).then(function() {
+            loadMyAvailability();
+          });
+        });
+      });
+    });
+}
