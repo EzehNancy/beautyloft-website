@@ -106,7 +106,7 @@ function actionButtons(appt) {
   }
   if (appt.status === 'confirmed' || appt.status === 'rescheduled') {
     buttons += '<button class="admin-action-btn" data-id="' + appt.id + '" data-status="completed">Complete</button>';
-    buttons += '<a class="admin-action-btn" style="text-decoration:none; display:inline-block;" href="' + buildCalendarLink(appt) + '" download="appointment-' + appt.booking_ref + '.ics">Add to Calendar</a>';
+    buttons += '<button class="admin-action-btn calendar-btn" data-id="' + appt.id + '">Add to Calendar</button>';
   }
   if (appt.status !== 'cancelled' && appt.status !== 'completed') {
     buttons += '<button class="admin-action-btn admin-action-cancel" data-id="' + appt.id + '" data-status="cancelled">Cancel</button>';
@@ -117,8 +117,11 @@ function actionButtons(appt) {
 }
 
 function attachActionListeners() {
+
+  // Status change buttons
   document.querySelectorAll('.admin-action-btn[data-status]').forEach(function(btn) {
     btn.addEventListener('click', function() {
+
       const id = btn.dataset.id;
       const newStatus = btn.dataset.status;
 
@@ -130,13 +133,31 @@ function attachActionListeners() {
         },
         body: JSON.stringify({ status: newStatus })
       })
-        .then(function() {
-          loadAppointments();
-        });
+      .then(function() {
+        loadAppointments();
+      });
+
     });
   });
 
+  // Download calendar (.ics)
+  document.querySelectorAll('.calendar-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+
+      const appt = allAppointments.find(function(a) {
+        return String(a.id) === btn.dataset.id;
+      });
+
+      if (appt) {
+        downloadAppointmentICS(appt);
+      }
+
+    });
+  });
+
+  // Reschedule buttons
   attachRescheduleListeners();
+
 }
 
 // ---------- Reschedule modal: full calendar + slot picker ----------
@@ -325,7 +346,7 @@ confirmRescheduleBtn.addEventListener('click', function() {
     });
 });
 
-function buildCalendarLink(appt) {
+function downloadAppointmentICS(appt) {
   const match = appt.appointment_time.match(/(\d+):00 (AM|PM)/);
   let hour = parseInt(match[1], 10);
   if (match[2] === 'PM' && hour !== 12) hour += 12;
@@ -354,5 +375,13 @@ function buildCalendarLink(appt) {
     'END:VCALENDAR'
   ].join('\r\n');
 
-  return 'data:text/calendar;charset=utf8,' + encodeURIComponent(icsContent);
+  const blob = new Blob([icsContent], { type: 'text/calendar' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'appointment-' + appt.booking_ref + '.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
