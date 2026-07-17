@@ -42,7 +42,7 @@ fetch('https://beautyloft-backend.onrender.com/me', {
     loadModelStatus();
   });
 
-
+let allMyAppointments = [];
 function loadAppointments() {
   fetch('https://beautyloft-backend.onrender.com/my-appointments', {
     headers: { 'Authorization': 'Bearer ' + authToken },
@@ -75,6 +75,11 @@ function loadAppointments() {
           actions = '<span style="color:var(--ink-soft); font-size:0.8rem;">Contact us directly to change this</span>';
         }
 
+        if (appt.status === 'confirmed' || appt.status === 'rescheduled') {
+          actions += '<button class="admin-action-btn calendar-btn" data-id="' + appt.id + '" data-type="appt">Add to Calendar</button>';
+        }
+        allMyAppointments = data.appointments;
+
         rows +=
           '<tr>' +
             '<td>' + appt.appointment_date + '</td>' +
@@ -92,6 +97,7 @@ function loadAppointments() {
         '</table>';
 
       attachRescheduleListeners();
+      attachCalendarListeners();
     });
 }
 
@@ -189,6 +195,8 @@ function loadModelStatus() {
     });
 }
 
+let allMyModelBookings = [];
+
 function loadModelBookings() {
   fetch('https://beautyloft-backend.onrender.com/my-model-bookings', {
     headers: { 'Authorization': 'Bearer ' + authToken },
@@ -198,6 +206,7 @@ function loadModelBookings() {
       return response.json();
     })
     .then(function(data) {
+      allMyModelBookings = data.bookings;
       const container = document.getElementById('modelBookingsTable');
 
       if (data.bookings.length === 0) {
@@ -207,19 +216,31 @@ function loadModelBookings() {
 
       let rows = '';
       data.bookings.forEach(function(b) {
+        const calendarBtn = (b.status === 'confirmed' || b.status === 'rescheduled')
+          ? '<button class="admin-action-btn calendar-btn" data-id="' + b.id + '" data-type="model">Add to Calendar</button>'
+          : '—';
+
         rows +=
           '<tr>' +
             '<td>' + b.booking_date + '</td>' +
             '<td>' + b.booking_time + '</td>' +
             '<td><span class="status-badge status-' + b.status + '">' + b.status + '</span></td>' +
+            '<td>' + calendarBtn + '</td>' +
           '</tr>';
       });
 
       container.innerHTML =
         '<table class="data-table">' +
-          '<thead><tr><th>Date</th><th>Time</th><th>Status</th></tr></thead>' +
+          '<thead><tr><th>Date</th><th>Time</th><th>Status</th><th></th></tr></thead>' +
           '<tbody>' + rows + '</tbody>' +
         '</table>';
+
+      document.querySelectorAll('.calendar-btn[data-type="model"]').forEach(function(btn) {
+        btn.addEventListener('click', function() {
+          const booking = allMyModelBookings.find(function(b) { return String(b.id) === btn.dataset.id; });
+          if (booking) addToCalendar(buildModelBookingCalendarDetailsProfile(booking));
+        });
+      });
     });
 }
 
@@ -250,6 +271,15 @@ function attachRescheduleListeners() {
       updateRescheduleConfirmState();
       rescheduleModal.style.display = 'flex';
       renderRescheduleCalendar();
+    });
+  });
+}
+
+function attachCalendarListeners() {
+  document.querySelectorAll('.calendar-btn[data-type="appt"]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const appt = allMyAppointments.find(function(a) { return String(a.id) === btn.dataset.id; });
+      if (appt) addToCalendar(buildApptCalendarDetails(appt));
     });
   });
 }
@@ -406,3 +436,88 @@ confirmRescheduleBtn.addEventListener('click', function() {
       loadAppointments();
     });
 });
+
+function addToCalendar(details) {
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPad|iPhone|iPod/.test(ua);
+  const isMac = /Macintosh/.test(ua) && !isIOS;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function toCalDate(d) {
+    return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
+  }
+
+  if (isIOS || isMac) {
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      'DTSTART:' + toCalDate(details.start),
+      'DTEND:' + toCalDate(details.end),
+      'SUMMARY:' + details.title,
+      'DESCRIPTION:' + details.description,
+      'LOCATION:' + details.location,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'event.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  const googleUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent(details.title) +
+    '&dates=' + toCalDate(details.start) + '/' + toCalDate(details.end) +
+    '&details=' + encodeURIComponent(details.description) +
+    '&location=' + encodeURIComponent(details.location);
+
+  window.open(googleUrl, '_blank');
+}
+
+function buildApptCalendarDetails(appt) {
+  const match = appt.appointment_time.match(/(\d+):00 (AM|PM)/);
+  let hour = parseInt(match[1], 10);
+  if (match[2] === 'PM' && hour !== 12) hour += 12;
+  if (match[2] === 'AM' && hour === 12) hour = 0;
+
+  const dateParts = appt.appointment_date.split('-');
+  const start = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], hour, 0, 0);
+  const end = new Date(start);
+  end.setHours(end.getHours() + 1);
+
+  return {
+    title: appt.service + ' at The BeautyLoft',
+    description: 'Booking ' + appt.booking_ref,
+    location: 'The BeautyLoft',
+    start: start,
+    end: end
+  };
+}
+
+function buildModelBookingCalendarDetailsProfile(b) {
+  const match = b.booking_time.match(/(\d+):00 (AM|PM)/);
+  let hour = parseInt(match[1], 10);
+  if (match[2] === 'PM' && hour !== 12) hour += 12;
+  if (match[2] === 'AM' && hour === 12) hour = 0;
+
+  const dateParts = b.booking_date.split('-');
+  const start = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], hour, 0, 0);
+  const end = new Date(start);
+  end.setHours(end.getHours() + 1);
+
+  return {
+    title: 'Modelling session at The BeautyLoft',
+    description: b.notes || 'Modelling session',
+    location: 'The BeautyLoft',
+    start: start,
+    end: end
+  };
+}
