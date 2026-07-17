@@ -61,14 +61,27 @@ function loadAppointments() {
 
       let rows = '';
       data.appointments.forEach(function(appt) {
-        const canReschedule = appt.status !== 'cancelled' && appt.status !== 'completed';
+        const isFinal = appt.status === 'cancelled' || appt.status === 'completed';
+        const hoursPassed = hoursSinceBooking(appt);
+        const withinWindow = hoursPassed <= 24;
+        const canAct = !isFinal && withinWindow;
+
+        let actions = '—';
+        if (canAct) {
+          actions =
+            '<button class="admin-action-btn reschedule-btn" data-id="' + appt.id + '">Reschedule</button>' +
+            '<button class="admin-action-btn admin-action-cancel cancel-appt-btn" data-id="' + appt.id + '">Cancel</button>';
+        } else if (!isFinal && !withinWindow) {
+          actions = '<span style="color:var(--ink-soft); font-size:0.8rem;">Contact us directly to change this</span>';
+        }
+
         rows +=
           '<tr>' +
             '<td>' + appt.appointment_date + '</td>' +
             '<td>' + appt.appointment_time + '</td>' +
             '<td>' + appt.service + '</td>' +
             '<td><span class="status-badge status-' + appt.status + '">' + appt.status + '</span></td>' +
-            '<td>' + (canReschedule ? '<button class="admin-action-btn reschedule-btn" data-id="' + appt.id + '">Reschedule</button>' : '—') + '</td>' +
+            '<td>' + actions + '</td>' +
           '</tr>';
       });
 
@@ -92,6 +105,28 @@ function attachRescheduleListeners() {
       rescheduleModal.style.display = 'flex';
     });
   });
+}
+
+function attachCancelListeners() {
+  document.querySelectorAll('.cancel-appt-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (!confirm('Cancel this appointment?')) return;
+
+      fetch('https://beautyloft-backend.onrender.com/appointments/' + btn.dataset.id + '/cancel', {
+        method: 'PATCH',
+        headers: { 'Authorization': 'Bearer ' + authToken }
+      })
+        .then(function() {
+          loadAppointments();
+        });
+    });
+  });
+}
+
+function hoursSinceBooking(appt) {
+  const createdAt = new Date(appt.created_at);
+  const now = new Date();
+  return (now - createdAt) / (1000 * 60 * 60);
 }
 
 document.getElementById('closeRescheduleModal').addEventListener('click', function() {

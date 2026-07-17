@@ -70,9 +70,16 @@ function renderAppointmentsTable(appointments) {
         '<td>' + appt.service + '</td>' +
         '<td>' + appt.appointment_date + '<br>' + appt.appointment_time + '</td>' +
         '<td><span class="status-badge status-' + appt.status + '">' + appt.status + '</span></td>' +
+        '<td>' + (appt.reschedule_reason || '—') + '</td>' +
         '<td>' + actionButtons(appt) + '</td>' +
       '</tr>';
   });
+
+  container.innerHTML =
+    '<table class="data-table">' +
+      '<thead><tr><th>Booking ID</th><th>Customer</th><th>Service</th><th>Date & Time</th><th>Status</th><th>Reschedule Reason</th><th>Actions</th></tr></thead>' +
+      '<tbody>' + rows + '</tbody>' +
+    '</table>';
 
   container.innerHTML =
     '<table class="data-table">' +
@@ -99,6 +106,7 @@ function actionButtons(appt) {
   }
   if (appt.status === 'confirmed' || appt.status === 'rescheduled') {
     buttons += '<button class="admin-action-btn" data-id="' + appt.id + '" data-status="completed">Complete</button>';
+    buttons += '<a class="admin-action-btn" style="text-decoration:none; display:inline-block;" href="' + buildCalendarLink(appt) + '" download="appointment-' + appt.booking_ref + '.ics">Add to Calendar</a>';
   }
   if (appt.status !== 'cancelled' && appt.status !== 'completed') {
     buttons += '<button class="admin-action-btn admin-action-cancel" data-id="' + appt.id + '" data-status="cancelled">Cancel</button>';
@@ -316,3 +324,35 @@ confirmRescheduleBtn.addEventListener('click', function() {
       loadAppointments();
     });
 });
+
+function buildCalendarLink(appt) {
+  const match = appt.appointment_time.match(/(\d+):00 (AM|PM)/);
+  let hour = parseInt(match[1], 10);
+  if (match[2] === 'PM' && hour !== 12) hour += 12;
+  if (match[2] === 'AM' && hour === 12) hour = 0;
+
+  const dateParts = appt.appointment_date.split('-');
+  const start = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], hour, 0, 0);
+  const end = new Date(start);
+  end.setHours(end.getHours() + 1);
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function formatICS(d) {
+    return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
+  }
+
+  const icsContent = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'BEGIN:VEVENT',
+    'DTSTART:' + formatICS(start),
+    'DTEND:' + formatICS(end),
+    'SUMMARY:' + appt.service + ' — ' + appt.customer_name,
+    'DESCRIPTION:Booking ' + appt.booking_ref + '. Customer: ' + appt.customer_name + ', ' + appt.customer_email,
+    'LOCATION:The BeautyLoft',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  return 'data:text/calendar;charset=utf8,' + encodeURIComponent(icsContent);
+}
