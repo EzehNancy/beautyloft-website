@@ -89,6 +89,9 @@ function actionButtons(b) {
   if (b.model_phone) {
     buttons += '<a class="admin-action-btn" style="text-decoration:none; display:inline-block;" href="' + buildReminderLink(b) + '" target="_blank">Remind on WhatsApp</a>';
   }
+  if (b.status !== 'cancelled' && b.status !== 'completed') {
+    buttons += '<button class="admin-action-btn calendar-btn" data-id="' + b.id + '">Add to Calendar</button>';
+  }
 
   return buttons;
 }
@@ -118,6 +121,20 @@ function attachActionListeners() {
       })
         .then(function() {
           loadModelBookings();
+        });
+    });
+  });
+
+  document.querySelectorAll('.calendar-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      fetch('https://beautyloft-backend.onrender.com/admin/model-bookings', {
+        headers: { 'Authorization': 'Bearer ' + authToken },
+        cache: 'no-store'
+      })
+        .then(function(response) { return response.json(); })
+        .then(function(data) {
+          const booking = data.bookings.find(function(b) { return String(b.id) === btn.dataset.id; });
+          if (booking) addToCalendar(buildModelBookingCalendarDetails(booking));
         });
     });
   });
@@ -226,4 +243,24 @@ function openAssignModal(userId, modelName, date) {
       loadModelAvailability();
       loadModelBookings();
     });
+}
+
+function buildModelBookingCalendarDetails(b) {
+  const match = b.booking_time.match(/(\d+):00 (AM|PM)/);
+  let hour = parseInt(match[1], 10);
+  if (match[2] === 'PM' && hour !== 12) hour += 12;
+  if (match[2] === 'AM' && hour === 12) hour = 0;
+
+  const dateParts = b.booking_date.split('-');
+  const start = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], hour, 0, 0);
+  const end = new Date(start);
+  end.setHours(end.getHours() + 1);
+
+  return {
+    title: 'Modelling session — ' + b.model_name,
+    description: b.notes || 'Modelling session at The BeautyLoft',
+    location: 'The BeautyLoft',
+    start: start,
+    end: end
+  };
 }
