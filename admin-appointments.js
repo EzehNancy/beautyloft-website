@@ -346,6 +346,51 @@ confirmRescheduleBtn.addEventListener('click', function() {
     });
 });
 
+function addToCalendar(details) {
+  const ua = navigator.userAgent || '';
+  const isIOS = /iPad|iPhone|iPod/.test(ua);
+  const isMac = /Macintosh/.test(ua) && !isIOS;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+  function toCalDate(d) {
+    return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
+  }
+
+  if (isIOS || isMac) {
+    const icsContent = [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'BEGIN:VEVENT',
+      'DTSTART:' + toCalDate(details.start),
+      'DTEND:' + toCalDate(details.end),
+      'SUMMARY:' + details.title,
+      'DESCRIPTION:' + details.description,
+      'LOCATION:' + details.location,
+      'END:VEVENT',
+      'END:VCALENDAR'
+    ].join('\r\n');
+
+    const blob = new Blob([icsContent], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'event.ics';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    return;
+  }
+
+  const googleUrl = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+    '&text=' + encodeURIComponent(details.title) +
+    '&dates=' + toCalDate(details.start) + '/' + toCalDate(details.end) +
+    '&details=' + encodeURIComponent(details.description) +
+    '&location=' + encodeURIComponent(details.location);
+
+  window.open(googleUrl, '_blank');
+}
+
 function downloadAppointmentICS(appt) {
   const match = appt.appointment_time.match(/(\d+):00 (AM|PM)/);
   let hour = parseInt(match[1], 10);
@@ -357,31 +402,11 @@ function downloadAppointmentICS(appt) {
   const end = new Date(start);
   end.setHours(end.getHours() + 1);
 
-  function pad(n) { return String(n).padStart(2, '0'); }
-  function formatICS(d) {
-    return d.getFullYear() + pad(d.getMonth() + 1) + pad(d.getDate()) + 'T' + pad(d.getHours()) + pad(d.getMinutes()) + '00';
-  }
-
-  const icsContent = [
-    'BEGIN:VCALENDAR',
-    'VERSION:2.0',
-    'BEGIN:VEVENT',
-    'DTSTART:' + formatICS(start),
-    'DTEND:' + formatICS(end),
-    'SUMMARY:' + appt.service + ' — ' + appt.customer_name,
-    'DESCRIPTION:Booking ' + appt.booking_ref + '. Customer: ' + appt.customer_name + ', ' + appt.customer_email,
-    'LOCATION:The BeautyLoft',
-    'END:VEVENT',
-    'END:VCALENDAR'
-  ].join('\r\n');
-
-  const blob = new Blob([icsContent], { type: 'text/calendar' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = 'appointment-' + appt.booking_ref + '.ics';
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  addToCalendar({
+    title: appt.service + ' — ' + appt.customer_name,
+    description: 'Booking ' + appt.booking_ref + '. Customer: ' + appt.customer_name + ', ' + appt.customer_email,
+    location: 'The BeautyLoft',
+    start: start,
+    end: end
+  });
 }
