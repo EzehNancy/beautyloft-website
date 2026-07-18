@@ -347,6 +347,29 @@ h1, h2, h3 {
     border-radius:100px;
   }
 
+  .lookbook-card {
+  position: relative;
+}
+
+.lookbook-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.lookbook-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0,0,0,0.6), transparent);
+  color: white;
+  font-family: 'Fraunces', serif;
+  font-style: italic;
+  font-size: 1rem;
+}
 @media (max-width:768px){
 
     .lookbook-section{
@@ -384,6 +407,40 @@ h1, h2, h3 {
         font-size:.55rem;
         padding:4px 8px;
     }
+}
+
+.lookbook-strip {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 4px 4px 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.lookbook-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.lookbook-card {
+  flex: 0 0 auto;
+  width: 220px;
+  aspect-ratio: 3/4;
+  scroll-snap-align: start;
+}
+
+@media (max-width: 600px) {
+  .lookbook-card {
+    width: 65vw;
+  }
+}
+
+.lookbook-section {
+  overflow-x: hidden;
 }
 
 .tag {
@@ -1601,8 +1658,18 @@ a{
 
 .admin-main {
   flex: 1;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: auto;
   padding: 50px 6vw;
   background: var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.admin-main::-webkit-scrollbar {
+  display: none;
 }
 
 .mobile-sidebar-toggle {
@@ -1642,6 +1709,16 @@ a{
 
   .admin-main {
     padding: 30px 6vw;
+  }
+
+  .admin-layout {
+    height: auto;
+    overflow: visible;
+  }
+
+  .admin-main {
+    height: auto;
+    overflow-y: visible;
   }
 }
 
@@ -1708,7 +1785,8 @@ a{
 }
 
 .data-table {
-  width: 100%;
+  width: fit-content;
+  margin-left: 0;
   border-collapse: collapse;
 }
 
@@ -1829,19 +1907,106 @@ a{
 }
 
 .data-table {
-  display: block;
-  overflow-x: auto;
-  white-space: nowrap;
+  width: 100%;
+  border-collapse: collapse;
 }
 
-.data-table thead, .data-table tbody {
-  display: table;
-  width: 100%;
-  table-layout: auto;
+#appointmentsAdminTable,
+#modelBookingsAdminTable,
+#applicationsAdminTable,
+#appointmentsTable,
+#modelBookingsTable {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+#appointmentsAdminTable::-webkit-scrollbar,
+#modelBookingsAdminTable::-webkit-scrollbar,
+#applicationsAdminTable::-webkit-scrollbar,
+#appointmentsTable::-webkit-scrollbar,
+#modelBookingsTable::-webkit-scrollbar {
+  display: none;
 }
 
 @media (max-width: 700px) {
   .admin-main {
     padding: 30px 4vw;
   }
+}
+
+.admin-layout {
+  display: flex;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.admin-sidebar {
+  width: 260px;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 100vh;
+  overflow-y: auto;
+  background: var(--plum);
+  color: white;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.admin-sidebar{
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.admin-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.data-table {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.data-table::-webkit-scrollbar {
+  display: none;
+}
+
+.data-table th {
+  text-align: left;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 16px 20px;
+  border-bottom: 2px solid #E4D8D2;
+}
+
+.data-table td {
+  padding: 20px;
+  border-bottom: 1px solid #E4D8D2;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+
+.data-table tr:hover td {
+  background: var(--bg-soft);
+}
+
+.data-table {
+  width: 100%;
+  min-width: 700px;
+  border-collapse: collapse;
+}
+
+.data-table {
+  width: auto;
+  min-width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+.data-table th,
+.data-table td {
+  white-space: nowrap;
 }

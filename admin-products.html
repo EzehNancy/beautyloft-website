@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Products — Admin — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="admin-layout">
+
+  <aside class="admin-sidebar">
+    <a href="index.html" class="logo">The <span>BeautyLoft</span></a>
+    <p class="admin-tag">Admin</p>
+    <a href="index.html" class="admin-nav-link" style="margin-bottom:10px;">🏠 Home</a>
+
+    <nav class="admin-nav">
+      <a href="admin-dashboard.html" class="admin-nav-link">Dashboard</a>
+      <a href="admin-appointments.html" class="admin-nav-link">Appointments</a>
+      <a href="admin-orders.html" class="admin-nav-link">Shop Orders</a>
+      <a href="admin-products.html" class="admin-nav-link active">Products</a>
+      <a href="admin-model-bookings.html" class="admin-nav-link">Model Bookings</a>
+      <a href="admin-model-availability.html" class="admin-nav-link">Model Availability</a>
+      <a href="admin-models.html" class="admin-nav-link">Model Applications</a>
+      <a href="admin-availability.html" class="admin-nav-link">Availability</a>
+      <a href="admin-settings.html" class="admin-nav-link">Settings</a>
+    </nav>
+
+    <button id="adminLogoutBtn" class="admin-logout">Log out</button>
+  </aside>
+
+  <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">☰ Menu</button>
+
+  <main class="admin-main">
+    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
+      <h1>Products</h1>
+      <button class="admin-action-btn" id="addProductBtn">+ Add Product</button>
+    </div>
+    <div id="productsAdminTable" style="margin-top:30px;">Loading...</div>
+  </main>
+
+</div>
+
+<div id="productModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
+  <div class="cal-card" style="max-width:460px; width:100%; max-height:90vh; overflow-y:auto; position:relative;">
+    <button id="closeProductModal" style="position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+    <h3 id="productModalTitle" style="margin-bottom:16px;">Add Product</h3>
+
+    <form id="productForm">
+      <input type="hidden" id="productId">
+      <div class="field">
+        <label for="productName">Name</label>
+        <input type="text" id="productName" required>
+      </div>
+      <div class="field">
+        <label for="productDescription">Description</label>
+        <textarea id="productDescription"></textarea>
+      </div>
+      <div class="field">
+        <label for="productPrice">Price (₦)</label>
+        <input type="number" id="productPrice" step="0.01" required>
+      </div>
+      <div class="field">
+        <label for="productImageUrl">Image URL</label>
+        <input type="text" id="productImageUrl" placeholder="https://...">
+      </div>
+      <div class="field">
+        <label for="productCategory">Category</label>
+        <input type="text" id="productCategory" placeholder="e.g. Press-on Sets">
+      </div>
+      <div class="field">
+        <label for="productStock">Stock Quantity</label>
+        <input type="number" id="productStock" value="0">
+      </div>
+      <div class="field" id="activeField" style="display:none;">
+        <label style="display:flex; align-items:center; gap:10px; cursor:pointer;">
+          <input type="checkbox" id="productActive" style="width:auto;">
+          Active (visible in shop)
+        </label>
+      </div>
+      <button type="submit" class="submit-btn">Save Product</button>
+    </form>
+  </div>
+</div>
+
+<script src="admin-products.js"></script>
+</body>
+</html>

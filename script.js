@@ -30,18 +30,22 @@ filterButtons.forEach(function(btn) {
 });
 
 const lookbookItems = [
-  { label:'Cinnamon balayage',  grad:'linear-gradient(160deg,#B98A82,#5B3A45)' },
-  { label:'Espresso chrome',    grad:'linear-gradient(160deg,#6B5F5A,#2E2622)' },
-  { label:'Copper glow blowout',grad:'linear-gradient(160deg,#C9A876,#98645C)' },
-  { label:'Terracotta nail art',grad:'linear-gradient(160deg,#98645C,#C9A876)' },
-  { label:'Soft caramel roots', grad:'linear-gradient(160deg,#E4D8D2,#B98A82)' },
+  { label: 'Cinnamon balayage', img: 'images/lookbook-1.jpeg' },
+  { label: 'Espresso chrome', img: 'images/lookbook-2.jpeg' },
+  { label: 'Copper glow blowout', img: 'images/lookbook-3.jpeg' },
+  { label: 'Terracotta nail art', img: 'images/lookbook-6.jpeg' },
+  { label: 'Soft caramel roots', img: 'images/lookbook-5.jpeg' },
+  { label: 'Soft caramel roots', img: 'images/lookbook-4.jpeg' },
 ];
 const lookbookStrip = document.getElementById('lookbookStrip');
 if (lookbookStrip) {
-  lookbookItems.forEach(item => {
+  lookbookItems.forEach(function(item) {
     const el = document.createElement('div');
     el.className = 'lookbook-card';
-    el.innerHTML = `<span class="lookbook-badge">Trending</span><div class="ph" style="background:${item.grad}">${item.label}</div>`;
+    el.innerHTML =
+      '<span class="lookbook-badge">Trending</span>' +
+      '<img src="' + item.img + '" alt="' + item.label + '">' +
+      '<p class="lookbook-caption">' + item.label + '</p>';
     lookbookStrip.appendChild(el);
   });
 }
