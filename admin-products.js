@@ -128,7 +128,16 @@ function openProductModal(product) {
     document.getElementById('productName').value = product.name;
     document.getElementById('productDescription').value = product.description;
     document.getElementById('productPrice').value = (product.price / 100).toFixed(2);
-    document.getElementById('productImageUrl').value = product.image_url;
+    document.getElementById('productImageUrl').value = product.image_url;document.getElementById('productImageUrl').value = product.image_url;
+    if (product.image_url) {
+      document.getElementById('imagePreview').src = product.image_url;
+      document.getElementById('imagePreviewWrap').style.display = 'block';
+    } else {
+    productModalTitle.textContent = 'Add Product';
+    document.getElementById('productId').value = '';
+    document.getElementById('imagePreviewWrap').style.display = 'none';
+    activeField.style.display = 'none';
+  }
     document.getElementById('productCategory').value = product.category;
     document.getElementById('productStock').value = product.stock_quantity;
     document.getElementById('productActive').checked = !!product.is_active;
@@ -172,5 +181,32 @@ productForm.addEventListener('submit', function(e) {
     .then(function() {
       productModal.style.display = 'none';
       loadProducts();
+    });
+});
+
+document.getElementById('productImageFile').addEventListener('change', function(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const formData = new FormData();
+  formData.append('image', file);
+
+  const preview = document.getElementById('imagePreview');
+  const previewWrap = document.getElementById('imagePreviewWrap');
+  preview.src = URL.createObjectURL(file);
+  previewWrap.style.display = 'block';
+
+  fetch('https://beautyloft-backend.onrender.com/admin/upload-image', {
+    method: 'POST',
+    headers: { 'Authorization': 'Bearer ' + authToken },
+    body: formData
+  })
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(data) {
+      if (data.imageUrl) {
+        document.getElementById('productImageUrl').value = data.imageUrl;
+      }
     });
 });

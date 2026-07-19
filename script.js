@@ -110,6 +110,19 @@ if (authNavItem) {
               window.location.href = 'index.html';
             });
           });
+
+          fetch('https://beautyloft-backend.onrender.com/my-model-status', {
+            headers: { 'Authorization': 'Bearer ' + token }
+          })
+            .then(function(response) {
+              return response.json();
+            })
+            .then(function(statusData) {
+              const modelsLink = document.getElementById('modelsNavLink');
+              if (modelsLink && statusData.status === 'accepted') {
+                modelsLink.href = 'model-booking.html';
+              }
+            });
         }
       });
   }
