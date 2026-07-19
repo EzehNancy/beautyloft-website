@@ -16,7 +16,6 @@
   <aside class="admin-sidebar">
     <a href="index.html" class="logo">The <span>BeautyLoft</span></a>
     <p class="admin-tag">Admin</p>
-    <a href="index.html" class="admin-nav-link" style="margin-bottom:10px;">🏠 Home</a>
 
     <nav class="admin-nav">
       <a href="admin-dashboard.html" class="admin-nav-link">Dashboard</a>
@@ -36,12 +35,15 @@
   <button id="mobileSidebarToggle" class="mobile-sidebar-toggle">☰ Menu</button>
 
   <main class="admin-main">
-    <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
-      <h1>Products</h1>
-      <button class="admin-action-btn" id="addProductBtn">+ Add Product</button>
-    </div>
-    <div id="productsAdminTable" style="margin-top:30px;">Loading...</div>
-  </main>
+  <div class="page-header-row">
+    <h1>Products</h1>
+    <button class="admin-action-btn" id="addProductBtn">+ Add Product</button>
+  </div>
+
+  <div class="table-scroll-wrap">
+    <div id="productsAdminTable">Loading...</div>
+  </div>
+</main>
 
 </div>
 

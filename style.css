@@ -18,6 +18,7 @@ body {
   color: var(--ink);
   font-family: 'Inter', sans-serif;
   line-height: 1.5;
+  overflow-x: hidden;
 }
 
  header{
@@ -1711,15 +1712,19 @@ a{
     padding: 30px 6vw;
   }
 
+ @media (max-width: 900px) {
   .admin-layout {
     height: auto;
-    overflow: visible;
+    overflow-x: hidden;
+    overflow-y: visible;
   }
 
   .admin-main {
     height: auto;
     overflow-y: visible;
+    overflow-x: auto;
   }
+}
 }
 
 .stats-grid {
@@ -2009,4 +2014,53 @@ a{
 .data-table th,
 .data-table td {
   white-space: nowrap;
+}
+
+.admin-main {
+  flex: 1;
+  min-width: 0;
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 50px 6vw;
+  background: var(--bg);
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.admin-main::-webkit-scrollbar {
+  display: none;
+}
+
+.page-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.table-scroll-wrap {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.table-scroll-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .admin-layout {
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: visible;
+  }
+
+  .admin-main {
+    height: auto;
+    overflow-y: visible;
+    overflow-x: hidden;
+  }
 }
