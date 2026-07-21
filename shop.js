@@ -136,58 +136,63 @@ function renderShopGrid() {
 
     card.innerHTML = `
 
-      <div class="product-photo">
+  <a href="product.html?id=${p.id}" class="product-photo">
 
-        ${
-          p.image_url
-            ? `<img
-                src="${p.image_url}"
-                alt="${p.name}"
-                style="width:100%;height:100%;object-fit:cover;">`
-            : `<div
-                class="ph"
-                style="background:linear-gradient(160deg,#C9A876,#98645C);">
-                ${p.name}
-               </div>`
-        }
+    ${
+      p.image_url
+        ? `<img
+            src="${p.image_url}"
+            alt="${p.name}"
+            style="width:100%; height:100%; object-fit:cover;">`
+        : `<div
+            class="ph"
+            style="background:linear-gradient(160deg,#C9A876,#98645C);">
+            ${p.name}
+           </div>`
+    }
 
-      </div>
+  </a>
 
-      <div class="product-info">
+  <div class="product-info">
 
-        <h3>${p.name}</h3>
+    <a
+      href="product.html?id=${p.id}"
+      style="text-decoration:none; color:inherit;"
+    >
+      <h3>${p.name}</h3>
+    </a>
 
-        <p class="product-desc">
-          ${p.description || ''}
-        </p>
+    <p class="product-desc">
+      ${p.description || ''}
+    </p>
 
-        <p class="product-price">
-          ₦${nairaPrice}
-        </p>
+    <p class="product-price">
+      ₦${nairaPrice}
+    </p>
 
-        <div class="product-size-row">
+    <div class="product-size-row">
 
-          <button class="size-btn" data-size="S">
-            S
-          </button>
+      <button class="size-btn" data-size="S">
+        S
+      </button>
 
-          <button class="size-btn active" data-size="M">
-            M
-          </button>
+      <button class="size-btn active" data-size="M">
+        M
+      </button>
 
-          <button class="size-btn" data-size="L">
-            L
-          </button>
+      <button class="size-btn" data-size="L">
+        L
+      </button>
 
-        </div>
+    </div>
 
-        <button class="add-cart-btn">
-          Add to Cart
-        </button>
+    <button class="add-cart-btn">
+      Add to Cart
+    </button>
 
-      </div>
+  </div>
 
-    `;
+`;
 
     card.querySelectorAll('.size-btn').forEach(function(btn) {
 

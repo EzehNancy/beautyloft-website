@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html" id="modelsNavLink">Models</a></li>
+      <li id="authNavItem"><a href="login.html">Log In</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="productDetail" style="padding-top:160px;">Loading...</section>
+</main>
+
+<button id="cartToggle">🛍 Cart <span id="cartCount">0</span></button>
+<div id="cartOverlay"></div>
+<div id="cartDrawer">
+  <button id="cartClose">&times;</button>
+  <h3>Your cart</h3>
+  <div id="cartItems"></div>
+  <div id="cartTotal"></div>
+</div>
+
+<script src="script.js"></script>
+<script src="product.js"></script>
+</body>
+</html>
