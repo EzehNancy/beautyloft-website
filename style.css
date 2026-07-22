@@ -2103,3 +2103,20 @@ a{
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 900px) {
+  .shop-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .shop-grid {
+    grid-template-columns: 1fr;
+  }
+
+  #shop-hero {
+    padding-top: 140px;
+    text-align: center;
+  }
+}
