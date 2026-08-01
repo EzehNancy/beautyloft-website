@@ -27,33 +27,90 @@ cartOverlay.addEventListener('click', function () {
 // CART
 // =========================
 
-let cart = JSON.parse(sessionStorage.getItem('cart') || '[]');
+let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
 const cartCount = document.getElementById('cartCount');
 const cartItems = document.getElementById('cartItems');
 const cartTotal = document.getElementById('cartTotal');
 
 function renderCart() {
-  cartCount.textContent = cart.length;
+  cartCount.textContent = cart.reduce(function(sum, item) { return sum + (item.quantity || 1); }, 0);
   cartItems.innerHTML = '';
+
+  if (cart.length === 0) {
+    cartItems.innerHTML = '<p style="text-align:center; color:var(--ink-soft); padding:30px 0;">Your cart is empty.</p>';
+    cartTotal.textContent = '';
+    return;
+  }
+
   let total = 0;
 
-  cart.forEach(function(item) {
-    const price = item.price / 100;
+  cart.forEach(function(item, index) {
+    const qty = item.quantity || 1;
+    const lineTotal = (item.price * qty) / 100;
+    total += item.price * qty;
+
+    const optionsText = [
+      item.size ? 'Size: ' + item.size : '',
+      item.shape ? 'Shape: ' + item.shape : '',
+      item.length ? 'Length: ' + item.length : '',
+      item.finish ? item.finish : ''
+    ].filter(Boolean).join(' · ');
 
     cartItems.innerHTML += `
-      <p>
-        <strong>${item.name}</strong><br>
-        Size: ${item.size}<br>
-        ₦${price.toLocaleString('en-NG', { minimumFractionDigits: 2 })}
-      </p>
+      <div class="cart-line">
+        <div class="cart-line-top">
+          <div class="cart-line-photo">
+            ${item.image
+              ? `<img src="${item.image}" alt="${item.name}">`
+              : `<div class="cart-line-photo-placeholder"></div>`
+            }
+          </div>
+          <div class="cart-line-details">
+            <strong>${item.name}</strong>
+            <p class="cart-line-options">${optionsText}</p>
+          </div>
+        </div>
+        <div class="cart-line-bottom">
+          <div class="qty-controls">
+            <button type="button" class="qty-btn" data-index="${index}" data-action="minus">−</button>
+            <span>${qty}</span>
+            <button type="button" class="qty-btn" data-index="${index}" data-action="plus">+</button>
+          </div>
+          <span class="cart-line-price">₦${lineTotal.toLocaleString('en-NG', { minimumFractionDigits: 2 })}</span>
+          <a href="product.html?id=${item.productId}&editIndex=${index}" class="remove-line-btn" style="text-decoration:underline;">Edit</a>
+          <button type="button" class="remove-line-btn" data-index="${index}">Remove</button>
+        </div>
+      </div>
     `;
-
-    total += item.price;
   });
 
-  cartTotal.textContent =
-    'Total: ₦' + (total / 100).toLocaleString('en-NG', { minimumFractionDigits: 2 });
+  cartTotal.textContent = 'Total: ₦' + (total / 100).toLocaleString('en-NG', { minimumFractionDigits: 2 });
+
+  document.querySelectorAll('.qty-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const idx = parseInt(btn.dataset.index, 10);
+      const currentQty = cart[idx].quantity || 1;
+
+      if (btn.dataset.action === 'plus') {
+        cart[idx].quantity = currentQty + 1;
+      } else if (currentQty > 1) {
+        cart[idx].quantity = currentQty - 1;
+      }
+
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    });
+  });
+
+  document.querySelectorAll('.remove-line-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      const idx = parseInt(btn.dataset.index, 10);
+      cart.splice(idx, 1);
+      localStorage.setItem('cart', JSON.stringify(cart));
+      renderCart();
+    });
+  });
 }
 
 
@@ -150,10 +207,12 @@ function renderShopGrid() {
         productId: p.id,
         name: p.name,
         price: p.price,
-        size: selectedSize
+        size: selectedSize,
+        quantity: 1,
+        image: p.image_url
       });
 
-      sessionStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('cart', JSON.stringify(cart));
       renderCart();
 
       addBtn.textContent = 'Added ✓';
