@@ -136,8 +136,12 @@ function openProductModal(product) {
   const imagePreviewWrap =
     document.getElementById('imagePreviewWrap');
 
-  const imagePreview =
-    document.getElementById('imagePreview');
+  const productImagesInput =
+    document.getElementById('productImages');
+
+  // Clear old previews every time modal opens
+  imagePreviewWrap.innerHTML = '';
+  imagePreviewWrap.style.display = 'none';
 
   if (product) {
     productModalTitle.textContent = 'Edit Product';
@@ -171,21 +175,45 @@ function openProductModal(product) {
 
     activeField.style.display = 'block';
 
-    if (product.image_url) {
-      imagePreview.src = product.image_url;
-      imagePreviewWrap.style.display = 'block';
-    } else {
-      imagePreview.src = '';
-      imagePreviewWrap.style.display = 'none';
+
+    // Get all existing product images
+    let existingImages = [];
+
+    if (Array.isArray(product.images)) {
+      existingImages = product.images;
     }
 
+
+    // If old product only has one image,
+    // use image_url as fallback
+    if (
+      existingImages.length === 0 &&
+      product.image_url
+    ) {
+      existingImages = [product.image_url];
+    }
+
+
+    // Save images into hidden input
+    productImagesInput.value =
+      JSON.stringify(existingImages);
+
+
+    // Show existing image previews
+   renderProductImagePreviews(existingImages);
+
   } else {
+
+    // ADD PRODUCT
     productModalTitle.textContent = 'Add Product';
 
     document.getElementById('productId').value = '';
+
     document.getElementById('productImageUrl').value = '';
 
-    imagePreview.src = '';
+    productImagesInput.value = '[]';
+
+    imagePreviewWrap.innerHTML = '';
     imagePreviewWrap.style.display = 'none';
 
     activeField.style.display = 'none';
@@ -199,16 +227,36 @@ productForm.addEventListener('submit', function(e) {
 
   const id = document.getElementById('productId').value;
 
-  const payload = {
-    name: document.getElementById('productName').value,
-    collection: document.getElementById('productCollection').value,
-    description: document.getElementById('productDescription').value,
-    price: parseFloat(document.getElementById('productPrice').value),
-    imageUrl: document.getElementById('productImageUrl').value,
-    category: document.getElementById('productCategory').value,
-    stockQuantity: parseInt(document.getElementById('productStock').value, 10) || 0,
-    isActive: document.getElementById('productActive').checked
-  };
+const payload = {
+  name: document.getElementById('productName').value,
+
+  collection: document.getElementById('productCollection').value,
+
+  description: document.getElementById('productDescription').value,
+
+  price: parseFloat(
+    document.getElementById('productPrice').value
+  ),
+
+  imageUrl:
+    document.getElementById('productImageUrl').value,
+
+  images: JSON.parse(
+    document.getElementById('productImages').value || '[]'
+  ),
+
+  category:
+    document.getElementById('productCategory').value,
+
+  stockQuantity:
+    parseInt(
+      document.getElementById('productStock').value,
+      10
+    ) || 0,
+
+  isActive:
+    document.getElementById('productActive').checked
+};
 
   console.log('Product ID:', id);
   console.log('Payload:', payload);
@@ -252,29 +300,165 @@ productForm.addEventListener('submit', function(e) {
     });
 });
 
-document.getElementById('productImageFile').addEventListener('change', function(e) {
-  const file = e.target.files[0];
-  if (!file) return;
+document
+  .getElementById('productImageFile')
+  .addEventListener('change', async function (e) {
 
-  const formData = new FormData();
-  formData.append('image', file);
+    const files = Array.from(e.target.files);
 
-  const preview = document.getElementById('imagePreview');
-  const previewWrap = document.getElementById('imagePreviewWrap');
-  preview.src = URL.createObjectURL(file);
-  previewWrap.style.display = 'block';
+    if (!files.length) return;
 
-  fetch('https://beautyloft-backend.onrender.com/admin/upload-image', {
-    method: 'POST',
-    headers: { 'Authorization': 'Bearer ' + authToken },
-    body: formData
-  })
-    .then(function(response) {
-      return response.json();
-    })
-    .then(function(data) {
-      if (data.imageUrl) {
-        document.getElementById('productImageUrl').value = data.imageUrl;
+    // Get images already saved for this product
+    let allImages = [];
+
+    try {
+      allImages = JSON.parse(
+        document.getElementById('productImages').value || '[]'
+      );
+    } catch (error) {
+      allImages = [];
+    }
+
+    // Upload each newly selected image
+    for (const file of files) {
+
+      const formData = new FormData();
+      formData.append('image', file);
+
+      try {
+
+        const response = await fetch(
+          'https://beautyloft-backend.onrender.com/admin/upload-image',
+          {
+            method: 'POST',
+            headers: {
+              'Authorization': 'Bearer ' + authToken
+            },
+            body: formData
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(
+            data.error || 'Image upload failed.'
+          );
+        }
+
+        if (data.imageUrl) {
+          allImages.push(data.imageUrl);
+        }
+
+      } catch (error) {
+
+        console.error('IMAGE UPLOAD ERROR:', error);
+
+        alert(
+          'One of the images failed to upload.'
+        );
       }
+    }
+
+    // Save all images
+    document.getElementById('productImages').value =
+      JSON.stringify(allImages);
+
+    // First image is always the main/shop image
+    document.getElementById('productImageUrl').value =
+      allImages.length > 0 ? allImages[0] : '';
+
+    // Refresh previews
+    renderProductImagePreviews(allImages);
+
+    // Clear file input so another image can be selected
+    e.target.value = '';
+  });
+
+  function renderProductImagePreviews(images) {
+
+  const previewWrap =
+    document.getElementById('imagePreviewWrap');
+
+  previewWrap.innerHTML = '';
+
+  if (!images || images.length === 0) {
+    previewWrap.style.display = 'none';
+    return;
+  }
+
+  previewWrap.style.display = 'flex';
+
+  images.forEach(function(imageUrl, index) {
+
+    // Wrapper for image + remove button
+    const imageBox = document.createElement('div');
+
+    imageBox.style.position = 'relative';
+    imageBox.style.width = '80px';
+    imageBox.style.height = '80px';
+
+
+    // Image
+    const img = document.createElement('img');
+
+    img.src = imageUrl;
+    img.style.width = '80px';
+    img.style.height = '80px';
+    img.style.objectFit = 'cover';
+    img.style.borderRadius = '8px';
+
+    imageBox.appendChild(img);
+
+
+    // Remove button
+    const removeBtn = document.createElement('button');
+
+    removeBtn.type = 'button';
+    removeBtn.innerHTML = '&times;';
+
+    removeBtn.style.position = 'absolute';
+    removeBtn.style.top = '-6px';
+    removeBtn.style.right = '-6px';
+    removeBtn.style.width = '22px';
+    removeBtn.style.height = '22px';
+    removeBtn.style.border = 'none';
+    removeBtn.style.borderRadius = '50%';
+    removeBtn.style.background = '#2e2622';
+    removeBtn.style.color = '#fff';
+    removeBtn.style.cursor = 'pointer';
+    removeBtn.style.fontSize = '16px';
+    removeBtn.style.lineHeight = '20px';
+    removeBtn.style.padding = '0';
+
+
+    // Remove this image
+    removeBtn.addEventListener('click', function() {
+
+      const currentImages = JSON.parse(
+        document.getElementById('productImages').value || '[]'
+      );
+
+      currentImages.splice(index, 1);
+
+      document.getElementById('productImages').value =
+        JSON.stringify(currentImages);
+
+
+      // Update main image
+      document.getElementById('productImageUrl').value =
+        currentImages.length > 0
+          ? currentImages[0]
+          : '';
+
+
+      // Refresh previews
+      renderProductImagePreviews(currentImages);
     });
-});
+
+
+    imageBox.appendChild(removeBtn);
+
+    previewWrap.appendChild(imageBox);
+  });
+}
