@@ -63,6 +63,7 @@ function loadProducts() {
           '<tr>' +
             '<td>' + (p.image_url ? '<img src="' + p.image_url + '" style="width:44px; height:44px; object-fit:cover; border-radius:8px;">' : '—') + '</td>' +
             '<td>' + p.name + '</td>' +
+            '<td>' + (p.collection || '—') + '</td>' +
             '<td>' + p.category + '</td>' +
             '<td>₦' + nairaPrice + '</td>' +
             '<td>' + p.stock_quantity + '</td>' +
@@ -76,7 +77,17 @@ function loadProducts() {
 
       container.innerHTML =
         '<table class="data-table">' +
-          '<thead><tr><th>Photo</th><th>Name</th><th>Category</th><th>Price</th><th>Stock</th><th>Status</th><th>Actions</th></tr></thead>' +
+          '<thead><tr>' +
+  '<th>Photo</th>' +
+  '<th>Name</th>' +
+  '<th>Collection</th>' +
+  '<th>Category</th>' +
+  '<th>Price</th>' +
+  '<th>Stock</th>' +
+  '<th>Status</th>' +
+  '<th>Actions</th>' +
+'</tr></thead>'+
+          
           '<tbody>' + rows + '</tbody>' +
         '</table>';
 
@@ -122,29 +133,61 @@ document.getElementById('closeProductModal').addEventListener('click', function(
 function openProductModal(product) {
   productForm.reset();
 
+  const imagePreviewWrap =
+    document.getElementById('imagePreviewWrap');
+
+  const imagePreview =
+    document.getElementById('imagePreview');
+
   if (product) {
     productModalTitle.textContent = 'Edit Product';
-    document.getElementById('productId').value = product.id;
-    document.getElementById('productName').value = product.name;
-    document.getElementById('productDescription').value = product.description;
-    document.getElementById('productPrice').value = (product.price / 100).toFixed(2);
-    document.getElementById('productImageUrl').value = product.image_url;document.getElementById('productImageUrl').value = product.image_url;
-    if (product.image_url) {
-      document.getElementById('imagePreview').src = product.image_url;
-      document.getElementById('imagePreviewWrap').style.display = 'block';
-    } else {
-    productModalTitle.textContent = 'Add Product';
-    document.getElementById('productId').value = '';
-    document.getElementById('imagePreviewWrap').style.display = 'none';
-    activeField.style.display = 'none';
-  }
-    document.getElementById('productCategory').value = product.category;
-    document.getElementById('productStock').value = product.stock_quantity;
-    document.getElementById('productActive').checked = !!product.is_active;
+
+    document.getElementById('productId').value =
+      product.id;
+
+    document.getElementById('productName').value =
+      product.name || '';
+
+    document.getElementById('productCollection').value =
+      product.collection || '';
+
+    document.getElementById('productDescription').value =
+      product.description || '';
+
+    document.getElementById('productPrice').value =
+      (product.price / 100).toFixed(2);
+
+    document.getElementById('productImageUrl').value =
+      product.image_url || '';
+
+    document.getElementById('productCategory').value =
+      product.category || '';
+
+    document.getElementById('productStock').value =
+      product.stock_quantity || 0;
+
+    document.getElementById('productActive').checked =
+      !!product.is_active;
+
     activeField.style.display = 'block';
+
+    if (product.image_url) {
+      imagePreview.src = product.image_url;
+      imagePreviewWrap.style.display = 'block';
+    } else {
+      imagePreview.src = '';
+      imagePreviewWrap.style.display = 'none';
+    }
+
   } else {
     productModalTitle.textContent = 'Add Product';
+
     document.getElementById('productId').value = '';
+    document.getElementById('productImageUrl').value = '';
+
+    imagePreview.src = '';
+    imagePreviewWrap.style.display = 'none';
+
     activeField.style.display = 'none';
   }
 
@@ -156,14 +199,15 @@ productForm.addEventListener('submit', function(e) {
 
   const id = document.getElementById('productId').value;
   const payload = {
-    name: document.getElementById('productName').value,
-    description: document.getElementById('productDescription').value,
-    price: parseFloat(document.getElementById('productPrice').value),
-    imageUrl: document.getElementById('productImageUrl').value,
-    category: document.getElementById('productCategory').value,
-    stockQuantity: parseInt(document.getElementById('productStock').value, 10) || 0,
-    isActive: document.getElementById('productActive').checked
-  };
+  name: document.getElementById('productName').value,
+  collection: document.getElementById('productCollection').value,
+  description: document.getElementById('productDescription').value,
+  price: parseFloat(document.getElementById('productPrice').value),
+  imageUrl: document.getElementById('productImageUrl').value,
+  category: document.getElementById('productCategory').value,
+  stockQuantity: parseInt(document.getElementById('productStock').value, 10) || 0,
+  isActive: document.getElementById('productActive').checked
+};
 
   const url = id
     ? 'https://beautyloft-backend.onrender.com/admin/products/' + id
