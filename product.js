@@ -81,6 +81,18 @@ const NAIL_LENGTHS = [
 // ========================================
 
 function renderProduct(p) {
+  function optimizeCloudinaryImage(url, width) {
+  if (!url) return '';
+
+  if (!url.includes('res.cloudinary.com')) {
+    return url;
+  }
+
+  return url.replace(
+    '/upload/',
+    '/upload/f_auto,q_auto,w_' + width + ',c_limit/'
+  );
+}
 
   const nairaPrice =
     (p.price / 100).toLocaleString(
@@ -132,10 +144,9 @@ function renderProduct(p) {
   }
 
 
-  const mainImage =
-    productImages.length > 0
-      ? productImages[0]
-      : '';
+  const mainImage = productImages.length > 0
+  ? optimizeCloudinaryImage(productImages[0], 900)
+  : '';
 
 
   // ========================================
@@ -160,11 +171,7 @@ function renderProduct(p) {
           (
             mainImage
 
-              ? '<img id="productMainImage" src="' +
-                  mainImage +
-                  '" alt="' +
-                  p.name +
-                  '">'
+              ? '<img id="productMainImage" src="' + mainImage + '" alt="' + p.name + '" fetchpriority="high">'
 
               : '<div class="ph" style="' +
                   'background:linear-gradient(160deg,#C9A876,#98645C);' +
@@ -224,12 +231,12 @@ function renderProduct(p) {
                         '">' +
 
                           '<img src="' +
-                            imageUrl +
-                            '" alt="' +
-                            p.name +
-                            ' image ' +
-                            (index + 1) +
-                            '">' +
+                          optimizeCloudinaryImage(imageUrl, 160) +
+                          '" alt="' +
+                          p.name +
+                          ' image ' +
+                          (index + 1) +
+                          '" loading="lazy">' +
 
                       '</button>'
 
@@ -472,7 +479,10 @@ function renderProduct(p) {
 
 
       mainImageElement.src =
-        productImages[currentImageIndex];
+  optimizeCloudinaryImage(
+    productImages[currentImageIndex],
+    900
+  );
 
 
       // Update active thumbnail
