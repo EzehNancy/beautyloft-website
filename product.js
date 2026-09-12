@@ -60,20 +60,10 @@ const NAIL_SHAPES = [
   'Stiletto',
   'Square',
   'Oval',
-  'Round',
-  'Ballerina',
-  'Squoval',
-  'Lipstick'
+  'Almond Stiletto',
 ];
 
 
-const NAIL_LENGTHS = [
-  'Short',
-  'Medium',
-  'Long',
-  'Extra Long',
-  'XXL'
-];
 
 
 // ========================================
@@ -290,7 +280,7 @@ function renderProduct(p) {
 
           '<div class="pill-row" id="sizeOptions">' +
 
-            ['XS', 'S', 'M', 'L', 'XL']
+            ['XS', 'S', 'M', 'L', 'XL', 'XXL',]
 
               .map(function(s, i) {
 
@@ -346,30 +336,6 @@ function renderProduct(p) {
         '</div>' +
 
 
-        // LENGTH
-        '<div class="field">' +
-
-          '<label for="lengthSelect">' +
-            'Length' +
-          '</label>' +
-
-          '<select id="lengthSelect">' +
-
-            NAIL_LENGTHS
-              .map(function(length) {
-
-                return (
-                  '<option>' +
-                    length +
-                  '</option>'
-                );
-
-              })
-              .join('') +
-
-          '</select>' +
-
-        '</div>' +
 
 
         // FINISH
@@ -694,15 +660,6 @@ function renderProduct(p) {
     }
 
 
-    // Restore length
-    if (existingItem.length) {
-
-      document.getElementById(
-        'lengthSelect'
-      ).value =
-        existingItem.length;
-
-    }
 
 
     // Restore finish
@@ -777,10 +734,6 @@ function renderProduct(p) {
             'shapeSelect'
           ).value,
 
-        length:
-          document.getElementById(
-            'lengthSelect'
-          ).value,
 
         finish:
           selectedFinish,
@@ -1019,10 +972,6 @@ function renderCart() {
 
         item.shape
           ? 'Shape: ' + item.shape
-          : '',
-
-        item.length
-          ? 'Length: ' + item.length
           : '',
 
         item.finish
