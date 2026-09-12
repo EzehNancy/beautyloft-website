@@ -198,21 +198,29 @@ productForm.addEventListener('submit', function(e) {
   e.preventDefault();
 
   const id = document.getElementById('productId').value;
+
   const payload = {
-  name: document.getElementById('productName').value,
-  collection: document.getElementById('productCollection').value,
-  description: document.getElementById('productDescription').value,
-  price: parseFloat(document.getElementById('productPrice').value),
-  imageUrl: document.getElementById('productImageUrl').value,
-  category: document.getElementById('productCategory').value,
-  stockQuantity: parseInt(document.getElementById('productStock').value, 10) || 0,
-  isActive: document.getElementById('productActive').checked
-};
+    name: document.getElementById('productName').value,
+    collection: document.getElementById('productCollection').value,
+    description: document.getElementById('productDescription').value,
+    price: parseFloat(document.getElementById('productPrice').value),
+    imageUrl: document.getElementById('productImageUrl').value,
+    category: document.getElementById('productCategory').value,
+    stockQuantity: parseInt(document.getElementById('productStock').value, 10) || 0,
+    isActive: document.getElementById('productActive').checked
+  };
+
+  console.log('Product ID:', id);
+  console.log('Payload:', payload);
 
   const url = id
     ? 'https://beautyloft-backend.onrender.com/admin/products/' + id
     : 'https://beautyloft-backend.onrender.com/admin/products';
+
   const method = id ? 'PATCH' : 'POST';
+
+  console.log('Method:', method);
+  console.log('URL:', url);
 
   fetch(url, {
     method: method,
@@ -222,9 +230,25 @@ productForm.addEventListener('submit', function(e) {
     },
     body: JSON.stringify(payload)
   })
+    .then(async function(response) {
+      const data = await response.json();
+
+      console.log('Status:', response.status);
+      console.log('Response:', data);
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to save product.');
+      }
+
+      return data;
+    })
     .then(function() {
       productModal.style.display = 'none';
       loadProducts();
+    })
+    .catch(function(error) {
+      console.error('PRODUCT SAVE ERROR:', error);
+      alert(error.message);
     });
 });
 
