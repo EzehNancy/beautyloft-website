@@ -2818,3 +2818,15 @@ a{
     font-size: 24px;
   }
 }
+
+.product-display-details {
+  margin: 12px 0 20px;
+  font-size: 13px;
+  color: #7d6b64;
+  line-height: 1.5;
+}
+
+.product-display-details strong {
+  color: #2e2622;
+  font-weight: 600;
+}

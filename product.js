@@ -272,6 +272,16 @@ function renderProduct(p) {
           (p.description || '') +
         '</p>' +
 
+(
+  p.display_size || p.display_shape
+    ? '<p class="product-display-details">' +
+        '<strong>Display:</strong> ' +
+        [p.display_size, p.display_shape]
+          .filter(Boolean)
+          .join(', ') +
+      '</p>'
+    : ''
+) +
 
         // SIZE
         '<div class="field">' +
