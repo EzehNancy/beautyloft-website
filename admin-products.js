@@ -155,6 +155,12 @@ function openProductModal(product) {
     document.getElementById('productCollection').value =
       product.collection || '';
 
+    document.getElementById('productDisplaySize').value =
+  product.display_size || '';
+
+document.getElementById('productDisplayShape').value =
+  product.display_shape || '';
+
     document.getElementById('productDescription').value =
       product.description || '';
 
@@ -172,6 +178,8 @@ function openProductModal(product) {
 
     document.getElementById('productActive').checked =
       !!product.is_active;
+
+    
 
     activeField.style.display = 'block';
 
@@ -211,6 +219,10 @@ function openProductModal(product) {
 
     document.getElementById('productImageUrl').value = '';
 
+    document.getElementById('productDisplaySize').value = '';
+
+    document.getElementById('productDisplayShape').value = '';
+
     productImagesInput.value = '[]';
 
     imagePreviewWrap.innerHTML = '';
@@ -231,6 +243,9 @@ const payload = {
   name: document.getElementById('productName').value,
 
   collection: document.getElementById('productCollection').value,
+  displaySize: document.getElementById('productDisplaySize').value,
+
+  displayShape: document.getElementById('productDisplayShape').value,
 
   description: document.getElementById('productDescription').value,
 

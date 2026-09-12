@@ -380,6 +380,20 @@ function renderProduct(p) {
 
         '</div>' +
 
+         '<div class="whats-inside-box">' +
+
+  '<h3>What’s inside the box</h3>' +
+
+  '<ul>' +
+    '<li>10 press-on nails</li>' +
+    '<li>Nail glue</li>' +
+    '<li>Adhesive tabs</li>' +
+    '<li>Nail file</li>' +
+    '<li>Cuticle stick</li>' +
+    '<li>Alcohol wipe</li>' +
+  '</ul>' +
+
+'</div>' +
 
         // ADD TO CART BUTTON
         '<button ' +
@@ -392,11 +406,16 @@ function renderProduct(p) {
         '</button>' +
 
 
-      '</div>' +
+     '</div>' +
+'</div>' +
 
-
-    '</div>';
-
+'<section class="related-products-section">' +
+  '<h2>You May Also Like</h2>' +
+  '<div id="relatedProductsGrid" class="related-products-grid">' +
+    '<p>Loading recommendations...</p>' +
+  '</div>' +
+'</section>';
+loadRelatedProducts(p);
 
   // ========================================
   // IMAGE CAROUSEL
@@ -806,6 +825,151 @@ function renderProduct(p) {
 
 }
 
+function loadRelatedProducts(currentProduct) {
+
+  const relatedGrid =
+    document.getElementById('relatedProductsGrid');
+
+  if (!relatedGrid) return;
+
+
+  // If this product doesn't have a collection
+  if (!currentProduct.collection) {
+
+    relatedGrid.innerHTML =
+      '<p>No related products yet.</p>';
+
+    return;
+  }
+
+
+  fetch('https://beautyloft-backend.onrender.com/products')
+
+    .then(function(response) {
+
+      if (!response.ok) {
+        throw new Error('Could not load products');
+      }
+
+      return response.json();
+
+    })
+
+    .then(function(data) {
+
+      // Works whether backend returns:
+      // [...]
+      // or { products: [...] }
+
+      const products =
+        Array.isArray(data)
+          ? data
+          : data.products || [];
+
+
+      const relatedProducts =
+        products.filter(function(product) {
+
+          return (
+            String(product.id) !==
+              String(currentProduct.id) &&
+
+            product.collection &&
+            product.collection.toLowerCase() ===
+              currentProduct.collection.toLowerCase()
+          );
+
+        });
+
+
+      if (relatedProducts.length === 0) {
+
+        relatedGrid.innerHTML =
+          '<p>No other products in this collection yet.</p>';
+
+        return;
+      }
+
+
+      relatedGrid.innerHTML = '';
+
+
+      // Show up to 10 products
+      relatedProducts
+        .slice(0, 10)
+        .forEach(function(product) {
+
+          const price =
+            (product.price / 100)
+              .toLocaleString(
+                'en-NG',
+                {
+                  minimumFractionDigits: 2
+                }
+              );
+
+
+          relatedGrid.innerHTML += `
+
+            <a
+              href="product.html?id=${product.id}"
+              class="related-product-card"
+            >
+
+              <div class="related-product-image">
+
+                ${
+                  product.image_url
+
+                    ? `<img
+                        src="${product.image_url}"
+                        alt="${product.name}"
+                        loading="lazy"
+                      >`
+
+                    : `<div class="ph">
+                        ${product.name}
+                      </div>`
+                }
+
+              </div>
+
+
+              <p class="related-product-collection">
+                ${product.collection || ''}
+              </p>
+
+
+              <h3>
+                ${product.name}
+              </h3>
+
+
+              <p class="related-product-price">
+                ₦${price}
+              </p>
+
+            </a>
+
+          `;
+
+        });
+
+    })
+
+    .catch(function(error) {
+
+      console.error(
+        'RELATED PRODUCTS ERROR:',
+        error
+      );
+
+      relatedGrid.innerHTML =
+        '<p>Could not load recommendations.</p>';
+
+    });
+
+}
 
 // ========================================
 // CART DRAWER
