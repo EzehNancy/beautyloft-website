@@ -78,7 +78,7 @@ function renderCart() {
             <button type="button" class="qty-btn" data-index="${index}" data-action="plus">+</button>
           </div>
           <span class="cart-line-price">₦${lineTotal.toLocaleString('en-NG', { minimumFractionDigits: 2 })}</span>
-          <a href="product.html?id=${item.productId}&editIndex=${index}" class="remove-line-btn" style="text-decoration:underline;">Edit</a>
+          <a href="product.html?id=${item.productId}&editIndex=${index}" class="edit-line-btn">Edit</a>
           <button type="button" class="remove-line-btn" data-index="${index}">Remove</button>
         </div>
       </div>
