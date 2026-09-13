@@ -512,7 +512,7 @@ document
 }
 
 async function loadCollections() {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('authToken');
   const collectionsList =
     document.getElementById('collectionsList');
 
@@ -535,6 +535,11 @@ async function loadCollections() {
     }
 
     collectionsList.innerHTML = '';
+    const productCollectionSelect =
+  document.getElementById('productCollection');
+
+productCollectionSelect.innerHTML =
+  '<option value="">Select collection</option>';
 
     if (data.collections.length === 0) {
       collectionsList.innerHTML =
@@ -542,7 +547,14 @@ async function loadCollections() {
       return;
     }
 
+    
     data.collections.forEach(function(collection) {
+      const option = document.createElement('option');
+
+option.value = collection.name;
+option.textContent = collection.name;
+
+productCollectionSelect.appendChild(option);
       const item = document.createElement('div');
 
       item.className = 'collection-item';
@@ -584,7 +596,7 @@ document
       return;
     }
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
 
     try {
       const response = await fetch(
@@ -641,7 +653,7 @@ document
 
     if (!confirmed) return;
 
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('authToken');
 
     try {
       const response = await fetch(
