@@ -320,6 +320,46 @@ function renderProduct(p) {
         '</div>' +
 
 
+        // NAIL TYPE
+'<div class="field">' +
+
+  '<label>Nail Type</label>' +
+
+  '<div class="pill-row" id="nailTypeOptions">' +
+
+    '<button ' +
+      'type="button" ' +
+      'class="pill-option active" ' +
+      'data-value="Rubber Gel">' +
+      'Rubber Gel' +
+    '</button>' +
+
+    '<button ' +
+      'type="button" ' +
+      'class="pill-option" ' +
+      'data-value="Builder Gel">' +
+      'Builder Gel' +
+    '</button>' +
+
+    '<button ' +
+      'type="button" ' +
+      'class="pill-option" ' +
+      'data-value="Polygel">' +
+      'Polygel' +
+    '</button>' +
+
+    '<button ' +
+      'type="button" ' +
+      'class="pill-option" ' +
+      'data-value="Acrylic">' +
+      'Acrylic' +
+    '</button>' +
+
+  '</div>' +
+
+'</div>' +
+
+
         // SHAPE
         '<div class="field">' +
 
@@ -558,6 +598,63 @@ loadRelatedProducts(p);
 
   let selectedSize = 'M';
 
+  function getSizePrice(size) {
+
+  if (size === 'L') {
+    return 1500 * 100;
+  }
+
+  if (size === 'XL') {
+    return 2000 * 100;
+  }
+
+  if (size === 'XXL') {
+    return 2500 * 100;
+  }
+
+  return 0;
+}
+
+let selectedNailType = 'Rubber Gel';
+
+function getNailTypePrice(nailType) {
+
+  if (nailType === 'Builder Gel') {
+    return 1000 * 100;
+  }
+
+  if (nailType === 'Polygel') {
+    return 1500 * 100;
+  }
+
+  if (nailType === 'Acrylic') {
+    return 2500 * 100;
+  }
+
+  return 0;
+}
+
+function updateDisplayedPrice() {
+
+  const finalPrice =
+  p.price +
+  getSizePrice(selectedSize) +
+  getNailTypePrice(selectedNailType);
+
+  const formattedPrice =
+    (finalPrice / 100).toLocaleString(
+      'en-NG',
+      {
+        minimumFractionDigits: 2
+      }
+    );
+
+  document.querySelector(
+    '.product-detail-price'
+  ).textContent =
+    '₦' + formattedPrice;
+}
+
 
   document
     .querySelectorAll(
@@ -587,11 +684,51 @@ loadRelatedProducts(p);
           selectedSize =
             btn.dataset.value;
 
+            updateDisplayedPrice();
+
         }
       );
 
     });
 
+
+    // ========================================
+// NAIL TYPE
+// ========================================
+
+document
+  .querySelectorAll(
+    '#nailTypeOptions .pill-option'
+  )
+  .forEach(function(btn) {
+
+    btn.addEventListener(
+      'click',
+      function() {
+
+        document
+          .querySelectorAll(
+            '#nailTypeOptions .pill-option'
+          )
+          .forEach(function(button) {
+
+            button.classList.remove(
+              'active'
+            );
+
+          });
+
+        btn.classList.add('active');
+
+        selectedNailType =
+          btn.dataset.value;
+
+        updateDisplayedPrice();
+
+      }
+    );
+
+  });
 
   // ========================================
   // FINISH
@@ -677,6 +814,8 @@ loadRelatedProducts(p);
       existingItem.size ||
       selectedSize;
 
+      updateDisplayedPrice();
+
 
     // Restore shape
     if (existingItem.shape) {
@@ -751,12 +890,16 @@ loadRelatedProducts(p);
 
         name: p.name,
 
-        price: p.price,
+        price:
+  p.price +
+  getSizePrice(selectedSize) +
+  getNailTypePrice(selectedNailType),
 
         // Always use first/main image in cart
         image: p.image_url,
 
         size: selectedSize,
+        nailType: selectedNailType,
 
         shape:
           document.getElementById(
@@ -1140,19 +1283,23 @@ function renderCart() {
 
       const optionsText = [
 
-        item.size
-          ? 'Size: ' + item.size
-          : '',
+  item.size
+    ? 'Size: ' + item.size
+    : '',
 
-        item.shape
-          ? 'Shape: ' + item.shape
-          : '',
+  item.nailType
+    ? 'Nail Type: ' + item.nailType
+    : '',
 
-        item.finish
-          ? item.finish
-          : ''
+  item.shape
+    ? 'Shape: ' + item.shape
+    : '',
 
-      ]
+  item.finish
+    ? item.finish
+    : ''
+
+]
 
         .filter(Boolean)
 
