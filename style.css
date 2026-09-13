@@ -2890,3 +2890,153 @@ a{
   cursor: pointer;
   text-decoration: underline;
 }
+#productCollection {
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #d8cbc5;
+  border-radius: 10px;
+  background: #fff;
+  color: #2e2622;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+#productCollection:focus {
+  border-color: #98645c;
+}
+
+.collections-list.hidden {
+  display: none;
+}
+
+.collections-list.visible {
+  display: block;
+}
+
+.collections-toggle-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 13px;
+  text-decoration: underline;
+}
+
+/* ================================
+   COLLECTIONS MANAGER
+================================ */
+
+.collections-manager {
+  margin-bottom: 30px;
+  padding: 22px;
+  background: #ffffff;
+  border-radius: 14px;
+}
+
+.collections-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 16px;
+}
+
+.collections-header-row h2 {
+  margin: 0;
+  font-size: 24px;
+}
+
+.collections-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+#newCollectionName {
+  flex: 1;
+  width: 100%;
+  padding: 12px 14px;
+  border: 1px solid #c9b8b1;
+  border-radius: 10px;
+  background: #ffffff;
+  color: #2e2622;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+}
+
+#newCollectionName:focus {
+  border-color: #98645c;
+  box-shadow: 0 0 0 2px rgba(152, 100, 92, 0.12);
+}
+
+#addCollectionBtn {
+  padding: 12px 18px;
+  border: 1px solid #98645c;
+  border-radius: 10px;
+  background: #98645c;
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+#addCollectionBtn:hover {
+  opacity: 0.9;
+}
+
+.collections-toggle-btn {
+  padding: 8px 12px;
+  border: 1px solid #98645c;
+  border-radius: 9px;
+  background: transparent;
+  color: #98645c;
+  font-family: inherit;
+  font-size: 13px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.collections-toggle-btn:hover {
+  background: #f8efec;
+}
+
+.collections-list {
+  margin-top: 18px;
+}
+
+.collections-list.hidden {
+  display: none !important;
+}
+
+.collections-list.visible {
+  display: block !important;
+}
+
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee4df;
+}
+
+.collection-item:last-child {
+  border-bottom: none;
+}
+
+.collection-delete-btn {
+  border: none;
+  background: transparent;
+  color: #b33a3a;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.collection-delete-btn:hover {
+  text-decoration: underline;
+}

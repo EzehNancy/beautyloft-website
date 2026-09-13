@@ -684,3 +684,48 @@ document
   });
 
   loadCollections();
+
+  const toggleCollectionsBtn =
+  document.getElementById('toggleCollectionsBtn');
+
+const collectionsList =
+  document.getElementById('collectionsList');
+
+toggleCollectionsBtn.addEventListener(
+  'click',
+  function() {
+
+    const isHidden =
+      collectionsList.classList.contains('hidden');
+
+    if (isHidden) {
+      collectionsList.classList.remove('hidden');
+      collectionsList.classList.add('visible');
+
+      toggleCollectionsBtn.textContent =
+        'Hide Collections';
+
+    } else {
+      collectionsList.classList.remove('visible');
+      collectionsList.classList.add('hidden');
+
+      toggleCollectionsBtn.textContent =
+        'Show Collections';
+    }
+
+  }
+);
+
+document
+  .getElementById('newCollectionName')
+  .addEventListener('keydown', function(event) {
+
+    if (event.key === 'Enter') {
+      event.preventDefault();
+
+      document
+        .getElementById('addCollectionBtn')
+        .click();
+    }
+
+  });

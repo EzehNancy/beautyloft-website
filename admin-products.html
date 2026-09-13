@@ -101,7 +101,18 @@
       </div>
 
       <section class="collections-manager">
-  <h2>Collections</h2>
+
+  <div class="collections-header-row">
+    <h2>Collections</h2>
+
+    <button
+      type="button"
+      id="toggleCollectionsBtn"
+      class="collections-toggle-btn"
+    >
+      Show Collections
+    </button>
+  </div>
 
   <div class="collections-form">
     <input
@@ -118,9 +129,11 @@
     </button>
   </div>
 
-  <div id="collectionsList">
-    <p>Loading collections...</p>
-  </div>
+  <div
+    id="collectionsList"
+    class="collections-list hidden"
+  ></div>
+
 </section>
 
 
