@@ -170,8 +170,27 @@ document.getElementById('productDisplayShape').value =
     document.getElementById('productImageUrl').value =
       product.image_url || '';
 
-    document.getElementById('productCategory').value =
-      product.category || '';
+    // Restore selected categories
+let savedCategories = [];
+
+if (Array.isArray(product.categories)) {
+  savedCategories = product.categories;
+} else if (typeof product.categories === 'string') {
+  try {
+    savedCategories = JSON.parse(product.categories);
+  } catch (error) {
+    savedCategories = [];
+  }
+}
+
+document
+  .querySelectorAll('input[name="productCategory"]')
+  .forEach(function(checkbox) {
+
+    checkbox.checked =
+      savedCategories.includes(checkbox.value);
+
+  });
 
     document.getElementById('productStock').value =
       product.stock_quantity || 0;
@@ -223,6 +242,12 @@ document.getElementById('productDisplayShape').value =
 
     document.getElementById('productDisplayShape').value = '';
 
+    document
+  .querySelectorAll('input[name="productCategory"]')
+  .forEach(function(checkbox) {
+    checkbox.checked = false;
+  });
+
     productImagesInput.value = '[]';
 
     imagePreviewWrap.innerHTML = '';
@@ -239,10 +264,21 @@ productForm.addEventListener('submit', function(e) {
 
   const id = document.getElementById('productId').value;
 
+  const selectedCategories = Array.from(
+  document.querySelectorAll(
+    'input[name="productCategory"]:checked'
+  )
+).map(function(checkbox) {
+  return checkbox.value;
+});
+
 const payload = {
   name: document.getElementById('productName').value,
 
   collection: document.getElementById('productCollection').value,
+
+  categories: selectedCategories,
+
   displaySize: document.getElementById('productDisplaySize').value,
 
   displayShape: document.getElementById('productDisplayShape').value,
@@ -259,9 +295,6 @@ const payload = {
   images: JSON.parse(
     document.getElementById('productImages').value || '[]'
   ),
-
-  category:
-    document.getElementById('productCategory').value,
 
   stockQuantity:
     parseInt(
@@ -477,3 +510,165 @@ document
     previewWrap.appendChild(imageBox);
   });
 }
+
+async function loadCollections() {
+  const token = localStorage.getItem('token');
+  const collectionsList =
+    document.getElementById('collectionsList');
+
+  try {
+    const response = await fetch(
+      'https://beautyloft-backend.onrender.com/admin/collections',
+      {
+        headers: {
+          Authorization: 'Bearer ' + token
+        }
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || 'Could not load collections.'
+      );
+    }
+
+    collectionsList.innerHTML = '';
+
+    if (data.collections.length === 0) {
+      collectionsList.innerHTML =
+        '<p>No collections yet.</p>';
+      return;
+    }
+
+    data.collections.forEach(function(collection) {
+      const item = document.createElement('div');
+
+      item.className = 'collection-item';
+
+      item.innerHTML = `
+        <span>${collection.name}</span>
+
+        <button
+          type="button"
+          class="collection-delete-btn"
+          data-id="${collection.id}"
+        >
+          Delete
+        </button>
+      `;
+
+      collectionsList.appendChild(item);
+    });
+
+  } catch (error) {
+    console.error('LOAD COLLECTIONS ERROR:', error);
+
+    collectionsList.innerHTML =
+      '<p>Could not load collections.</p>';
+  }
+}
+
+document
+  .getElementById('addCollectionBtn')
+  .addEventListener('click', async function() {
+
+    const input =
+      document.getElementById('newCollectionName');
+
+    const name = input.value.trim();
+
+    if (!name) {
+      alert('Enter a collection name.');
+      return;
+    }
+
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch(
+        'https://beautyloft-backend.onrender.com/admin/collections',
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: 'Bearer ' + token
+          },
+
+          body: JSON.stringify({
+            name: name
+          })
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || 'Could not add collection.'
+        );
+      }
+
+      input.value = '';
+
+      loadCollections();
+
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+
+  document
+  .getElementById('collectionsList')
+  .addEventListener('click', async function(event) {
+
+    if (
+      !event.target.classList.contains(
+        'collection-delete-btn'
+      )
+    ) {
+      return;
+    }
+
+    const collectionId =
+      event.target.dataset.id;
+
+    const confirmed = confirm(
+      'Delete this collection?'
+    );
+
+    if (!confirmed) return;
+
+    const token = localStorage.getItem('token');
+
+    try {
+      const response = await fetch(
+        'https://beautyloft-backend.onrender.com/admin/collections/' +
+        collectionId,
+        {
+          method: 'DELETE',
+
+          headers: {
+            Authorization: 'Bearer ' + token
+          }
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.error || 'Could not delete collection.'
+        );
+      }
+
+      loadCollections();
+
+    } catch (error) {
+      alert(error.message);
+    }
+  });
+
+  loadCollections();

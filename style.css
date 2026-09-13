@@ -2830,3 +2830,63 @@ a{
   color: #2e2622;
   font-weight: 600;
 }
+
+.product-category-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.product-category-options label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.product-category-options input {
+  width: auto;
+  margin: 0;
+}
+
+.collections-manager {
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #fff;
+  border-radius: 14px;
+}
+
+.collections-manager h2 {
+  margin-top: 0;
+}
+
+.collections-form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.collections-form input {
+  flex: 1;
+}
+
+.collection-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+}
+
+.collection-item:last-child {
+  border-bottom: none;
+}
+
+.collection-delete-btn {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  text-decoration: underline;
+}

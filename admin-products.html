@@ -100,6 +100,29 @@
 
       </div>
 
+      <section class="collections-manager">
+  <h2>Collections</h2>
+
+  <div class="collections-form">
+    <input
+      type="text"
+      id="newCollectionName"
+      placeholder="e.g. Summer Collection"
+    >
+
+    <button
+      type="button"
+      id="addCollectionBtn"
+    >
+      Add Collection
+    </button>
+  </div>
+
+  <div id="collectionsList">
+    <p>Loading collections...</p>
+  </div>
+</section>
+
 
       <div class="table-scroll-wrap">
 
@@ -195,18 +218,18 @@
 
         <!-- COLLECTION -->
         <div class="field">
+  <label for="productCollection">Collection</label>
 
-          <label for="productCollection">
-            Collection
-          </label>
-
-          <input
-            type="text"
-            id="productCollection"
-            placeholder="e.g. Nude Collection"
-          >
-
-        </div>
+  <select id="productCollection">
+    <option value="">Select collection</option>
+    <option value="Pretty In Polka">Pretty In Polka</option>
+    <option value="The Stripe Edit">The Stripe Edit</option>
+    <option value="It Girl Col.">It Girl Col.</option>
+    <option value="Soft Bloom">Soft Bloom</option>
+    <option value="The Cat-Eye Effect">The Cat-Eye Effect</option>
+    <option value="Bridal Bloom">Bridal Bloom</option>
+  </select>
+</div>
 
         <div class="field">
   <label for="productDisplaySize">Display Size</label>
@@ -302,18 +325,63 @@
 
         <!-- CATEGORY -->
         <div class="field">
+  <label>Categories</label>
 
-          <label for="productCategory">
-            Category
-          </label>
+  <div class="product-category-options">
 
-          <input
-            type="text"
-            id="productCategory"
-            placeholder="e.g. Press-on Sets"
-          >
+    <label>
+      <input type="checkbox" name="productCategory" value="3D Nails"> 3D Nails 
+    </label>
+    <label>
+            <input type="checkbox" name="productCategory" value="Lace Nails"> Lace Nails
+    </label>
+    <label>
+      <input
+        type="checkbox"
+        name="productCategory"
+        value="Chrome"
+      >
+      Chrome
+    </label>
 
-        </div>
+    <label>
+      <input
+        type="checkbox"
+        name="productCategory"
+        value="Minimalist"
+      >
+      Minimalist  
+    </label>
+
+    <label>
+      <input
+        type="checkbox"
+        name="productCategory"
+        value="Glam"
+      >
+      Glam
+    </label>
+
+    <label>
+      <input
+        type="checkbox"
+        name="productCategory"
+        value="French Tips"
+      >
+      French Tips
+    </label>
+
+    <label>
+      <input
+        type="checkbox"
+        name="productCategory"
+        value="Rhinestone Nails"
+      >
+      Rhinestone Nails
+    </label>
+
+  </div>
+</div>
 
 
         <!-- STOCK -->
