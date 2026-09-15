@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Account — The BeautyLoft</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <a href="index.html">The BeautyLoft</a>
+  <button id="menuToggle">☰</button>
+  <nav>
+    <ul id="navList">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="shop.html">Shop</a></li>
+      <li><a href="models.html" id="modelsNavLink">Models</a></li>
+      <li id="authNavItem"><a href="login.html">Log In</a></li>
+      <li><a href="booking.html">Book Now</a></li>
+    </ul>
+  </nav>
+</header>
+
+<div class="mobile-bottom-nav" id="mobileBottomNav">
+
+  <a href="index.html" class="bottom-nav-item">
+    <span class="bottom-nav-icon">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M3 10.8 12 3l9 7.8"></path>
+    <path d="M5.5 9.5V21h13V9.5"></path>
+    <path d="M9.5 21v-6.5h5V21"></path>
+  </svg>
+</span>
+    <span class="bottom-nav-label">Home</span>
+  </a>
+
+  <!-- BOOK NOW -->
+<a
+  href="booking.html"
+  class="bottom-nav-item bottom-book-item"
+>
+
+  <span class="bottom-nav-icon">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <rect x="3.5" y="5.5" width="17" height="15" rx="2.5"></rect>
+    <path d="M8 3.5v4"></path>
+    <path d="M16 3.5v4"></path>
+    <path d="M3.5 10h17"></path>
+    <path d="M8 14h3"></path>
+    <path d="M9.5 12.5v3"></path>
+  </svg>
+</span>
+
+  <span class="bottom-nav-label">
+    Book Now
+  </span>
+
+</a>
+
+  <a href="shop.html" class="bottom-nav-item">
+    <span class="bottom-nav-icon">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M5 8.5h14l-1 12H6l-1-12z"></path>
+    <path d="M9 9V6.5a3 3 0 0 1 6 0V9"></path>
+  </svg>
+</span>
+    <span class="bottom-nav-label">Shop</span>
+  </a>
+
+  <a href="cart.html" class="bottom-nav-item bottom-cart-link">
+
+    <span class="bottom-nav-icon bottom-cart-icon">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path
+      d="M3.5 4.5h2l1.8 10.2a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 1.9-1.5L21 8H6.2"
+    ></path>
+
+    <circle cx="9.5" cy="20" r="1"></circle>
+    <circle cx="18" cy="20" r="1"></circle>
+  </svg>
+
+  <span
+    class="bottom-cart-badge"
+    id="bottomCartBadge"
+  >
+    0
+  </span>
+</span>
+
+    <span class="bottom-nav-label">Cart</span>
+
+  </a>
+
+  <a
+    href="login.html"
+    class="bottom-nav-item"
+    id="bottomProfileLink"
+  >
+    <span class="bottom-nav-icon">
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <circle cx="12" cy="8" r="3.5"></circle>
+
+    <path
+      d="M5 20.5c.7-4 3.2-6 7-6s6.3 2 7 6"
+    ></path>
+  </svg>
+</span>
+    <span class="bottom-nav-label">Profile</span>
+  </a>
+
+</div>
+
+<main class="appointments-page">
+
+  <section class="appointments-page-header">
+
+    <a href="profile.html" class="account-back-link">
+      ← Back to My Account
+    </a>
+
+    <p class="eyebrow">My Account</p>
+
+    <h1>My Appointments</h1>
+
+    <p class="appointments-page-subtitle">
+      View and manage your BeautyLoft appointments.
+    </p>
+
+  </section>
+
+
+  <section class="appointments-content">
+
+    <!-- UPCOMING APPOINTMENTS -->
+
+    <div class="appointments-section">
+
+      <div class="appointments-section-heading">
+        <div>
+          <p class="eyebrow">Bookings</p>
+          <h2>Upcoming</h2>
+        </div>
+
+        <a href="booking.html" class="new-booking-btn">
+          + New Appointment
+        </a>
+      </div>
+
+      <div id="upcomingAppointments">
+        <p class="activity-empty">
+          Loading your appointments...
+        </p>
+      </div>
+
+    </div>
+
+
+    <!-- APPOINTMENT HISTORY -->
+
+    <div class="appointments-section">
+
+      <div class="appointments-section-heading">
+        <div>
+          <p class="eyebrow">History</p>
+          <h2>Past & Cancelled</h2>
+        </div>
+      </div>
+
+      <div id="pastAppointments">
+        <p class="activity-empty">
+          Loading...
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+
+<div id="rescheduleModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
+  <div class="cal-card" style="max-width:420px; width:100%; max-height:90vh; overflow-y:auto; position:relative;">
+    <button id="closeRescheduleModal" style="position:absolute; top:14px; right:14px; background:none; border:none; font-size:1.4rem; cursor:pointer;">&times;</button>
+    <h3 style="margin-bottom:16px;">Reschedule Appointment</h3>
+
+    <div class="cal-header">
+      <button class="cal-nav-btn" id="rescheduleCalPrev">‹</button>
+      <h3 id="rescheduleCalMonthLabel"></h3>
+      <button class="cal-nav-btn" id="rescheduleCalNext">›</button>
+    </div>
+    <div class="cal-grid" id="rescheduleCalGrid"></div>
+
+    <div id="rescheduleSlotSection" style="display:none; margin-top:16px;">
+      <h4 id="rescheduleSlotDateLabel" style="font-size:0.95rem; margin-bottom:8px;"></h4>
+      <div class="slot-grid" id="rescheduleSlotGrid"></div>
+    </div>
+
+    <div class="field" style="margin-top:16px;">
+      <label for="rescheduleReason">Reason for rescheduling (optional)</label>
+      <textarea id="rescheduleReason" placeholder="e.g. something came up"></textarea>
+    </div>
+
+    <button class="admin-action-btn" id="confirmRescheduleBtn" disabled>Select a new date and time</button>
+  </div>
+</div>
+
+<script src="bottom-nav.js"></script>
+<script src="script.js"></script>
+<script src="my-appointments.js"></script>
+</body>
+</html>
