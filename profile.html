@@ -149,13 +149,224 @@
 
 </div>
 
-<main>
-  <section class="page-hero">
-    <p class="eyebrow">My Account</p>
-    <h1 id="welcomeHeading">Loading...</h1>
+<main class="profile-dashboard">
+
+  <!-- PROFILE HERO -->
+
+  <section class="profile-dashboard-hero">
+
+    <div class="profile-welcome">
+
+      <p class="eyebrow">
+        My Account
+      </p>
+
+      <h1 id="welcomeHeading">
+        Loading...
+      </h1>
+
+      <p class="profile-welcome-text">
+        Manage your BeautyLoft account,
+        bookings and orders.
+      </p>
+
+    </div>
+
+
+    <!-- MODEL BADGE APPEARS HERE -->
+
+    <div
+      class="profile-model-badge"
+      id="profileModelBadge"
+      style="display: none;"
+    >
+      <span>✦</span>
+      BeautyLoft Model
+    </div>
+
   </section>
 
-  <section id="profileContent" style="padding-top:0;"></section>
+
+  <!-- DASHBOARD CARDS -->
+
+  <section class="profile-dashboard-grid">
+
+
+    <!-- ORDERS -->
+
+    <a
+      href="orders.html"
+      class="profile-dashboard-card"
+    >
+
+      <div class="profile-card-icon">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <path d="M5 8h14l-1 13H6L5 8z"></path>
+          <path d="M9 9V6a3 3 0 0 1 6 0v3"></path>
+        </svg>
+
+      </div>
+
+      <div class="profile-card-content">
+
+        <h3>My Orders</h3>
+
+        <p>
+          View your purchases and
+          order history.
+        </p>
+
+      </div>
+
+      <span class="profile-card-arrow">
+        →
+      </span>
+
+    </a>
+
+
+    <!-- APPOINTMENTS -->
+
+    <a
+      href="my-appointments.html"
+      class="profile-dashboard-card"
+    >
+
+      <div class="profile-card-icon">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect
+            x="3.5"
+            y="5.5"
+            width="17"
+            height="15"
+            rx="2.5"
+          ></rect>
+
+          <path d="M8 3.5v4"></path>
+          <path d="M16 3.5v4"></path>
+          <path d="M3.5 10h17"></path>
+        </svg>
+
+      </div>
+
+      <div class="profile-card-content">
+
+        <h3>My Appointments</h3>
+
+        <p>
+          View and manage your
+          BeautyLoft appointments.
+        </p>
+
+      </div>
+
+      <span class="profile-card-arrow">
+        →
+      </span>
+
+    </a>
+
+
+    <!-- MODEL APPOINTMENTS -->
+
+    <a
+      href="model-appointments.html"
+      class="profile-dashboard-card"
+      id="modelAppointmentsCard"
+      style="display: none;"
+    >
+
+      <div class="profile-card-icon">
+
+        <span class="model-star-icon">
+          ✦
+        </span>
+
+      </div>
+
+      <div class="profile-card-content">
+
+        <h3>Model Appointments</h3>
+
+        <p>
+          View your upcoming
+          modelling sessions.
+        </p>
+
+      </div>
+
+      <span class="profile-card-arrow">
+        →
+      </span>
+
+    </a>
+
+
+    <!-- ACCOUNT -->
+
+    <a
+      href="account.html"
+      class="profile-dashboard-card"
+    >
+
+      <div class="profile-card-icon">
+
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.7"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <circle
+            cx="12"
+            cy="8"
+            r="3.5"
+          ></circle>
+
+          <path
+            d="M5 20.5c.7-4 3.2-6 7-6s6.3 2 7 6"
+          ></path>
+        </svg>
+
+      </div>
+
+      <div class="profile-card-content">
+
+        <h3>Account Information</h3>
+
+        <p>
+          Manage your personal details,
+          password and account.
+        </p>
+
+      </div>
+
+      <span class="profile-card-arrow">
+        →
+      </span>
+
+    </a>
+
+  </section>
+
 </main>
 <div id="rescheduleModal" style="display:none; position:fixed; inset:0; background:rgba(46,38,34,0.6); z-index:300; align-items:center; justify-content:center; padding:20px;">
   <div class="cal-card" style="max-width:420px; width:100%; max-height:90vh; overflow-y:auto; position:relative;">

@@ -90,54 +90,151 @@ if (authNavItem) {
         return null;
       })
       .then(function(data) {
-        if (data && data.user) {
-          const bottomProfileLink =
-  document.getElementById('bottomProfileLink');
+       if (data && data.user) {
 
-if (bottomProfileLink) {
+  // ========================================
+  // BOTTOM NAV PROFILE LINK
+  // ========================================
 
-  if (data.user.is_admin) {
-    bottomProfileLink.href =
-      'admin-dashboard.html';
-  } else {
-    bottomProfileLink.href =
-      'profile.html';
+  const bottomProfileLink =
+    document.getElementById('bottomProfileLink');
+
+  if (bottomProfileLink) {
+
+    if (data.user.is_admin) {
+      bottomProfileLink.href =
+        'admin-dashboard.html';
+    } else {
+      bottomProfileLink.href =
+        'profile.html';
+    }
+
   }
 
+
+  // ========================================
+  // DESKTOP PROFILE ICON
+  // ========================================
+
+  let profileLink = 'profile.html';
+
+if (data.user.is_admin) {
+  profileLink = 'admin-dashboard.html';
 }
-          let navHtml = '<a href="profile.html">' + data.user.name.split(' ')[0] + '</a>';
 
-          if (data.user.is_admin) {
-            navHtml += ' <a href="admin-dashboard.html" style="color:var(--gold); font-weight:700;">Admin</a>';
+let navHtml = `
+  <a
+    href="${profileLink}"
+    class="desktop-profile-link"
+    aria-label="Profile"
+    title="Profile"
+  >
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle
+          cx="12"
+          cy="8"
+          r="3.5"
+        ></circle>
+
+        <path
+          d="M5 20.5c.7-4 3.2-6 7-6s6.3 2 7 6"
+        ></path>
+      </svg>
+    </a>
+  `;
+
+
+  // LOGOUT BUTTON
+
+  navHtml += `
+    <button id="logoutBtn">
+      Log out
+    </button>
+  `;
+
+
+  authNavItem.innerHTML = navHtml;
+
+
+  // ========================================
+  // LOGOUT
+  // ========================================
+
+  document
+    .getElementById('logoutBtn')
+    .addEventListener(
+      'click',
+      function() {
+
+        fetch(
+          'https://beautyloft-backend.onrender.com/logout',
+          {
+            method: 'POST',
+
+            headers: {
+              'Authorization':
+                'Bearer ' + token
+            }
           }
+        )
+          .then(function() {
 
-          navHtml += ' <button id="logoutBtn">Log out</button>';
+            localStorage.removeItem(
+              'authToken'
+            );
 
-          authNavItem.innerHTML = navHtml;
+            window.location.href =
+              'index.html';
 
-          document.getElementById('logoutBtn').addEventListener('click', function() {
-            fetch('https://beautyloft-backend.onrender.com/logout', {
-              method: 'POST',
-              headers: { 'Authorization': 'Bearer ' + token }
-            }).then(function() {
-              localStorage.removeItem('authToken');
-              window.location.href = 'index.html';
-            });
           });
 
-          fetch('https://beautyloft-backend.onrender.com/my-model-status', {
-            headers: { 'Authorization': 'Bearer ' + token }
-          })
-            .then(function(response) {
-              return response.json();
-            })
-            .then(function(statusData) {
-              const modelsLink = document.getElementById('modelsNavLink');
-              if (modelsLink && statusData.status === 'accepted') {
-                modelsLink.href = 'model-booking.html';
-              }
-            });
-        }
+      }
+    );
+
+
+  // ========================================
+  // MODEL STATUS
+  // ========================================
+
+  fetch(
+    'https://beautyloft-backend.onrender.com/my-model-status',
+    {
+      headers: {
+        'Authorization':
+          'Bearer ' + token
+      }
+    }
+  )
+    .then(function(response) {
+      return response.json();
+    })
+    .then(function(statusData) {
+
+      const modelsLink =
+        document.getElementById(
+          'modelsNavLink'
+        );
+
+      if (
+        modelsLink &&
+        statusData.status === 'accepted'
+      ) {
+
+        modelsLink.href =
+          'model-booking.html';
+
+      }
+
+    });
+
+}
       });
   }
 }
@@ -239,3 +336,93 @@ if (fanNav && fanToggle) {
   });
 
 }
+
+  // ========================================
+  // HIDE HEADER DOWN / SHOW HEADER UP
+  // ========================================
+
+  const siteHeader =
+    document.querySelector('header');
+
+  let lastScrollY =
+    window.scrollY;
+
+  const scrollThreshold = 8;
+
+  window.addEventListener('scroll', function() {
+
+    const currentScrollY =
+      window.scrollY;
+
+
+    // Always show header near top of page
+    if (currentScrollY <= 40) {
+
+      siteHeader.classList.remove(
+        'header-hidden'
+      );
+
+      siteHeader.classList.add(
+        'header-visible'
+      );
+
+      lastScrollY = currentScrollY;
+
+      return;
+    }
+
+
+    // Ignore tiny scroll movements
+    if (
+      Math.abs(
+        currentScrollY - lastScrollY
+      ) < scrollThreshold
+    ) {
+      return;
+    }
+
+
+
+    // SCROLLING DOWN
+if (currentScrollY > lastScrollY) {
+
+  // Close mobile/tablet hamburger menu
+  const navList =
+    document.getElementById('navList');
+
+  if (
+    navList &&
+    navList.classList.contains('open')
+  ) {
+    navList.classList.remove('open');
+  }
+
+
+  // Hide header
+  siteHeader.classList.add(
+    'header-hidden'
+  );
+
+  siteHeader.classList.remove(
+    'header-visible'
+  );
+
+}
+
+    // SCROLLING UP
+    else {
+
+      siteHeader.classList.remove(
+        'header-hidden'
+      );
+
+      siteHeader.classList.add(
+        'header-visible'
+      );
+
+    }
+
+
+    lastScrollY = currentScrollY;
+
+  });
