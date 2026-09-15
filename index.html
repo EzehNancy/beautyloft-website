@@ -18,14 +18,17 @@
     <ul id="navList">
       <li><a href="#about">About</a></li>
       <li><a href="#work">Work</a></li>
-      <li><a href="shop.html">Shop</a></li>
+      <li class="bottom-nav-duplicate"><a href="shop.html">Shop</a></li>
       <li><a href="models.html" id="modelsNavLink">Models</a></li>
       <li><a href="#contact">Contact</a></li>
-      <li><a href="booking.html">Book Now</a></li>
-      <li id="authNavItem"><a href="login.html">Log In</a></li>
+      <li class="bottom-nav-duplicate"><a href="booking.html">Book Now</a></li>
+      <li id="authNavItem" class="bottom-nav-duplicate"><a href="login.html">Log In</a></li>
     </ul>
   </nav>
 </header>
+
+<!-- MOBILE / TABLET BOTTOM NAVIGATION -->
+
 
 <section class="hero">
     <div>
@@ -240,6 +243,176 @@
   <button class="lightbox-close" id="lightboxClose">&times;</button>
 </div>
 
+<!-- ========================================
+     HOMEPAGE FLOATING FAN NAV
+========================================= -->
+
+<div class="home-fan-nav" id="homeFanNav">
+
+  <!-- HOME -->
+  <a
+    href="index.html"
+    class="fan-nav-item fan-home"
+    aria-label="Home"
+  >
+    <span class="fan-nav-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M3 10.8 12 3l9 7.8"></path>
+        <path d="M5.5 9.5V21h13V9.5"></path>
+        <path d="M9.5 21v-6.5h5V21"></path>
+      </svg>
+    </span>
+
+    <span class="fan-nav-label">Home</span>
+  </a>
+
+
+  <!-- BOOK NOW -->
+  <a
+    href="booking.html"
+    class="fan-nav-item fan-book"
+    aria-label="Book Now"
+  >
+    <span class="fan-nav-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <rect
+          x="3.5"
+          y="5.5"
+          width="17"
+          height="15"
+          rx="2.5"
+        ></rect>
+
+        <path d="M8 3.5v4"></path>
+        <path d="M16 3.5v4"></path>
+        <path d="M3.5 10h17"></path>
+        <path d="M8 14h3"></path>
+        <path d="M9.5 12.5v3"></path>
+      </svg>
+    </span>
+
+    <span class="fan-nav-label">Book</span>
+  </a>
+
+
+  <!-- SHOP -->
+  <a
+    href="shop.html"
+    class="fan-nav-item fan-shop"
+    aria-label="Shop"
+  >
+    <span class="fan-nav-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M5 8.5h14l-1 12H6l-1-12z"></path>
+        <path d="M9 9V6.5a3 3 0 0 1 6 0V9"></path>
+      </svg>
+    </span>
+
+    <span class="fan-nav-label">Shop</span>
+  </a>
+
+
+  <!-- CART -->
+  <a
+    href="cart.html"
+    class="fan-nav-item fan-cart"
+    aria-label="Cart"
+  >
+    <span class="fan-nav-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path
+          d="M3.5 4.5h2l1.8 10.2a2 2 0 0 0 2 1.7h7.9a2 2 0 0 0 1.9-1.5L21 8H6.2"
+        ></path>
+
+        <circle cx="9.5" cy="20" r="1"></circle>
+        <circle cx="18" cy="20" r="1"></circle>
+      </svg>
+
+      <span
+        class="fan-cart-badge"
+        id="homeFanCartBadge"
+      >
+        0
+      </span>
+    </span>
+
+    <span class="fan-nav-label">Cart</span>
+  </a>
+
+
+  <!-- PROFILE -->
+  <a
+    href="login.html"
+    class="fan-nav-item fan-profile"
+    id="homeFanProfileLink"
+    aria-label="Profile"
+  >
+    <span class="fan-nav-icon">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.7"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <circle cx="12" cy="8" r="3.5"></circle>
+
+        <path
+          d="M5 20.5c.7-4 3.2-6 7-6s6.3 2 7 6"
+        ></path>
+      </svg>
+    </span>
+
+    <span class="fan-nav-label">Profile</span>
+  </a>
+
+
+  <!-- MAIN CIRCULAR BUTTON -->
+  <button
+    type="button"
+    class="fan-nav-toggle"
+    id="fanNavToggle"
+    aria-label="Open navigation"
+    aria-expanded="false"
+  >
+    <span class="fan-toggle-line"></span>
+    <span class="fan-toggle-line"></span>
+    <span class="fan-toggle-line"></span>
+  </button>
+
+</div>
+
+<script src="bottom-nav.js"></script>
+<script src="bottom-nav.js"></script>
 <script src="script.js"></script> 
 
 </body>

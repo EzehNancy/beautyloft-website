@@ -91,6 +91,20 @@ if (authNavItem) {
       })
       .then(function(data) {
         if (data && data.user) {
+          const bottomProfileLink =
+  document.getElementById('bottomProfileLink');
+
+if (bottomProfileLink) {
+
+  if (data.user.is_admin) {
+    bottomProfileLink.href =
+      'admin-dashboard.html';
+  } else {
+    bottomProfileLink.href =
+      'profile.html';
+  }
+
+}
           let navHtml = '<a href="profile.html">' + data.user.name.split(' ')[0] + '</a>';
 
           if (data.user.is_admin) {
@@ -126,4 +140,102 @@ if (authNavItem) {
         }
       });
   }
+}
+
+// ========================================
+// MOBILE BOTTOM NAV CART BADGE
+// ========================================
+
+function updateBottomCartBadge() {
+
+  const badge =
+    document.getElementById('bottomCartBadge');
+
+  if (!badge) return;
+
+  const cart =
+    JSON.parse(
+      localStorage.getItem('cart') || '[]'
+    );
+
+  const totalItems =
+    cart.reduce(function(total, item) {
+
+      return total + (item.quantity || 1);
+
+    }, 0);
+
+  badge.textContent = totalItems;
+
+  if (totalItems === 0) {
+    badge.style.display = 'none';
+  } else {
+    badge.style.display = 'flex';
+  }
+}
+
+updateBottomCartBadge();
+
+const fanNav =
+  document.getElementById('homeFanNav');
+
+const fanToggle =
+  document.getElementById('fanNavToggle');
+
+if (fanNav && fanToggle) {
+
+  // Open / close when main button is clicked
+  fanToggle.addEventListener('click', function(event) {
+
+    // Prevent this click from reaching the page
+    event.stopPropagation();
+
+    fanNav.classList.toggle('open');
+
+    const isOpen =
+      fanNav.classList.contains('open');
+
+    fanToggle.setAttribute(
+      'aria-expanded',
+      isOpen
+    );
+
+    fanToggle.setAttribute(
+      'aria-label',
+      isOpen
+        ? 'Close navigation'
+        : 'Open navigation'
+    );
+
+  });
+
+
+  // Prevent clicks on the fan itself
+  // from immediately closing it
+  fanNav.addEventListener('click', function(event) {
+    event.stopPropagation();
+  });
+
+
+  // Tap anywhere outside the fan to close it
+  document.addEventListener('click', function() {
+
+    if (fanNav.classList.contains('open')) {
+
+      fanNav.classList.remove('open');
+
+      fanToggle.setAttribute(
+        'aria-expanded',
+        'false'
+      );
+
+      fanToggle.setAttribute(
+        'aria-label',
+        'Open navigation'
+      );
+
+    }
+
+  });
+
 }
