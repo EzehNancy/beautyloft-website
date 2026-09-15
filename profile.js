@@ -1,45 +1,77 @@
 const welcomeHeading = document.getElementById('welcomeHeading');
-const profileContent = document.getElementById('profileContent');
 const authToken = localStorage.getItem('authToken');
 
 if (!authToken) {
   window.location.href = 'login.html';
 }
 
+
+// -------------------------
+// LOAD USER
+// -------------------------
+
 fetch('https://beautyloft-backend.onrender.com/me', {
-  headers: { 'Authorization': 'Bearer ' + authToken }
+  headers: {
+    'Authorization': 'Bearer ' + authToken
+  }
 })
   .then(function(response) {
+
     if (!response.ok) {
       window.location.href = 'login.html';
       return null;
     }
+
+    return response.json();
+
+  })
+  .then(function(data) {
+
+    if (!data || !data.user) return;
+
+    const user = data.user;
+
+    welcomeHeading.textContent =
+      'Welcome back, ' + user.name.split(' ')[0] + '.';
+
+  });
+
+
+// -------------------------
+// CHECK MODEL STATUS
+// -------------------------
+
+fetch('https://beautyloft-backend.onrender.com/my-model-status', {
+  headers: {
+    'Authorization': 'Bearer ' + authToken
+  }
+})
+  .then(function(response) {
     return response.json();
   })
   .then(function(data) {
-    if (!data) return;
 
-    const user = data.user;
-    welcomeHeading.textContent = 'Welcome back, ' + user.name.split(' ')[0] + '.';
+    if (data.status === 'accepted') {
 
-    profileContent.innerHTML =
-      '<div class="profile-card">' +
-        '<h3>Account Info</h3>' +
-        '<p><b>Name:</b> ' + user.name + '</p>' +
-        '<p><b>Email:</b> ' + user.email + '</p>' +
-        '<div id="modelTagSlot"></div>' +
-      '</div>' +
-      '<div class="profile-card">' +
-        '<h3>My Appointments</h3>' +
-        '<div id="appointmentsTable">Loading...</div>' +
-      '</div>' +
-      '<div class="profile-card" id="modelBookingsCard" style="display:none;">' +
-        '<h3>My Model Bookings</h3>' +
-        '<div id="modelBookingsTable">Loading...</div>' +
-      '</div>';
+      const modelBadge =
+        document.getElementById('profileModelBadge');
 
-    loadAppointments();
-    loadModelStatus();
+      const modelCard =
+        document.getElementById('modelAppointmentsCard');
+
+      if (modelBadge) {
+        modelBadge.style.display = 'flex';
+      }
+
+      if (modelCard) {
+        modelCard.style.display = 'flex';
+      }
+
+    }
+
+  })
+  .catch(function(error) {
+    console.error('Model status error:', error);
   });
 
 let allMyAppointments = [];

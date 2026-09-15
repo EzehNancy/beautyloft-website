@@ -4096,3 +4096,462 @@ header.header-visible {
   }
 
 }
+/* =====================================================
+   PROFILE DASHBOARD
+===================================================== */
+
+.profile-dashboard {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 135px 0 90px;
+}
+
+
+/* =========================
+   PROFILE HERO
+========================= */
+
+.profile-dashboard-hero {
+  position: relative;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+
+  padding: 42px 44px;
+  margin-bottom: 28px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 247, 244, 0.98),
+      rgba(247, 235, 231, 0.92)
+    );
+
+  border: 1px solid rgba(152, 100, 92, 0.14);
+  border-radius: 28px;
+
+  box-shadow:
+    0 14px 45px rgba(65, 43, 38, 0.06);
+
+  overflow: hidden;
+}
+
+
+/* subtle decorative circle */
+
+.profile-dashboard-hero::after {
+  content: "";
+
+  position: absolute;
+  width: 240px;
+  height: 240px;
+
+  right: -70px;
+  top: -100px;
+
+  border-radius: 50%;
+
+  background:
+    rgba(152, 100, 92, 0.06);
+
+  pointer-events: none;
+}
+
+
+.profile-welcome {
+  position: relative;
+  z-index: 2;
+}
+
+
+.profile-welcome .eyebrow {
+  margin-bottom: 10px;
+
+  color: #98645c;
+
+  font-size: 11px;
+  font-weight: 700;
+
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+
+.profile-welcome h1 {
+  margin: 0;
+
+  font-family: "Fraunces", serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 500;
+
+  line-height: 1.05;
+
+  color: #3f3531;
+}
+
+
+.profile-welcome-text {
+  max-width: 480px;
+
+  margin: 13px 0 0;
+
+  color: #85756f;
+
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+
+/* =========================
+   MODEL BADGE
+========================= */
+
+.profile-model-badge {
+  position: relative;
+  z-index: 2;
+
+  flex-shrink: 0;
+
+  align-items: center;
+  gap: 7px;
+
+  padding: 10px 15px;
+
+  background: rgba(152, 100, 92, 0.09);
+
+  border:
+    1px solid rgba(152, 100, 92, 0.18);
+
+  border-radius: 999px;
+
+  color: #98645c;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 0.02em;
+}
+
+
+.profile-model-badge span {
+  font-size: 15px;
+}
+
+
+/* =========================
+   DASHBOARD GRID
+========================= */
+
+.profile-dashboard-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+/* =========================
+   DASHBOARD CARD
+========================= */
+
+.profile-dashboard-card {
+  position: relative;
+
+  min-height: 175px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+
+  padding: 26px;
+
+  background: #ffffff;
+
+  border:
+    1px solid rgba(152, 100, 92, 0.13);
+
+  border-radius: 22px;
+
+  text-decoration: none;
+  color: inherit;
+
+  box-shadow:
+    0 8px 30px rgba(65, 43, 38, 0.04);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.profile-dashboard-card:hover {
+  transform: translateY(-4px);
+
+  border-color:
+    rgba(152, 100, 92, 0.28);
+
+  box-shadow:
+    0 16px 40px rgba(65, 43, 38, 0.08);
+
+  background: #fffdfc;
+}
+
+
+/* =========================
+   CARD ICON
+========================= */
+
+.profile-card-icon {
+  width: 48px;
+  height: 48px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 15px;
+
+  background:
+    rgba(152, 100, 92, 0.07);
+
+  color: #98645c;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+.profile-card-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+
+.profile-dashboard-card:hover
+.profile-card-icon {
+  background: #98645c;
+  color: #ffffff;
+}
+
+
+.model-star-icon {
+  font-size: 22px;
+}
+
+
+/* =========================
+   CARD TEXT
+========================= */
+
+.profile-card-content {
+  padding-top: 3px;
+  padding-right: 30px;
+}
+
+
+.profile-card-content h3 {
+  margin: 0 0 8px;
+
+  font-family: "Fraunces", serif;
+
+  font-size: 20px;
+  font-weight: 500;
+
+  color: #433834;
+}
+
+
+.profile-card-content p {
+  max-width: 290px;
+
+  margin: 0;
+
+  color: #8a7b75;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+}
+
+
+/* =========================
+   ARROW
+========================= */
+
+.profile-card-arrow {
+  position: absolute;
+
+  right: 24px;
+  bottom: 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 50%;
+
+  color: #98645c;
+
+  font-size: 18px;
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease;
+}
+
+
+.profile-dashboard-card:hover
+.profile-card-arrow {
+  transform: translateX(4px);
+
+  background:
+    rgba(152, 100, 92, 0.07);
+}
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1024px) {
+
+  .profile-dashboard {
+    width: min(100% - 32px, 900px);
+
+    padding-top: 115px;
+    padding-bottom: 120px;
+  }
+
+
+  .profile-dashboard-hero {
+    padding: 34px;
+  }
+
+
+  .profile-dashboard-grid {
+    gap: 14px;
+  }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 650px) {
+
+  .profile-dashboard {
+    width: calc(100% - 28px);
+
+    padding-top: 105px;
+    padding-bottom: 115px;
+  }
+
+
+  /* HERO */
+
+  .profile-dashboard-hero {
+    min-height: 210px;
+
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-end;
+
+    padding: 27px 24px;
+
+    border-radius: 24px;
+
+    margin-bottom: 16px;
+  }
+
+
+  .profile-dashboard-hero::after {
+    width: 180px;
+    height: 180px;
+
+    right: -60px;
+    top: -70px;
+  }
+
+
+  .profile-welcome h1 {
+    font-size: 34px;
+  }
+
+
+  .profile-welcome-text {
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+
+  .profile-model-badge {
+    padding: 8px 12px;
+
+    font-size: 11px;
+  }
+
+
+  /* ONE CARD PER ROW */
+
+  .profile-dashboard-grid {
+    grid-template-columns: 1fr;
+
+    gap: 12px;
+  }
+
+
+  .profile-dashboard-card {
+    min-height: 135px;
+
+    padding: 21px;
+
+    border-radius: 19px;
+
+    gap: 15px;
+  }
+
+
+  .profile-card-icon {
+    width: 44px;
+    height: 44px;
+
+    border-radius: 13px;
+  }
+
+
+  .profile-card-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+
+  .profile-card-content h3 {
+    font-size: 18px;
+  }
+
+
+  .profile-card-content p {
+    font-size: 12px;
+  }
+
+
+  .profile-card-arrow {
+    right: 18px;
+    bottom: 18px;
+  }
+
+}
