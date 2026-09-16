@@ -827,9 +827,6 @@ document
 
     }
 
-
-
-
     // Restore finish
     if (existingItem.finish) {
 
