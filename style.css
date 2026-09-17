@@ -7108,3 +7108,23 @@ margin-bottom: 40px;
 .wishlist-nav-text {
   font-size: inherit;
 }
+
+@media (max-width: 768px) {
+
+  #navList .wishlist-nav-link {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+
+  #navList .wishlist-nav-icon {
+    font-size: 20px;
+    line-height: 1;
+    color: #98645c;
+  }
+
+  #navList .wishlist-nav-text {
+    font-size: inherit;
+  }
+
+}
