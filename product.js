@@ -2,6 +2,11 @@ const params = new URLSearchParams(window.location.search);
 const productId = params.get('id');
 
 const editIndex = params.get('editIndex');
+const returnTo = params.get('returnTo');
+
+const reopenCart = params.get('reopenCart');
+
+let wishlist = JSON.parse(localStorage.getItem('wishlist') || '[]');
 
 let cart = JSON.parse(localStorage.getItem('cart') || '[]');
 
@@ -176,9 +181,17 @@ function renderProduct(p) {
                   '</div>'
           ) +
 
+          '<button ' +
+            'type="button" ' +
+            'class="wishlist-btn product-wishlist-btn" ' +
+            'data-product-id="' + p.id + '" ' +
+            'aria-label="Add ' + p.name + ' to wishlist">' +
+            '♡' +
+          '</button>' +
+
 
           // Only show arrows if there is more than one image
-          (
+(
             productImages.length > 1
 
               ? '<button type="button" ' +
@@ -317,6 +330,12 @@ function renderProduct(p) {
 
           '</div>' +
 
+              '<a ' +
+  'href="index.html#nail-sizing" ' +
+  'class="size-guide-link">' +
+  'Not sure of your size? View Size Guide →' +
+'</a>' +
+
         '</div>' +
 
 
@@ -422,29 +441,74 @@ function renderProduct(p) {
           '</label>' +
 
           '<input ' +
-            'type="number" ' +
-            'id="quantityInput" ' +
-            'value="1" ' +
-            'min="1" ' +
-            'style="max-width:100px;">' +
+  'type="number" ' +
+  'id="quantityInput" ' +
+  'value="1" ' +
+  'min="1" ' +
+  'max="3 ' +
+  'style="max-width:100px;">' +
+
+'<p id="quantityMessage" ' +
+  'style="display:none; margin-top:8px; font-size:12px; color:#98645c;">' +
+'</p>' +
 
         '</div>' +
 
-         '<div class="whats-inside-box">' +
+  '<div class="product-accordion">' +
 
-  '<h3>What’s inside the box</h3>' +
+  '<button ' +
+    'type="button" ' +
+    'class="product-accordion-btn">' +
 
-  '<ul>' +
-    '<li>10 press-on nails</li>' +
-    '<li>Nail glue</li>' +
-    '<li>Adhesive tabs</li>' +
-    '<li>Nail file</li>' +
-    '<li>Cuticle stick</li>' +
-    '<li>Alcohol wipe</li>' +
-  '</ul>' +
+    '<span>What’s inside the box</span>' +
+
+    '<span class="product-accordion-icon">+</span>' +
+
+  '</button>' +
+
+  '<div class="product-accordion-content">' +
+
+    '<ul>' +
+      '<li>10 press-on nails</li>' +
+      '<li>Nail glue</li>' +
+      '<li>Adhesive tabs</li>' +
+      '<li>Nail file</li>' +
+      '<li>Cuticle stick</li>' +
+      '<li>Alcohol wipe</li>' +
+    '</ul>' +
+
+  '</div>' +
 
 '</div>' +
 
+
+              '<div class="product-accordion">' +
+
+  '<button ' +
+    'type="button" ' +
+    'class="product-accordion-btn">' +
+
+    '<span>Shipping & Returns</span>' +
+
+    '<span class="product-accordion-icon">+</span>' +
+
+  '</button>' +
+
+  '<div class="product-accordion-content">' +
+
+    '<p>' +
+      'Shipping and delivery times vary depending on your location. ' +
+      'Please ensure your nail size and customization details are correct before placing your order.' +
+    '</p>' +
+
+  '</div>' +
+
+'</div>' +
+
+
+
+
+              
         // ADD TO CART BUTTON
         '<button ' +
           'class="submit-btn" ' +
@@ -465,6 +529,73 @@ function renderProduct(p) {
     '<p>Loading recommendations...</p>' +
   '</div>' +
 '</section>';
+
+// ========================================
+// PRODUCT WISHLIST
+// ========================================
+
+const productWishlistBtn =
+  document.querySelector('.product-wishlist-btn');
+
+if (productWishlistBtn) {
+
+  const alreadyWishlisted = wishlist.some(function(item) {
+    return String(item.productId) === String(p.id);
+  });
+
+  if (alreadyWishlisted) {
+    productWishlistBtn.textContent = '♥';
+    productWishlistBtn.classList.add('active');
+
+    productWishlistBtn.setAttribute(
+      'aria-label',
+      'Remove ' + p.name + ' from wishlist'
+    );
+  }
+
+  productWishlistBtn.addEventListener('click', function() {
+
+    const wishlistIndex = wishlist.findIndex(function(item) {
+      return String(item.productId) === String(p.id);
+    });
+
+    if (wishlistIndex !== -1) {
+
+      wishlist.splice(wishlistIndex, 1);
+
+      productWishlistBtn.textContent = '♡';
+      productWishlistBtn.classList.remove('active');
+
+      productWishlistBtn.setAttribute(
+        'aria-label',
+        'Add ' + p.name + ' to wishlist'
+      );
+
+    } else {
+
+      wishlist.push({
+        productId: p.id,
+        name: p.name,
+        price: p.price,
+        image: p.image_url
+      });
+
+      productWishlistBtn.textContent = '♥';
+      productWishlistBtn.classList.add('active');
+
+      productWishlistBtn.setAttribute(
+        'aria-label',
+        'Remove ' + p.name + ' from wishlist'
+      );
+    }
+
+    localStorage.setItem(
+      'wishlist',
+      JSON.stringify(wishlist)
+    );
+
+  });
+}
 loadRelatedProducts(p);
 
   // ========================================
@@ -770,6 +901,110 @@ document
 
     });
 
+      // ========================================
+// QUANTITY LIMIT
+// ========================================
+
+const quantityInput =
+  document.getElementById('quantityInput');
+
+const quantityMessage =
+  document.getElementById('quantityMessage');
+
+const MAX_QUANTITY = 3;
+
+
+quantityInput.addEventListener(
+  'input',
+  function() {
+
+    let quantity =
+      parseInt(quantityInput.value, 10);
+
+
+    // Allow empty field while typing
+    if (quantityInput.value === '') {
+
+      quantityMessage.style.display =
+        'none';
+
+      return;
+    }
+
+
+    // Prevent less than 1
+    if (quantity < 1) {
+
+      quantityInput.value = 1;
+
+      quantityMessage.textContent =
+        'Quantity must be at least 1.';
+
+      quantityMessage.style.display =
+        'block';
+
+      return;
+    }
+
+
+    // Prevent more than 10
+    if (quantity > MAX_QUANTITY) {
+
+      quantityInput.value =
+        MAX_QUANTITY;
+
+      quantityMessage.textContent =
+        'Maximum quantity is 3 sets per product. For larger orders, please contact us.';
+
+      quantityMessage.style.display =
+        'block';
+
+      return;
+    }
+
+
+    // Valid quantity
+    quantityMessage.style.display =
+      'none';
+
+  }
+);
+
+// ========================================
+// PRODUCT ACCORDION
+// ========================================
+
+const accordionButtons =
+  document.querySelectorAll(
+    '.product-accordion-btn'
+  );
+
+accordionButtons.forEach(function(button) {
+
+  button.addEventListener(
+    'click',
+    function() {
+
+      const content =
+        button.nextElementSibling;
+
+      const icon =
+        button.querySelector(
+          '.product-accordion-icon'
+        );
+
+      const isOpen =
+        content.classList.contains('open');
+
+      content.classList.toggle('open');
+
+      icon.textContent =
+        isOpen ? '+' : '−';
+
+    }
+  );
+
+});
 
   // ========================================
   // ADD / UPDATE CART
@@ -815,6 +1050,32 @@ document
       selectedSize;
 
       updateDisplayedPrice();
+
+      // Restore nail type
+if (existingItem.nailType) {
+
+  document
+    .querySelectorAll(
+      '#nailTypeOptions .pill-option'
+    )
+    .forEach(function(btn) {
+
+      btn.classList.toggle(
+        'active',
+        btn.dataset.value ===
+          existingItem.nailType
+      );
+
+    });
+
+
+  selectedNailType =
+    existingItem.nailType;
+
+
+  updateDisplayedPrice();
+
+}
 
 
     // Restore shape
@@ -938,13 +1199,25 @@ document
       renderCart();
 
 
-      // If editing, return to shop
-      if (existingItem !== null) {
+      // If editing
+if (existingItem !== null) {
 
-        window.location.href =
-          'shop.html';
+  if (reopenCart === '1') {
 
-      }
+    // Stay on the product page and open the updated cart drawer
+    renderCart();
+
+    cartDrawer.classList.add('open');
+    cartOverlay.classList.add('open');
+
+  } else {
+
+    // Edit came from the full cart page
+    window.location.href = 'cart.html';
+
+  }
+
+}
 
       // New item
       else {
@@ -991,7 +1264,6 @@ function loadRelatedProducts(currentProduct) {
 
     return;
   }
-
 
   fetch('https://beautyloft-backend.onrender.com/products')
 
@@ -1386,7 +1658,7 @@ function renderCart() {
 
 
             <a
-              href="product.html?id=${item.productId}&editIndex=${index}"
+             href="product.html?id=${item.productId}&editIndex=${index}&returnTo=${encodeURIComponent(window.location.href)}&reopenCart=1"
               class="edit-line-btn"
               style="text-decoration:underline;"
             >

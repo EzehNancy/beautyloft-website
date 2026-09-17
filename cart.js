@@ -116,33 +116,42 @@ function renderCartPage() {
 
       <div class="cart-page-item-controls">
 
-        <div class="cart-page-quantity">
+       <div class="cart-quantity-wrap">
 
-          <button
-            type="button"
-            class="cart-qty-minus"
-            data-index="${index}"
-            aria-label="Decrease quantity"
-          >
-            −
-          </button>
+  <div class="cart-page-quantity">
 
+    <button
+      type="button"
+      class="cart-qty-minus"
+      data-index="${index}"
+      aria-label="Decrease quantity"
+    >
+      −
+    </button>
 
-          <span>
-            ${quantity}
-          </span>
+    <span>
+      ${quantity}
+    </span>
 
+    <button
+      type="button"
+      class="cart-qty-plus"
+      data-index="${index}"
+      aria-label="Increase quantity"
+    >
+      +
+    </button>
 
-          <button
-            type="button"
-            class="cart-qty-plus"
-            data-index="${index}"
-            aria-label="Increase quantity"
-          >
-            +
-          </button>
+  </div>
 
-        </div>
+  <p
+    class="cart-quantity-limit"
+    ${quantity >= 3 ? '' : 'hidden'}
+  >
+    Maximum of 3 sets per product.
+  </p>
+
+</div>
 
 
       <div class="cart-page-actions">
@@ -247,10 +256,10 @@ cartPageItems.addEventListener('click', function(event) {
 
 
     window.location.href =
-      'product.html?id=' +
-      productId +
-      '&edit=' +
-      index;
+  'product.html?id=' +
+  productId +
+  '&editIndex=' +
+  index;
 
     return;
   }
@@ -262,18 +271,41 @@ cartPageItems.addEventListener('click', function(event) {
   const plusButton =
     event.target.closest('.cart-qty-plus');
 
-  if (plusButton) {
+    if (plusButton) {
 
-    const index =
-      Number(plusButton.dataset.index);
+  const index =
+    Number(plusButton.dataset.index);
 
-    cart[index].quantity =
-      (cart[index].quantity || 1) + 1;
+  const currentQuantity =
+    cart[index].quantity || 1;
 
-    saveCart();
+
+  if (currentQuantity >= 3) {
+
+    const cartItem =
+      plusButton.closest('.cart-page-item');
+
+    const limitMessage =
+      cartItem.querySelector(
+        '.cart-quantity-limit'
+      );
+
+    if (limitMessage) {
+      limitMessage.style.display =
+        'block';
+    }
 
     return;
   }
+
+
+  cart[index].quantity =
+    currentQuantity + 1;
+
+  saveCart();
+
+  return;
+}
 
 
   // -------------------------
