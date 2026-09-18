@@ -877,7 +877,7 @@ footer div:first-child p:first-child {
 
 #shop-hero {
   text-align: center;
-  height: 250px;
+  height: 270px;
   padding-bottom: 0px;
 }
 
@@ -7626,4 +7626,12 @@ margin-bottom: 40px;
   flex: 1;
   max-width: 520px;
   margin: 0;
+}
+
+@media (max-width: 650px) {
+
+  .shop-page #shop-hero {
+    padding-bottom: 32px;
+  }
+
 }
