@@ -7631,7 +7631,11 @@ margin-bottom: 40px;
 @media (max-width: 650px) {
 
   .shop-page #shop-hero {
-    padding-bottom: 32px;
+    padding-bottom: 40px;
+  }
+
+  .shop-search {
+    margin-left: 0;
   }
 
 }
