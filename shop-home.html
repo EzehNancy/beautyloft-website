@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <metaname="viewport"content="width=device-width, initial-scale=1.0">
+
+  <title>Shop — The BeautyLoft</title>
+  <link rel="preconnect"href="https://fonts.googleapis.com">
+  <link rel="preconnect"href="https://fonts.gstatic.com"crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css" >
+
+</head>
+
+
+<body class="shop-home-page">
+
+
+  <!-- ========================================
+     SHOP HOME — TOP NAVIGATION
+========================================= -->
+
+<header class="shop-home-header">
+
+  <a
+    href="index.html"
+    class="shop-home-logo"
+  >
+    The BeautyLoft
+  </a>
+
+  <button
+    id="menuToggle"
+    aria-label="Open menu"
+  >
+    ☰
+  </button>
+
+  <nav>
+    <ul id="navList">
+
+      <li>
+        <a href="shop.html">
+          All Products
+        </a>
+      </li>
+
+      <li>
+        <a href="#shopCategories">
+          Categories
+        </a>
+      </li>
+
+      <li>
+        <a href="#newArrivals">
+          New Arrivals
+        </a>
+      </li>
+
+      <li>
+        <a href="#bestSellers">
+          Best Sellers
+        </a>
+      </li>
+
+    <li class="shop-home-nav-search">
+
+  <div class="shop-home-search-wrap">
+
+    <form
+      class="shop-home-search-form"
+      id="shopHomeSearchForm"
+    >
+
+      <span
+        class="shop-home-search-icon"
+        aria-hidden="true"
+      >
+        ⌕
+      </span>
+
+      <input
+        type="search"
+        id="shopHomeSearchInput"
+        placeholder="Search..."
+        autocomplete="off"
+        aria-label="Search BeautyLoft products"
+      >
+
+    </form>
+
+    <div
+      class="shop-home-search-suggestions"
+      id="shopHomeSearchSuggestions"
+      hidden
+    ></div>
+
+  </div>
+
+</li>
+
+      <li class="wishlist-nav-item">
+        <a
+          href="wishlist.html"
+          class="wishlist-nav-link"
+          aria-label="Wishlist"
+        >
+          <span class="wishlist-nav-icon">♡</span>
+          <span class="wishlist-nav-text">
+            Wishlist
+          </span>
+        </a>
+      </li>
+
+      <li class="shop-home-cart-nav">
+        <a
+          href="cart.html"
+          class="shop-home-cart-link"
+          aria-label="Shopping cart"
+        >
+         <span class="shop-home-cart-icon">
+
+  <svg
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.7"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  >
+    <path d="M5 8.5h14l-1 12H6l-1-12z"></path>
+    <path d="M9 9V6.5a3 3 0 0 1 6 0V9"></path>
+  </svg>
+
+</span>
+
+          <span>
+            Cart
+          </span>
+        </a>
+      </li>
+
+    </ul>
+  </nav>
+
+</header>
+
+<main>
+
+  <!-- ========================================
+       SHOP HOME — HERO
+  ========================================= -->
+
+<!-- ========================================
+     SHOP HOME — HERO CAROUSEL
+========================================= -->
+
+<section class="shop-hero-carousel">
+
+  <div class="shop-hero-track">
+
+
+    <!-- =====================================
+         SLIDE 1 — MAIN SHOP
+    ====================================== -->
+
+    <article class="shop-hero-slide shop-hero-slide-one active">
+
+      <div class="hero-one-copy">
+
+        <p class="shop-hero-eyebrow">
+          Nails are a mood
+        </p>
+
+        <h1>
+          Confidence
+          <br>
+          Looks Good
+          <br>
+          <em>On You.</em>
+        </h1>
+
+        <p class="shop-hero-description">
+          Premium press-on nails, nail care and more —
+          curated for your mood, your style, your everyday.
+        </p>
+
+        <a
+          href="shop.html"
+          class="shop-hero-primary-button"
+        >
+          Shop All Products
+          <span>→</span>
+        </a>
+
+        <div class="hero-one-details">
+
+          <div>
+            <span>✦</span>
+
+            <p>
+              <strong>Premium Quality</strong>
+              <small>Made with care</small>
+            </p>
+          </div>
+
+          <div>
+            <span>♡</span>
+
+            <p>
+              <strong>Made For You</strong>
+              <small>Beauty in every detail</small>
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-one-image">
+
+        <img
+          src="images/shop-hero-1.jpg"
+          alt="BeautyLoft press-on nails"
+        >
+
+        <p class="hero-handwritten">
+          Pretty hands,
+          <br>
+          happier days ♡
+        </p>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =====================================
+         SLIDE 2 — DELIVERY
+    ====================================== -->
+
+    <article class="shop-hero-slide shop-hero-slide-two">
+
+      <div class="hero-delivery-decoration">
+        <span>THE BEAUTYLOFT</span>
+      </div>
+
+
+      <div class="hero-two-copy">
+
+        <p class="shop-hero-eyebrow">
+          From us to you
+        </p>
+
+        <h2>
+          Beauty,
+          <br>
+          <em>delivered.</em>
+        </h2>
+
+        <p class="shop-hero-description">
+          Your BeautyLoft order is carefully prepared,
+          securely packaged and delivered with care.
+        </p>
+
+
+        <div class="hero-delivery-features">
+
+          <div>
+            <span class="delivery-number">01</span>
+
+            <p>
+              <strong>Carefully Packed</strong>
+              <small>
+                Every set is prepared with attention
+                to detail.
+              </small>
+            </p>
+          </div>
+
+
+          <div>
+            <span class="delivery-number">02</span>
+
+            <p>
+              <strong>Guaranteed Delivery</strong>
+              <small>
+                Your order gets safely to you.
+              </small>
+            </p>
+          </div>
+
+
+          <div>
+            <span class="delivery-number">03</span>
+
+            <p>
+              <strong>Real-Time Tracking</strong>
+              <small>
+                Follow your BeautyLoft order every
+                step of the way.
+              </small>
+            </p>
+          </div>
+
+        </div>
+
+
+        <a
+          href="#orderTracking"
+          class="shop-hero-secondary-button"
+        >
+          Track Your Order
+          <span>→</span>
+        </a>
+
+      </div>
+
+
+      <div class="hero-two-image">
+
+        <img
+          src="images/shop-hero-delivery.jpg"
+          alt="BeautyLoft order packaging"
+        >
+
+        <div class="hero-delivery-badge">
+          <span>Delivered</span>
+          <strong>with care ♡</strong>
+        </div>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- =====================================
+         SLIDE 3 — COLLECTIONS
+    ====================================== -->
+
+    <article class="shop-hero-slide shop-hero-slide-three">
+
+      <div class="hero-three-heading">
+
+        <p class="shop-hero-eyebrow">
+          Find your mood
+        </p>
+
+        <h2>
+          A collection
+          <br>
+          for <em>every you.</em>
+        </h2>
+
+        <p>
+          From soft everyday sets to statement nails,
+          discover the BeautyLoft collection made for
+          your moment.
+        </p>
+
+        <a
+          href="#shopCategories"
+          class="shop-hero-secondary-button"
+        >
+          Explore Collections
+          <span>→</span>
+        </a>
+
+      </div>
+
+
+      <div class="hero-collection-preview">
+
+
+        <!-- COLLECTION 1 -->
+
+        <a
+          href="shop.html"
+          class="hero-collection-card"
+        >
+
+          <img
+            src="images/pretty-in-polka.jpeg"
+            alt="Pretty in Polka collection"
+          >
+
+          <div>
+            <span>01</span>
+            <h3>Pretty In Polka</h3>
+            <p>Delicate. Feminine. Everyday.</p>
+          </div>
+
+        </a>
+
+
+        <!-- COLLECTION 2 -->
+
+        <a
+          href="shop.html"
+          class="hero-collection-card"
+        >
+
+          <img
+            src="images/the-stripe-edit.jpeg"
+            alt="The Stripe Edit"
+          >
+
+          <div>
+            <span>02</span>
+            <h3>The Stripe Edit</h3>
+            <p>Bold sets for your main-character mood.</p>
+          </div>
+
+        </a>
+
+
+        <!-- COLLECTION 3 -->
+
+        <a
+          href="shop.html"
+          class="hero-collection-card"
+        >
+
+          <img
+            src="images/bridal-bliss.jpeg"
+            alt="Bridal Bliss collection"
+          >
+
+          <div>
+            <span>03</span>
+            <h3>Bridal Bliss</h3>
+            <p>Pretty details worth falling for.</p>
+          </div>
+
+        </a>
+
+      </div>
+
+    </article>
+
+
+  </div>
+
+
+
+  <!-- =====================================
+       CAROUSEL CONTROLS
+  ====================================== -->
+
+  <button
+    type="button"
+    class="shop-hero-arrow shop-hero-prev"
+    id="shopHeroPrev"
+    aria-label="Previous slide"
+  >
+    ‹
+  </button>
+
+
+  <button
+    type="button"
+    class="shop-hero-arrow shop-hero-next"
+    id="shopHeroNext"
+    aria-label="Next slide"
+  >
+    ›
+  </button>
+
+
+  <div class="shop-hero-dots">
+
+    <button
+      type="button"
+      class="shop-hero-dot active"
+      data-slide="0"
+      aria-label="Slide 1"
+    ></button>
+
+    <button
+      type="button"
+      class="shop-hero-dot"
+      data-slide="1"
+      aria-label="Slide 2"
+    ></button>
+
+    <button
+      type="button"
+      class="shop-hero-dot"
+      data-slide="2"
+      aria-label="Slide 3"
+    ></button>
+
+  </div>
+
+
+  <div class="shop-hero-counter">
+    <span id="shopHeroCurrent">01</span>
+    <span class="shop-hero-counter-line"></span>
+    <span>03</span>
+  </div>
+
+</section>
+<script src="bottom-nav.js"></script>
+<script src="script.js"></script>
+<script src="shop-home.js"></script>
+</body>
+</html>
+
+</body>
+
+</html>

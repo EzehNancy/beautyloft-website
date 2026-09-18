@@ -193,9 +193,64 @@ fetch('https://beautyloft-backend.onrender.com/products')
     return response.json();
   })
   .then(function(data) {
-    products = data.products || [];
+
+  products = data.products || [];
+
+  // Check whether the customer came
+  // from the shop-home search
+  const urlParams =
+    new URLSearchParams(window.location.search);
+
+  const searchFromHome =
+    urlParams.get('search');
+
+  if (searchFromHome) {
+
+    const searchTerm =
+      searchFromHome
+        .trim()
+        .toLowerCase();
+
+    // Put the search into the shop search box
+    if (shopSearchInput) {
+      shopSearchInput.value =
+        searchFromHome;
+    }
+
+    // Show the clear X
+    if (clearShopSearch) {
+      clearShopSearch.hidden = false;
+    }
+
+    // Search name + collection
+    const searchResults =
+      products.filter(function(product) {
+
+        const productName =
+          (product.name || '')
+            .toLowerCase();
+
+        const productCollection =
+          (product.collection || '')
+            .toLowerCase();
+
+        return (
+          productName.includes(searchTerm) ||
+          productCollection.includes(searchTerm)
+        );
+
+      });
+
+    renderShopGrid(searchResults);
+
+  } else {
+
+    // Normal shop visit
     renderShopGrid();
-  })
+
+  }
+
+})
   .catch(function(error) {
     console.error(error);
     const shopGrid = document.getElementById('shopGrid');
