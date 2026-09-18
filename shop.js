@@ -1,3 +1,19 @@
+
+if (menuToggle && navList) {
+
+  menuToggle.addEventListener('click', function () {
+    navList.classList.toggle('show');
+  });
+
+  // Close menu after clicking a navigation link
+  navList.querySelectorAll('a').forEach(function (link) {
+    link.addEventListener('click', function () {
+      navList.classList.remove('show');
+    });
+  });
+
+}
+
 // =========================
 // CART DRAWER
 // =========================
@@ -160,6 +176,15 @@ cartTotal.innerHTML = `
 
 let products = [];
 
+const shopSearchInput =
+  document.getElementById('shopSearchInput');
+
+const clearShopSearch =
+  document.getElementById('clearShopSearch');
+
+  const shopSearchSuggestions =
+  document.getElementById('shopSearchSuggestions');
+
 fetch('https://beautyloft-backend.onrender.com/products')
   .then(function(response) {
     if (!response.ok) {
@@ -182,10 +207,10 @@ fetch('https://beautyloft-backend.onrender.com/products')
 // RENDER PRODUCTS
 // =========================
 
-function renderShopGrid() {
+function renderShopGrid(productsToRender = products) {
   const shopGrid = document.getElementById('shopGrid');
 
-  if (!products.length) {
+  if (!productsToRender.length) {
     shopGrid.innerHTML =
       '<p class="activity-empty">No products available right now.</p>';
     return;
@@ -193,7 +218,7 @@ function renderShopGrid() {
 
   shopGrid.innerHTML = '';
 
-  products.forEach(function(p) {
+  productsToRender.forEach(function(p) {
 
     const nairaPrice = (p.price / 100).toLocaleString('en-NG', {
       minimumFractionDigits: 2
@@ -278,6 +303,7 @@ wishlistBtn.addEventListener('click', function() {
     wishlist.push({
       productId: p.id,
       name: p.name,
+      collection: p.collection,
       price: p.price,
       image: p.image_url
     });
@@ -326,4 +352,211 @@ wishlistBtn.addEventListener('click', function() {
   });
 }
 
+// =========================
+// SHOP SEARCH AUTOCOMPLETE
+// =========================
+
+if (shopSearchInput && shopSearchSuggestions) {
+
+  shopSearchInput.addEventListener('input', function() {
+
+    const searchTerm =
+      shopSearchInput.value
+        .trim()
+        .toLowerCase();
+
+    // Show/hide clear button
+    if (clearShopSearch) {
+      clearShopSearch.hidden =
+        searchTerm.length === 0;
+    }
+
+    // Nothing typed — close suggestions
+    if (!searchTerm) {
+      shopSearchSuggestions.innerHTML = '';
+      shopSearchSuggestions.hidden = true;
+      return;
+    }
+
+    // Find matching products
+    const matches = products.filter(function(p) {
+
+      const name =
+        (p.name || '').toLowerCase();
+
+      const collection =
+        (p.collection || '').toLowerCase();
+
+      return (
+        name.includes(searchTerm) ||
+        collection.includes(searchTerm)
+      );
+
+    }).slice(0, 6);
+
+
+    // No matches
+    if (!matches.length) {
+
+      shopSearchSuggestions.innerHTML = `
+        <div class="shop-search-no-results">
+          No sets found for "${shopSearchInput.value.trim()}"
+        </div>
+      `;
+
+      shopSearchSuggestions.hidden = false;
+
+      return;
+    }
+
+
+    // Build suggestions
+    shopSearchSuggestions.innerHTML =
+      matches.map(function(p) {
+
+        return `
+          <a
+            href="product.html?id=${p.id}"
+            class="shop-search-suggestion"
+          >
+
+            <div class="shop-suggestion-image">
+
+              ${
+                p.image_url
+                  ? `
+                    <img
+                      src="${p.image_url}"
+                      alt="${p.name}"
+                    >
+                  `
+                  : ''
+              }
+
+            </div>
+
+            <div class="shop-suggestion-info">
+
+              <span class="shop-suggestion-name">
+                ${p.name}
+              </span>
+
+              <span class="shop-suggestion-collection">
+                ${p.collection || 'BeautyLoft Collection'}
+              </span>
+
+            </div>
+
+          </a>
+        `;
+
+      }).join('');
+
+    shopSearchSuggestions.hidden = false;
+
+  });
+
+}
+
+// =========================
+// SEARCH ON ENTER
+// =========================
+
+if (shopSearchInput) {
+
+  shopSearchInput.addEventListener('keydown', function(event) {
+
+    if (event.key !== 'Enter') {
+      return;
+    }
+
+    event.preventDefault();
+
+    const searchTerm =
+      shopSearchInput.value
+        .trim()
+        .toLowerCase();
+
+    // Empty search = show everything
+    if (!searchTerm) {
+      renderShopGrid(products);
+
+      shopSearchSuggestions.innerHTML = '';
+      shopSearchSuggestions.hidden = true;
+
+      return;
+    }
+
+    // Find ALL matching products
+    const searchResults =
+      products.filter(function(p) {
+
+        const name =
+          (p.name || '').toLowerCase();
+
+        const collection =
+          (p.collection || '').toLowerCase();
+
+        return (
+          name.includes(searchTerm) ||
+          collection.includes(searchTerm)
+        );
+
+      });
+
+    // Put matching products on main grid
+    renderShopGrid(searchResults);
+
+    // Close autocomplete dropdown
+    shopSearchSuggestions.innerHTML = '';
+    shopSearchSuggestions.hidden = true;
+
+  });
+
+}
+
+/* =========================
+   CLEAR SEARCH
+========================= */
+
+if (clearShopSearch) {
+
+  clearShopSearch.addEventListener('click', function() {
+
+    shopSearchInput.value = '';
+
+    clearShopSearch.hidden = true;
+
+    shopSearchSuggestions.innerHTML = '';
+    shopSearchSuggestions.hidden = true;
+
+    shopSearchInput.focus();
+
+    renderShopGrid(products);
+
+  });
+
+}
+
+
+/* =========================
+   CLOSE SEARCH WHEN CLICKING
+   OUTSIDE
+========================= */
+
+document.addEventListener('click', function(event) {
+
+  const searchWrap =
+    document.querySelector('.shop-search');
+
+  if (
+    searchWrap &&
+    !searchWrap.contains(event.target)
+  ) {
+
+    shopSearchSuggestions.hidden = true;
+
+  }
+
+});
 renderCart();

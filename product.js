@@ -576,6 +576,7 @@ if (productWishlistBtn) {
       wishlist.push({
         productId: p.id,
         name: p.name,
+        collection: p.collection,
         price: p.price,
         image: p.image_url
       });
