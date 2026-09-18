@@ -123,3 +123,41 @@ function setupBottomProfileLink() {
 }
 
 setupBottomProfileLink();
+
+// ========================================
+// HIDE / SHOW BOTTOM NAV ON SCROLL
+// ========================================
+
+const mobileBottomNav =
+  document.getElementById('mobileBottomNav');
+
+let lastBottomNavScrollY = window.scrollY;
+
+if (mobileBottomNav) {
+
+  window.addEventListener('scroll', function () {
+
+    const currentScrollY = window.scrollY;
+
+    // Near the top — always show nav
+    if (currentScrollY <= 50) {
+      mobileBottomNav.classList.remove('bottom-nav-hidden');
+      lastBottomNavScrollY = currentScrollY;
+      return;
+    }
+
+    // Scrolling DOWN — hide nav
+    if (currentScrollY > lastBottomNavScrollY) {
+      mobileBottomNav.classList.add('bottom-nav-hidden');
+    }
+
+    // Scrolling UP — show nav
+    else if (currentScrollY < lastBottomNavScrollY) {
+      mobileBottomNav.classList.remove('bottom-nav-hidden');
+    }
+
+    lastBottomNavScrollY = currentScrollY;
+
+  });
+
+}

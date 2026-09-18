@@ -1685,14 +1685,20 @@ function renderCart() {
   );
 
 
-  cartTotal.textContent =
-    'Total: ₦' +
-    (total / 100).toLocaleString(
-      'en-NG',
-      {
-        minimumFractionDigits: 2
-      }
-    );
+  const totalItems = cart.reduce(
+  (sum, item) => sum + item.quantity,
+  0
+);
+
+cartTotal.innerHTML = `
+  <span>Total (${totalItems})</span>
+  <span>
+    ₦${(total / 100).toLocaleString('en-NG', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })}
+  </span>
+`;
 
 
   // ========================================

@@ -12,15 +12,26 @@
 <body>
 
 <header>
-  <a href="index.html">The BeautyLoft</a>
-  <button id="menuToggle">☰</button>
+  <a href="#top" class="logo">The <span>BeautyLoft</span></a>
+  <button id="menuToggle" style="margin-left: 200px;">☰</button>
   <nav>
     <ul id="navList">
-      <li><a href="index.html#about">About</a></li>
-      <li><a href="shop.html">Shop</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#work">Work</a></li>
+      <li class="bottom-nav-duplicate"><a href="shop.html">Shop</a></li>
+      <li class="wishlist-nav-item">
+  <a
+    href="wishlist.html"
+    class="wishlist-nav-link"
+    aria-label="Wishlist"
+  >
+    <span class="wishlist-nav-icon">♡</span>
+    <span class="wishlist-nav-text">Wishlist</span>
+  </a>
+</li>
       <li><a href="models.html" id="modelsNavLink">Models</a></li>
-      <li id="authNavItem"><a href="login.html">Log In</a></li>
-      <li><a href="booking.html">Book Now</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li class="bottom-nav-duplicate"><a href="booking.html">Book Now</a></li>
     </ul>
   </nav>
 </header>

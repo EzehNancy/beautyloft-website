@@ -787,7 +787,7 @@ footer div:first-child p:first-child {
   }
 
   section {
-    padding: 70px 6vw;
+    padding: 0px 6vw;
   }
 
 }
@@ -5027,9 +5027,6 @@ header.header-visible {
    CART HEADER
 ========================= */
 
-.cart-page-header {
-  margin-bottom: 0px;
-}
 
 .cart-page-header .eyebrow {
   margin: 0 0 8px;
@@ -5071,13 +5068,13 @@ header.header-visible {
 
 .cart-layout {
   display: grid;
-
+  
+  padding-bottom: 0px;
   grid-template-columns:
     minmax(0, 1.7fr)
     minmax(300px, 0.8fr);
 
   gap: 24px;
-
   align-items: start;
 }
 
@@ -5088,11 +5085,11 @@ header.header-visible {
 
 .cart-items-section {
   padding: 28px;
-
   background: #ffffff;
 
   border: 1px solid rgba(152, 100, 92, 0.13);
   border-radius: 24px;
+  
 
   box-shadow:
     0 8px 30px rgba(65, 43, 38, 0.04);
@@ -5641,11 +5638,6 @@ header.header-visible {
 
     padding-top: 50px;
     padding-bottom: 115px;
-  }
-
-
-  .cart-page-header {
-    margin-bottom: 28px;
   }
 
 
@@ -6320,9 +6312,6 @@ header.header-visible {
   align-items: center;
 }
 
-.cart-page-body > header {
-  display: none;
-}
 .product-photo-wrap {
   position: relative;
 }
@@ -6740,18 +6729,19 @@ header.header-visible {
 
   .wishlist-page-header {
     position: relative;
-
     display: block;
-
+    margin-top: 100px;
     margin-bottom: 35px;
     padding: 10px 0 25px;
-
+    width: 100%;
+    height: fit-content;
     border-bottom: 1px solid rgba(152, 100, 92, 0.14);
   }
 
   .wishlist-page-header .eyebrow {
     margin-bottom: 10px;
-
+   padding-top: 10px;
+    width: fit-content;
     font-size: 9px;
     letter-spacing: 0.25em;
   }
@@ -6783,7 +6773,7 @@ header.header-visible {
   .wishlist-saved-count {
     position: absolute;
 
-    top: 10px;
+    top: 20px;
     right: 0;
 
     width: 68px;
@@ -7025,6 +7015,7 @@ header.header-visible {
 
   gap: 35px;
 margin-bottom: 40px;
+margin-top: 40px
 }
 
 
@@ -7638,4 +7629,264 @@ margin-bottom: 40px;
     margin-left: 0;
   }
 
+}
+
+#cartTotal {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+/* ========================================
+   CART PAGE — EDITORIAL HEADER
+======================================== */
+
+.cart-page-header {
+  position: relative;
+
+  max-width: 760px;
+  height: 250px;
+  text-align: center;
+}
+
+/* Small YOUR BAG text */
+.cart-page-header .eyebrow {
+  margin: 0 0 14px;
+
+  color: #98645c;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+/* Main title */
+.cart-page-header h1 {
+  margin: 0;
+
+  color: #2f2927;
+
+  font-family: 'Fraunces', serif;
+  font-size: clamp(42px, 5vw, 64px);
+  font-weight: 500;
+  line-height: 1;
+
+  letter-spacing: -0.035em;
+}
+
+/* Subtitle */
+.cart-page-subtitle {
+  max-width: 460px;
+
+  margin: 18px auto 0;
+
+  color: #786d69;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.7;
+}
+
+/* Decorative line */
+.cart-page-header::after {
+  content: '';
+
+  display: block;
+
+  width: 44px;
+  height: 1px;
+
+  margin: 28px auto 0;
+
+  background: rgba(152, 100, 92, 0.45);
+}
+
+@media (max-width: 650px) {
+
+
+  .cart-page-header h1 {
+    font-size: 42px;
+  }
+
+  .cart-page-subtitle {
+    max-width: 310px;
+
+    margin-top: 14px;
+
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  .cart-page-header::after {
+    margin-top: 22px;
+  }
+
+}
+
+/* ========================================
+   CART PAGE — BEAUTYLOFT EDITORIAL HEADER
+======================================== */
+
+.cart-page-header {
+  position: relative;
+  margin-top: 100px;
+  width: 100%;
+  max-width: 1180px;
+  text-align: center;
+}
+
+
+/* MAIN COPY */
+
+.cart-header-copy {
+  position: relative;
+  z-index: 1;
+
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+
+.cart-header-eyebrow {
+  margin: 0 0 16px;
+
+  color: #98645c;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+
+
+.cart-page-header h1 {
+  margin: 0;
+
+  color: #302725;
+
+  font-family: 'Fraunces', serif;
+  font-size: clamp(52px, 6vw, 78px);
+  font-weight: 500;
+
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+
+.cart-page-header h1 em {
+  color: #98645c;
+
+  font-weight: 400;
+}
+
+
+.cart-page-subtitle {
+  max-width: 470px;
+
+  margin: 22px auto 0;
+
+  color: #756965;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 1.75;
+}
+
+
+/* SMALL BRAND DETAIL */
+
+.cart-header-detail {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 14px;
+
+  max-width: 330px;
+
+  margin: 34px auto 0;
+
+  color: rgba(152, 100, 92, 0.7);
+
+  font-family: 'Inter', sans-serif;
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 0.2em;
+}
+
+
+.cart-header-line {
+  flex: 1;
+
+  height: 1px;
+
+  background:
+    rgba(152, 100, 92, 0.22);
+}
+
+/* ========================================
+   CART HEADER — MOBILE
+======================================== */
+
+@media (max-width: 650px) {
+  .cart-header-eyebrow {
+    margin-bottom: 12px;
+
+    font-size: 8px;
+  }
+
+
+  .cart-page-header h1 {
+    font-size: 48px;
+
+    line-height: 0.98;
+  }
+
+
+  .cart-page-subtitle {
+    max-width: 310px;
+
+    margin-top: 17px;
+
+    font-size: 11px;
+    line-height: 1.65;
+  }
+
+
+  .cart-header-detail {
+    max-width: 250px;
+
+    gap: 10px;
+
+    margin-top: 26px;
+
+    font-size: 7px;
+  }
+
+}
+
+/* ========================================
+   MOBILE BOTTOM NAV — SCROLL BEHAVIOUR
+======================================== */
+
+.mobile-bottom-nav {
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.mobile-bottom-nav.bottom-nav-hidden {
+  transform: translateY(120%);
+  opacity: 0;
+  pointer-events: none;
 }
