@@ -615,3 +615,26 @@ document.addEventListener('click', function(event) {
 
 });
 renderCart();
+
+const drawerCheckoutBtn =
+  document.getElementById(
+    'drawerCheckoutBtn'
+  );
+
+if (drawerCheckoutBtn) {
+
+  drawerCheckoutBtn.addEventListener(
+    'click',
+    function () {
+
+      if (cart.length === 0) {
+        return;
+      }
+
+      window.location.href =
+        'checkout.html';
+
+    }
+  );
+
+}

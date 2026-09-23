@@ -383,3 +383,21 @@ function saveCart() {
   );
 
 }
+
+const checkoutBtn =
+  document.getElementById('checkoutBtn');
+
+if (checkoutBtn) {
+  checkoutBtn.addEventListener(
+    'click',
+    function () {
+
+      if (cart.length === 0) {
+        return;
+      }
+
+      window.location.href =
+        'checkout.html';
+    }
+  );
+}
