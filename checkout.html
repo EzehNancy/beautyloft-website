@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Checkout | The BeautyLoft</title>
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Inter:wght@400;500;600&display=swap"
+    rel="stylesheet"
+  >
+
+  <link rel="stylesheet" href="checkout.css">
+</head>
+
+<body>
+
+  <header class="checkout-header">
+
+    <a
+      href="shop-home.html"
+      class="checkout-logo"
+    >
+      The BeautyLoft
+    </a>
+
+    <a
+      href="cart.html"
+      class="back-to-cart"
+    >
+      ← Back to Cart
+    </a>
+
+  </header>
+
+
+  <main class="checkout-page">
+
+    <section class="checkout-intro">
+
+      <p class="checkout-eyebrow">
+        Almost yours
+      </p>
+
+      <h1>Checkout</h1>
+
+      <p>
+        Complete your details and we'll take care
+        of the rest.
+      </p>
+
+    </section>
+
+
+    <!-- PROGRESS -->
+
+    <div class="checkout-progress">
+
+      <button
+        type="button"
+        class="progress-step active"
+        data-progress="1"
+      >
+        <span>01</span>
+        Measurements
+      </button>
+
+      <div class="progress-line"></div>
+
+      <button
+        type="button"
+        class="progress-step"
+        data-progress="2"
+      >
+        <span>02</span>
+        Delivery
+      </button>
+
+      <div class="progress-line"></div>
+
+      <button
+        type="button"
+        class="progress-step"
+        data-progress="3"
+      >
+        <span>03</span>
+        Review
+      </button>
+
+      <div class="progress-line"></div>
+
+      <button
+        type="button"
+        class="progress-step"
+        data-progress="4"
+      >
+        <span>04</span>
+        Payment
+      </button>
+
+    </div>
+
+
+    <div class="checkout-layout">
+
+      <!-- LEFT -->
+
+      <section class="checkout-main">
+
+
+        <!-- ===================================
+             STEP 1 — NAIL MEASUREMENTS
+        ==================================== -->
+
+        <section
+          class="checkout-step active"
+          data-step="1"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              01
+            </span>
+
+            <div>
+              <p class="step-eyebrow">
+                Perfect fit
+              </p>
+
+              <h2>Your Nail Measurements</h2>
+
+              <p>
+                Enter each nail measurement in
+                millimetres.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div
+            class="measurement-note"
+            id="measurementNote"
+          >
+            <strong>Already know your size?</strong>
+
+            <span>
+              Add the measurements for both hands
+              below.
+            </span>
+          </div>
+
+
+          <div class="hands-grid">
+
+            <!-- LEFT HAND -->
+
+            <div class="hand-card">
+
+              <div class="hand-title">
+                <span>Left</span>
+                <h3>Left Hand</h3>
+              </div>
+
+              <div class="measurement-grid">
+
+                <label>
+                  <span>Thumb</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="leftThumb"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Index</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="leftIndex"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Middle</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="leftMiddle"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Ring</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="leftRing"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Pinky</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="leftPinky"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+              </div>
+
+            </div>
+
+
+            <!-- RIGHT HAND -->
+
+            <div class="hand-card">
+
+              <div class="hand-title">
+                <span>Right</span>
+                <h3>Right Hand</h3>
+              </div>
+
+              <div class="measurement-grid">
+
+                <label>
+                  <span>Thumb</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="rightThumb"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Index</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="rightIndex"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Middle</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="rightMiddle"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Ring</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="rightRing"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+
+                <label>
+                  <span>Pinky</span>
+
+                  <div class="measurement-input">
+                    <input
+                      type="number"
+                      id="rightPinky"
+                      min="1"
+                      max="30"
+                      step="0.1"
+                      inputmode="decimal"
+                      placeholder="0"
+                    >
+                    <small>mm</small>
+                  </div>
+                </label>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <label class="save-measurements">
+
+            <input
+              type="checkbox"
+              id="saveMeasurements"
+            >
+
+            <span>
+              Save these measurements to my
+              BeautyLoft account for future orders.
+            </span>
+
+          </label>
+
+
+          <div
+            class="checkout-error"
+            id="measurementError"
+          ></div>
+
+
+          <div class="step-actions">
+
+            <a
+              href="cart.html"
+              class="checkout-secondary-action"
+            >
+              Back to Cart
+            </a>
+
+            <button
+              type="button"
+              class="checkout-primary-action"
+              id="measurementContinue"
+            >
+              Continue to Delivery
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================
+             STEP 2 — DELIVERY
+        ==================================== -->
+
+        <section
+          class="checkout-step"
+          data-step="2"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              02
+            </span>
+
+            <div>
+              <p class="step-eyebrow">
+                Where it's going
+              </p>
+
+              <h2>Delivery Details</h2>
+
+              <p>
+                Tell us where your BeautyLoft order
+                should be delivered.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="checkout-form-grid">
+
+            <label>
+              <span>First Name *</span>
+
+              <input
+                type="text"
+                id="firstName"
+                autocomplete="given-name"
+              >
+            </label>
+
+
+            <label>
+              <span>Last Name *</span>
+
+              <input
+                type="text"
+                id="lastName"
+                autocomplete="family-name"
+              >
+            </label>
+
+
+            <label class="full-field">
+              <span>Email Address *</span>
+
+              <input
+                type="email"
+                id="email"
+                autocomplete="email"
+              >
+            </label>
+
+
+            <label class="full-field">
+              <span>Phone Number *</span>
+
+              <input
+                type="tel"
+                id="phone"
+                autocomplete="tel"
+                placeholder="+234"
+              >
+            </label>
+
+
+            <label class="full-field">
+              <span>Delivery Address *</span>
+
+              <input
+                type="text"
+                id="address"
+                autocomplete="street-address"
+                placeholder="House number and street"
+              >
+            </label>
+
+
+            <label>
+              <span>City / Locality *</span>
+
+              <input
+                type="text"
+                id="city"
+                autocomplete="address-level2"
+              >
+            </label>
+
+
+           <label>
+  <span>State *</span>
+
+  <input
+    type="text"
+    id="state"
+    value="Lagos"
+    readonly
+  >
+</label>
+
+
+<label>
+  <span>Delivery Area *</span>
+
+  <select id="deliveryArea">
+    <option value="">
+      Select your area
+    </option>
+  </select>
+</label>
+
+
+            <label class="full-field">
+              <span>
+                Delivery Instructions
+                <small>(optional)</small>
+              </span>
+
+              <textarea
+                id="deliveryInstructions"
+                rows="4"
+                placeholder="Landmark, gate instructions, etc."
+              ></textarea>
+            </label>
+
+          </div>
+
+
+          <div
+            class="checkout-error"
+            id="deliveryError"
+          ></div>
+
+
+          <div class="step-actions">
+
+            <button
+              type="button"
+              class="checkout-secondary-action"
+              data-back="1"
+            >
+              ← Measurements
+            </button>
+
+            <button
+              type="button"
+              class="checkout-primary-action"
+              id="deliveryContinue"
+            >
+              Review Order
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================
+             STEP 3 — REVIEW
+        ==================================== -->
+
+        <section
+          class="checkout-step"
+          data-step="3"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              03
+            </span>
+
+            <div>
+              <p class="step-eyebrow">
+                One last look
+              </p>
+
+              <h2>Review Your Order</h2>
+
+              <p>
+                Make sure everything looks right
+                before continuing to payment.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div
+            class="review-products"
+            id="reviewProducts"
+          ></div>
+
+
+          <div class="review-information">
+
+            <div class="review-card">
+
+              <div class="review-card-heading">
+
+                <h3>Measurements</h3>
+
+                <button
+                  type="button"
+                  data-edit-step="1"
+                >
+                  Edit
+                </button>
+
+              </div>
+
+              <div id="reviewMeasurements"></div>
+
+            </div>
+
+
+            <div class="review-card">
+
+              <div class="review-card-heading">
+
+                <h3>Delivery</h3>
+
+                <button
+                  type="button"
+                  data-edit-step="2"
+                >
+                  Edit
+                </button>
+
+              </div>
+
+              <div id="reviewDelivery"></div>
+
+            </div>
+
+          </div>
+
+
+          <div class="step-actions">
+
+            <button
+              type="button"
+              class="checkout-secondary-action"
+              data-back="2"
+            >
+              ← Delivery
+            </button>
+
+            <button
+              type="button"
+              class="checkout-primary-action"
+              id="reviewContinue"
+            >
+              Continue to Payment
+              <span>→</span>
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <!-- ===================================
+             STEP 4 — PAYMENT
+        ==================================== -->
+
+        <section
+          class="checkout-step"
+          data-step="4"
+        >
+
+          <div class="step-heading">
+
+            <span class="step-number">
+              04
+            </span>
+
+            <div>
+              <p class="step-eyebrow">
+                Secure checkout
+              </p>
+
+              <h2>Payment</h2>
+
+              <p>
+                Your payment is securely processed
+                before your order is confirmed.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="payment-card">
+
+            <div class="payment-lock">
+              ♡
+            </div>
+
+            <div>
+              <h3>Secure Payment</h3>
+
+              <p>
+                Your order will only be confirmed
+                after successful payment verification.
+              </p>
+            </div>
+
+          </div>
+
+
+          <label class="checkout-confirmation">
+
+            <input
+              type="checkbox"
+              id="confirmOrder"
+            >
+
+            <span>
+              I confirm that my order, delivery
+              information and nail measurements are
+              correct.
+            </span>
+
+          </label>
+
+
+          <div
+            class="checkout-error"
+            id="paymentError"
+          ></div>
+
+
+          <div class="step-actions">
+
+            <button
+              type="button"
+              class="checkout-secondary-action"
+              data-back="3"
+            >
+              ← Review
+            </button>
+
+            <button
+              type="button"
+              class="checkout-primary-action pay-button"
+              id="payButton"
+            >
+              Pay
+              <span id="payButtonTotal">
+                ₦0
+              </span>
+            </button>
+
+          </div>
+
+        </section>
+
+      </section>
+
+
+      <!-- ===================================
+           ORDER SUMMARY
+      ==================================== -->
+
+      <aside class="checkout-summary">
+
+        <div class="summary-heading">
+
+          <div>
+            <p>Your order</p>
+            <h2>Order Summary</h2>
+          </div>
+
+          <span id="summaryItemCount">
+            0 items
+          </span>
+
+        </div>
+
+
+        <div
+          class="summary-products"
+          id="summaryProducts"
+        ></div>
+
+
+        <div class="summary-totals">
+
+          <div>
+            <span>Subtotal</span>
+
+            <strong id="checkoutSubtotal">
+              ₦0
+            </strong>
+          </div>
+
+
+          <div>
+            <span>Delivery</span>
+
+            <strong id="checkoutDelivery">
+              Calculated before payment
+            </strong>
+          </div>
+
+
+          <div class="summary-total">
+            <span>Total</span>
+
+            <strong id="checkoutTotal">
+              ₦0
+            </strong>
+          </div>
+
+        </div>
+
+
+        <div class="checkout-assurances">
+
+          <p>
+            <span>♡</span>
+            Carefully prepared
+          </p>
+
+          <p>
+            <span>✓</span>
+            Secure payment
+          </p>
+
+          <p>
+            <span>⌖</span>
+            Order tracking
+          </p>
+
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <script src="checkout.js"></script>
+
+</body>
+</html>

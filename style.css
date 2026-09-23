@@ -9724,3 +9724,472 @@ margin-top: 40px
   }
 
 }
+
+/* ========================================
+   SHOP HOME — MOBILE HERO
+   SINGLE RESPONSIVE VERSION
+======================================== */
+
+@media (max-width: 768px) {
+
+  /* =====================================
+     CAROUSEL
+  ===================================== */
+
+  .shop-hero-carousel {
+    width: calc(100% - 20px);
+
+    height: 500px;
+    min-height: 500px;
+
+    margin: 14px auto 0;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+  }
+
+  .shop-hero-track,
+  .shop-hero-slide {
+    width: 100%;
+    height: 100%;
+  }
+
+
+  /* =====================================
+     SLIDE 1 — MAIN BEAUTYLOFT
+  ===================================== */
+
+  .shop-hero-slide-one {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+  }
+
+
+  /* LEFT SIDE */
+
+  .hero-one-copy {
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 100%;
+    height: 100%;
+
+    padding:
+      30px
+      0
+      30px
+      28px;
+
+    box-sizing: border-box;
+  }
+
+
+  .hero-one-copy h1 {
+    margin: 0;
+
+    font-size: clamp(43px, 11vw, 57px);
+    line-height: 0.88;
+    letter-spacing: -0.055em;
+  }
+
+
+  .shop-hero-eyebrow {
+    margin: 0 0 12px;
+
+    font-size: 7px;
+    letter-spacing: 0.23em;
+  }
+
+
+  .shop-hero-description {
+    max-width: 195px;
+
+    margin-top: 16px;
+
+    font-size: 10px;
+    line-height: 1.55;
+  }
+
+
+  .shop-hero-primary-button {
+    margin-top: 17px;
+
+    padding: 11px 14px;
+
+    font-size: 7px;
+  }
+
+
+  /* Hide small desktop details */
+
+  .hero-one-details {
+    display: none;
+  }
+
+
+  /* RIGHT IMAGE */
+
+  .hero-one-image {
+    position: relative;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+  }
+
+
+  .hero-one-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.5) 10%,
+        black 24%,
+        black 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.5) 10%,
+        black 24%,
+        black 100%
+      );
+  }
+
+
+  .hero-one-image::before {
+    background:
+      linear-gradient(
+        to right,
+        #f7e8e4 0%,
+        rgba(247, 232, 228, 0.45) 12%,
+        transparent 28%
+      );
+  }
+
+
+  .hero-handwritten {
+    font-size: 14px;
+  }
+
+
+  /* =====================================
+     SLIDE 2 — DELIVERY
+  ===================================== */
+
+  .shop-hero-slide-two {
+    position: relative;
+
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+  }
+
+
+  /* IMAGE */
+
+  .hero-two-image {
+    position: absolute;
+
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 62%;
+    height: 100%;
+  }
+
+
+  .hero-two-image img {
+    display: block;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    object-position: center;
+
+    -webkit-mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 12%,
+        black 30%,
+        black 100%
+      );
+
+    mask-image:
+      linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(0, 0, 0, 0.4) 12%,
+        black 30%,
+        black 100%
+      );
+  }
+
+
+  /* TEXT */
+
+  .hero-two-copy {
+    position: relative;
+    z-index: 5;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 52%;
+    height: 100%;
+
+    padding:
+      30px
+      0
+      30px
+      28px;
+
+    box-sizing: border-box;
+  }
+
+
+  .hero-two-copy h2 {
+    margin: 0;
+
+    font-size: clamp(46px, 12vw, 60px);
+    line-height: 0.88;
+    letter-spacing: -0.045em;
+  }
+
+
+  .hero-two-copy .shop-hero-description {
+    max-width: 190px;
+
+    margin-top: 14px;
+
+    font-size: 9px;
+  }
+
+
+  /* DELIVERY POINTS */
+
+  .hero-delivery-features {
+    margin-top: 16px;
+  }
+
+
+  .hero-delivery-features > div {
+    margin-bottom: 7px;
+  }
+
+
+  .delivery-number {
+    font-size: 6px;
+  }
+
+
+  .hero-delivery-features strong {
+    font-size: 8px;
+  }
+
+
+  .hero-delivery-features small {
+    display: none;
+  }
+
+
+  .hero-two-copy .shop-hero-secondary-button {
+    margin-top: 10px;
+
+    padding: 10px 12px;
+
+    font-size: 6px;
+  }
+
+
+  .hero-delivery-decoration,
+  .hero-delivery-badge {
+    display: none;
+  }
+
+
+  /* =====================================
+     SLIDE 3 — COLLECTIONS
+  ===================================== */
+
+  .shop-hero-slide-three {
+    display: grid;
+    grid-template-columns: 36% 64%;
+
+    width: 100%;
+    height: 100%;
+
+    padding:
+      34px
+      22px;
+
+    box-sizing: border-box;
+  }
+
+
+  /* LEFT TEXT */
+
+  .hero-three-heading {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    padding-right: 16px;
+  }
+
+
+  .hero-three-heading h2 {
+    margin: 0;
+
+    font-size: clamp(35px, 9vw, 46px);
+    line-height: 0.9;
+  }
+
+
+  .hero-three-heading > p:not(.shop-hero-eyebrow) {
+    margin-top: 12px;
+
+    font-size: 8px;
+    line-height: 1.5;
+  }
+
+
+  .hero-three-heading .shop-hero-secondary-button {
+    margin-top: 13px;
+
+    padding: 10px 11px;
+
+    font-size: 6px;
+  }
+
+
+  /* COLLECTION CARDS */
+
+  .hero-collection-preview {
+    display: grid;
+
+    grid-template-columns:
+      repeat(3, minmax(0, 1fr));
+
+    align-items: center;
+
+    gap: 7px;
+
+    width: 100%;
+    height: 100%;
+
+    margin: 0;
+  }
+
+
+  .hero-collection-card {
+    width: 100%;
+
+    overflow: hidden;
+  }
+
+
+  .hero-collection-card img {
+    display: block;
+
+    width: 100%;
+    height: 235px;
+
+    object-fit: cover;
+  }
+
+
+  .hero-collection-card > div {
+    padding: 8px;
+  }
+
+
+  .hero-collection-card span {
+    font-size: 6px;
+  }
+
+
+  .hero-collection-card h3 {
+    margin: 3px 0 0;
+
+    font-size: 11px;
+    line-height: 1.05;
+  }
+
+
+  .hero-collection-card p {
+    display: none;
+  }
+
+
+  /* =====================================
+     CAROUSEL CONTROLS
+  ===================================== */
+
+  .shop-hero-arrow {
+    width: 36px;
+    height: 36px;
+
+    font-size: 23px;
+  }
+
+
+  .shop-hero-prev {
+    left: 8px;
+  }
+
+
+  .shop-hero-next {
+    right: 8px;
+  }
+
+
+  .shop-hero-dots {
+    bottom: 13px;
+  }
+
+
+  .shop-hero-dot {
+    width: 7px;
+    height: 7px;
+  }
+
+
+  .shop-hero-counter {
+    right: 14px;
+    bottom: 12px;
+
+    font-size: 7px;
+  }
+
+}
