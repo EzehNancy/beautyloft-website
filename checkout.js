@@ -1031,7 +1031,7 @@ const LAGOS_DELIVERY_ZONES = {
       'GRA Ikeja',
       'Computer Village'
     ],
-    price: 2500 * 100
+    price: 1 * 100
   },
 
 

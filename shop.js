@@ -205,6 +205,9 @@ const urlParams =
 const searchFromHome =
   urlParams.get('search');
 
+  const categoryFromHome =
+  urlParams.get('category');
+
 const collectionFromHome =
   urlParams.get('collection');
 
@@ -240,6 +243,71 @@ if (collectionFromHome) {
   );
 
 
+  /* ========================================
+   CATEGORY FROM SHOP HOME
+======================================== */
+
+} else if (categoryFromHome) {
+
+  const categoryName =
+    categoryFromHome
+      .trim()
+      .toLowerCase();
+
+
+  const categoryProducts =
+    products.filter(
+      function(product) {
+
+        let categories =
+          product.categories || [];
+
+
+        // Safety in case the backend
+        // returns JSON as a string
+        if (
+          typeof categories === 'string'
+        ) {
+
+          try {
+
+            categories =
+              JSON.parse(categories);
+
+          } catch (error) {
+
+            categories = [];
+
+          }
+
+        }
+
+
+        if (!Array.isArray(categories)) {
+          categories = [];
+        }
+
+
+        return categories.some(
+          function(category) {
+
+            return (
+              String(category)
+                .trim()
+                .toLowerCase() ===
+              categoryName
+            );
+
+          }
+        );
+
+      }
+    );
+
+
+  renderShopGrid(
+    categoryProducts
+  );
 /* ========================================
    SEARCH FROM SHOP HOME
 ======================================== */
