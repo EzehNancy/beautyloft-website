@@ -7895,3 +7895,263 @@ margin-top: 40px
    SHOP HOME — NAV DETAILS
 ======================================== */
 
+
+/* ========================================
+   ADMIN COLLECTION CARDS
+======================================== */
+
+.collections-list {
+  margin-top: 22px;
+}
+
+.collections-list.visible {
+  display: grid;
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+}
+
+.collections-list.hidden {
+  display: none;
+}
+
+
+/* Individual collection card */
+
+.collection-item {
+  background: #fffaf8;
+  border: 1px solid rgba(151, 96, 87, 0.18);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 24px rgba(78, 52, 47, 0.06);
+}
+
+
+/* ========================================
+   COLLECTION COVER IMAGE
+======================================== */
+
+.collection-admin-image {
+  width: 100%;
+  height: 180px;
+  background: #f5ebe7;
+  overflow: hidden;
+}
+
+.collection-admin-image img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.collection-image-empty {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #a47d75;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+
+/* ========================================
+   COLLECTION DETAILS
+======================================== */
+
+.collection-admin-details {
+  padding: 18px;
+}
+
+.collection-name-input {
+  width: 100%;
+  padding: 11px 12px;
+
+  border: 1px solid #dfcbc5;
+  border-radius: 8px;
+
+  background: #ffffff;
+  color: #493631;
+
+  font-family: 'Fraunces', serif;
+  font-size: 17px;
+
+  outline: none;
+}
+
+.collection-name-input:focus {
+  border-color: #a66f65;
+}
+
+
+/* ========================================
+   IMAGE FIELD
+======================================== */
+
+.collection-image-field {
+  margin-top: 16px;
+}
+
+.collection-image-field > label {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #76564f;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collection-image-input {
+  width: 100%;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 11px;
+
+  color: #76564f;
+}
+
+
+/* File button */
+
+.collection-image-input::file-selector-button {
+  margin-right: 10px;
+  padding: 8px 12px;
+
+  border: 1px solid #d8bbb4;
+  border-radius: 999px;
+
+  background: #f8efec;
+  color: #805b54;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.collection-image-input::file-selector-button:hover {
+  background: #efdfda;
+}
+
+
+/* ========================================
+   SETTINGS
+======================================== */
+
+.collection-setting {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  margin-top: 15px;
+
+  color: #604943;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.collection-setting input {
+  width: 15px;
+  height: 15px;
+
+  accent-color: #9b6b62;
+}
+
+
+/* ========================================
+   ACTION BUTTONS
+======================================== */
+
+.collection-admin-actions {
+  display: flex;
+  gap: 9px;
+
+  margin-top: 20px;
+}
+
+.collection-save-btn,
+.collection-delete-btn {
+  flex: 1;
+
+  padding: 10px 14px;
+
+  border-radius: 999px;
+
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+
+/* Save */
+
+.collection-save-btn {
+  border: 1px solid #9b6b62;
+
+  background: #9b6b62;
+  color: #ffffff;
+}
+
+.collection-save-btn:hover {
+  background: #79534c;
+  border-color: #79534c;
+}
+
+
+/* Delete */
+
+.collection-delete-btn {
+  border: 1px solid #d9bcb5;
+
+  background: transparent;
+  color: #8e5f57;
+}
+
+.collection-delete-btn:hover {
+  background: #f5e5e1;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+
+  .collections-list.visible {
+    grid-template-columns: 1fr;
+  }
+
+  .collection-admin-image {
+    height: 200px;
+  }
+
+}

@@ -194,37 +194,85 @@ fetch('https://beautyloft-backend.onrender.com/products')
   })
   .then(function(data) {
 
-  products = data.products || [];
+ products = data.products || [];
 
-  // Check whether the customer came
-  // from the shop-home search
-  const urlParams =
-    new URLSearchParams(window.location.search);
+// Read information passed in the URL
+const urlParams =
+  new URLSearchParams(
+    window.location.search
+  );
 
-  const searchFromHome =
-    urlParams.get('search');
+const searchFromHome =
+  urlParams.get('search');
 
-  if (searchFromHome) {
+const collectionFromHome =
+  urlParams.get('collection');
 
-    const searchTerm =
-      searchFromHome
-        .trim()
-        .toLowerCase();
 
-    // Put the search into the shop search box
-    if (shopSearchInput) {
-      shopSearchInput.value =
-        searchFromHome;
-    }
+/* ========================================
+   COLLECTION FROM SHOP HOME
+======================================== */
 
-    // Show the clear X
-    if (clearShopSearch) {
-      clearShopSearch.hidden = false;
-    }
+if (collectionFromHome) {
 
-    // Search name + collection
-    const searchResults =
-      products.filter(function(product) {
+  const collectionName =
+    collectionFromHome
+      .trim()
+      .toLowerCase();
+
+  const collectionProducts =
+    products.filter(function(product) {
+
+      const productCollection =
+        (product.collection || '')
+          .trim()
+          .toLowerCase();
+
+      return (
+        productCollection ===
+        collectionName
+      );
+
+    });
+
+  renderShopGrid(
+    collectionProducts
+  );
+
+
+/* ========================================
+   SEARCH FROM SHOP HOME
+======================================== */
+
+} else if (searchFromHome) {
+
+  const searchTerm =
+    searchFromHome
+      .trim()
+      .toLowerCase();
+
+  // Put the search into
+  // the shop search box
+  if (shopSearchInput) {
+
+    shopSearchInput.value =
+      searchFromHome;
+
+  }
+
+  // Show the clear X
+  if (clearShopSearch) {
+
+    clearShopSearch.hidden =
+      false;
+
+  }
+
+
+  // Search name + collection
+  const searchResults =
+    products.filter(
+      function(product) {
 
         const productName =
           (product.name || '')
@@ -235,18 +283,32 @@ fetch('https://beautyloft-backend.onrender.com/products')
             .toLowerCase();
 
         return (
-          productName.includes(searchTerm) ||
-          productCollection.includes(searchTerm)
+          productName.includes(
+            searchTerm
+          ) ||
+          productCollection.includes(
+            searchTerm
+          )
         );
 
-      });
+      }
+    );
 
-    renderShopGrid(searchResults);
 
-  } else {
+  renderShopGrid(
+    searchResults
+  );
 
-    // Normal shop visit
-    renderShopGrid();
+
+/* ========================================
+   NORMAL SHOP VISIT
+======================================== */
+
+} else {
+
+  renderShopGrid();
+
+
 
   }
 

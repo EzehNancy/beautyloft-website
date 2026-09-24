@@ -739,3 +739,152 @@ async function loadBeautyLoftFavourites() {
 
 
 loadBeautyLoftFavourites();
+
+/* ========================================
+   SHOP HOME — FEATURED COLLECTIONS
+======================================== */
+
+async function loadHomeCollections() {
+
+  const grid =
+    document.getElementById(
+      'homeCollectionsGrid'
+    );
+
+  if (!grid) {
+    return;
+  }
+
+
+  try {
+
+    const response =
+      await fetch(
+        'https://beautyloft-backend.onrender.com/collections'
+      );
+
+
+    const data =
+      await response.json();
+
+
+    if (!response.ok) {
+
+      throw new Error(
+        data.error ||
+        'Could not load collections.'
+      );
+
+    }
+
+
+    const collections =
+      (data.collections || [])
+        .filter(function(collection) {
+
+          return (
+            Number(
+              collection.is_featured
+            ) === 1
+          );
+
+        });
+
+
+    grid.innerHTML = '';
+
+
+    if (collections.length === 0) {
+
+      grid.innerHTML = `
+        <p class="collections-empty">
+          No featured collections yet.
+        </p>
+      `;
+
+      return;
+
+    }
+
+
+    collections.forEach(
+      function(collection, index) {
+
+        const card =
+          document.createElement('a');
+
+
+        card.href =
+          'shop.html?collection=' +
+          encodeURIComponent(
+            collection.name
+          );
+
+
+        card.className =
+          index === 0
+            ? 'collection-card collection-card-large'
+            : 'collection-card';
+
+
+        const image =
+          collection.image_url || '';
+
+
+        card.innerHTML = `
+
+          ${
+            image
+              ? `
+                <img
+                  src="${image}"
+                  alt="${collection.name}"
+                >
+              `
+              : `
+                <div
+                  class="collection-card-placeholder"
+                >
+                </div>
+              `
+          }
+
+
+          <div class="collection-overlay">
+
+            <span>
+              THE BEAUTYLOFT
+            </span>
+
+            <h3>
+              ${collection.name}
+            </h3>
+
+            <p>
+              SHOP COLLECTION →
+            </p>
+
+          </div>
+
+        `;
+
+
+        grid.appendChild(card);
+
+      }
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      'HOME COLLECTIONS ERROR:',
+      error
+    );
+
+  }
+
+}
+
+
+loadHomeCollections();

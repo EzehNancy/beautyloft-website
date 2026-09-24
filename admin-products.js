@@ -555,23 +555,126 @@ option.value = collection.name;
 option.textContent = collection.name;
 
 productCollectionSelect.appendChild(option);
-      const item = document.createElement('div');
+const item =
+  document.createElement('div');
 
-      item.className = 'collection-item';
+item.className = 'collection-item';
 
-      item.innerHTML = `
-        <span>${collection.name}</span>
+item.dataset.id = collection.id;
 
-        <button
-          type="button"
-          class="collection-delete-btn"
-          data-id="${collection.id}"
-        >
-          Delete
-        </button>
-      `;
 
-      collectionsList.appendChild(item);
+item.innerHTML = `
+
+  <div class="collection-admin-image">
+
+    ${
+      collection.image_url
+        ? `
+          <img
+            src="${collection.image_url}"
+            alt="${collection.name}"
+          >
+        `
+        : `
+          <div class="collection-image-empty">
+            No cover image
+          </div>
+        `
+    }
+
+  </div>
+
+
+  <div class="collection-admin-details">
+
+    <input
+      type="text"
+      class="collection-name-input"
+      value="${collection.name}"
+    >
+
+
+    <div class="collection-image-field">
+
+      <label>
+        Collection Cover
+      </label>
+
+      <input
+        type="file"
+        class="collection-image-input"
+        accept="image/*"
+      >
+
+      <input
+        type="hidden"
+        class="collection-image-url"
+        value="${collection.image_url || ''}"
+      >
+
+    </div>
+
+
+    <label class="collection-setting">
+
+      <input
+        type="checkbox"
+        class="collection-featured-input"
+        ${
+          Number(collection.is_featured) === 1
+            ? 'checked'
+            : ''
+        }
+      >
+
+      Featured on Shop Home
+
+    </label>
+
+
+    <label class="collection-setting">
+
+      <input
+        type="checkbox"
+        class="collection-active-input"
+        ${
+          Number(collection.is_active) === 1
+            ? 'checked'
+            : ''
+        }
+      >
+
+      Visible to customers
+
+    </label>
+
+
+    <div class="collection-admin-actions">
+
+      <button
+        type="button"
+        class="collection-save-btn"
+        data-id="${collection.id}"
+      >
+        Save
+      </button>
+
+
+      <button
+        type="button"
+        class="collection-delete-btn"
+        data-id="${collection.id}"
+      >
+        Delete
+      </button>
+
+    </div>
+
+  </div>
+
+`;
+
+collectionsList.appendChild(item);
     });
 
   } catch (error) {
@@ -581,6 +684,139 @@ productCollectionSelect.appendChild(option);
       '<p>Could not load collections.</p>';
   }
 }
+
+/* ========================================
+   COLLECTION COVER IMAGE UPLOAD
+======================================== */
+
+document
+  .getElementById('collectionsList')
+  .addEventListener(
+    'change',
+    async function(event) {
+
+      if (
+        !event.target.classList.contains(
+          'collection-image-input'
+        )
+      ) {
+        return;
+      }
+
+
+      const file =
+        event.target.files[0];
+
+      if (!file) {
+        return;
+      }
+
+
+      const collectionItem =
+        event.target.closest(
+          '.collection-item'
+        );
+
+
+      const imageUrlInput =
+        collectionItem.querySelector(
+          '.collection-image-url'
+        );
+
+
+      const imageArea =
+        collectionItem.querySelector(
+          '.collection-admin-image'
+        );
+
+
+      const formData =
+        new FormData();
+
+      formData.append(
+        'image',
+        file
+      );
+
+
+      try {
+
+        event.target.disabled = true;
+
+
+        const response =
+          await fetch(
+            'https://beautyloft-backend.onrender.com/admin/upload-image',
+            {
+              method: 'POST',
+
+              headers: {
+                Authorization:
+                  'Bearer ' + authToken
+              },
+
+              body: formData
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            'Collection image upload failed.'
+          );
+
+        }
+
+
+        if (!data.imageUrl) {
+
+          throw new Error(
+            'No image URL was returned.'
+          );
+
+        }
+
+
+        // Store Cloudinary URL
+        imageUrlInput.value =
+          data.imageUrl;
+
+
+        // Immediately show preview
+        imageArea.innerHTML = `
+          <img
+            src="${data.imageUrl}"
+            alt="Collection cover"
+          >
+        `;
+
+
+      } catch (error) {
+
+        console.error(
+          'COLLECTION IMAGE UPLOAD ERROR:',
+          error
+        );
+
+        alert(error.message);
+
+
+      } finally {
+
+        event.target.disabled = false;
+
+        event.target.value = '';
+
+      }
+
+    }
+  );
 
 document
   .getElementById('addCollectionBtn')
@@ -631,6 +867,179 @@ document
       alert(error.message);
     }
   });
+
+  /* ========================================
+   SAVE COLLECTION
+======================================== */
+
+document
+  .getElementById('collectionsList')
+  .addEventListener(
+    'click',
+    async function(event) {
+
+      if (
+        !event.target.classList.contains(
+          'collection-save-btn'
+        )
+      ) {
+        return;
+      }
+
+
+      const saveButton =
+        event.target;
+
+      const collectionId =
+        saveButton.dataset.id;
+
+
+      const collectionItem =
+        saveButton.closest(
+          '.collection-item'
+        );
+
+
+      const name =
+        collectionItem
+          .querySelector(
+            '.collection-name-input'
+          )
+          .value
+          .trim();
+
+
+      const imageUrl =
+        collectionItem
+          .querySelector(
+            '.collection-image-url'
+          )
+          .value;
+
+
+      const isFeatured =
+        collectionItem
+          .querySelector(
+            '.collection-featured-input'
+          )
+          .checked;
+
+
+      const isActive =
+        collectionItem
+          .querySelector(
+            '.collection-active-input'
+          )
+          .checked;
+
+
+      if (!name) {
+
+        alert(
+          'Collection name is required.'
+        );
+
+        return;
+
+      }
+
+
+      const payload = {
+        name: name,
+        image_url: imageUrl,
+        is_featured: isFeatured,
+        is_active: isActive
+      };
+
+
+      try {
+
+        saveButton.disabled = true;
+
+        saveButton.textContent =
+          'Saving...';
+
+
+        const response =
+          await fetch(
+            'https://beautyloft-backend.onrender.com/admin/collections/' +
+            collectionId,
+            {
+              method: 'PATCH',
+
+              headers: {
+                'Content-Type':
+                  'application/json',
+
+                Authorization:
+                  'Bearer ' +
+                  authToken
+              },
+
+              body:
+                JSON.stringify(
+                  payload
+                )
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            'Could not save collection.'
+          );
+
+        }
+
+
+        saveButton.textContent =
+          'Saved ✓';
+
+
+        setTimeout(
+          function() {
+
+            saveButton.textContent =
+              'Save';
+
+          },
+          1500
+        );
+
+
+        // Refresh products' collection
+        // dropdown with any renamed collection
+        loadCollections();
+
+
+      } catch (error) {
+
+        console.error(
+          'SAVE COLLECTION ERROR:',
+          error
+        );
+
+        alert(error.message);
+
+        saveButton.textContent =
+          'Save';
+
+
+      } finally {
+
+        saveButton.disabled =
+          false;
+
+      }
+
+    }
+  );
 
   document
   .getElementById('collectionsList')
