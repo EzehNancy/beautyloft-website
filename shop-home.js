@@ -414,3 +414,328 @@ document.addEventListener(
 
   }
 );
+
+/* ========================================
+   SHOP HOME — NEW ARRIVALS
+======================================== */
+
+async function loadNewArrivals() {
+  const grid =
+    document.getElementById(
+      'newArrivalsGrid'
+    );
+
+  if (!grid) return;
+
+  try {
+    const response = await fetch(
+      'https://beautyloft-backend.onrender.com/products'
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        'Could not load products.'
+      );
+    }
+
+    const data =
+      await response.json();
+
+    /*
+      Support either:
+      [product, product, ...]
+      
+      OR
+      
+      {
+        products: [...]
+      }
+    */
+
+    const products =
+      Array.isArray(data)
+        ? data
+        : data.products || [];
+
+
+    /*
+      Keep active products only,
+      newest first,
+      maximum 5.
+    */
+
+    const newestProducts =
+      products
+        .filter(product => {
+          return (
+            product.is_active === 1 ||
+            product.is_active === true
+          );
+        })
+        .sort((a, b) => {
+          return (
+            Number(b.id) -
+            Number(a.id)
+          );
+        })
+        .slice(0, 5);
+
+
+    if (!newestProducts.length) {
+      grid.innerHTML = `
+        <p class="home-products-empty">
+          New sets are coming soon ♡
+        </p>
+      `;
+
+      return;
+    }
+
+
+    grid.innerHTML =
+      newestProducts
+        .map(product => {
+
+          const image =
+            product.images &&
+            Array.isArray(product.images) &&
+            product.images.length
+              ? product.images[0]
+              : product.image_url ||
+                'images/product-placeholder.jpg';
+
+
+          const price =
+            Number(product.price || 0) /
+            100;
+
+
+          const collection =
+            product.collection ||
+            'The BeautyLoft';
+
+
+          return `
+            <a
+              href="product.html?id=${product.id}"
+              class="home-product-card"
+            >
+
+              <div class="home-product-image">
+
+                <img
+                  src="${image}"
+                  alt="${product.name}"
+                  loading="lazy"
+                >
+
+                <span class="home-product-badge">
+                  NEW
+                </span>
+
+                <span class="home-product-arrow">
+                  ↗
+                </span>
+
+              </div>
+
+
+              <div class="home-product-info">
+
+                <p class="home-product-collection">
+                  ${collection}
+                </p>
+
+                <h3>
+                  ${product.name}
+                </h3>
+
+                <p class="home-product-price">
+                  ₦${price.toLocaleString()}
+                </p>
+
+              </div>
+
+            </a>
+          `;
+
+        })
+        .join('');
+
+  } catch (error) {
+
+    console.error(
+      'New arrivals error:',
+      error
+    );
+
+    grid.innerHTML = `
+      <p class="home-products-empty">
+        We couldn't load the latest sets
+        right now.
+      </p>
+    `;
+
+  }
+}
+
+
+loadNewArrivals();
+
+/* ========================================
+   SHOP HOME — BEAUTYLOFT FAVOURITES
+======================================== */
+
+async function loadBeautyLoftFavourites() {
+  const grid =
+    document.getElementById(
+      'bestSellersGrid'
+    );
+
+  if (!grid) return;
+
+  try {
+    const response = await fetch(
+      'https://beautyloft-backend.onrender.com/products'
+    );
+
+    if (!response.ok) {
+      throw new Error(
+        'Could not load BeautyLoft favourites.'
+      );
+    }
+
+    const data =
+      await response.json();
+
+    const products =
+      Array.isArray(data)
+        ? data
+        : data.products || [];
+
+    const activeProducts =
+      products.filter(product => {
+        return (
+          product.is_active === 1 ||
+          product.is_active === true ||
+          product.is_active === '1'
+        );
+      });
+
+
+    /*
+      For now, BeautyLoft Favourites
+      are curated from the available
+      live products.
+
+      Later we can replace this with
+      real sales-based ranking.
+    */
+
+    const favourites =
+      activeProducts
+        .slice(0, 5);
+
+
+    if (!favourites.length) {
+      grid.innerHTML = `
+        <p class="home-products-empty">
+          BeautyLoft favourites
+          are coming soon ♡
+        </p>
+      `;
+
+      return;
+    }
+
+
+    grid.innerHTML =
+      favourites
+        .map(product => {
+
+          const image =
+            product.images &&
+            Array.isArray(product.images) &&
+            product.images.length
+              ? product.images[0]
+              : product.image_url ||
+                'images/product-placeholder.jpg';
+
+
+          const price =
+            Number(product.price || 0) /
+            100;
+
+
+          const collection =
+            product.collection ||
+            'The BeautyLoft';
+
+
+          return `
+            <a
+              href="product.html?id=${product.id}"
+              class="home-product-card"
+            >
+
+              <div class="home-product-image">
+
+                <img
+                  src="${image}"
+                  alt="${product.name}"
+                  loading="lazy"
+                >
+
+                <span class="home-product-badge">
+                  ♡ LOVED
+                </span>
+
+                <span class="home-product-arrow">
+                  ↗
+                </span>
+
+              </div>
+
+
+              <div class="home-product-info">
+
+                <p class="home-product-collection">
+                  ${collection}
+                </p>
+
+                <h3>
+                  ${product.name}
+                </h3>
+
+                <p class="home-product-price">
+                  ₦${price.toLocaleString()}
+                </p>
+
+              </div>
+
+            </a>
+          `;
+        })
+        .join('');
+
+
+  } catch (error) {
+
+    console.error(
+      'BeautyLoft favourites error:',
+      error
+    );
+
+
+    grid.innerHTML = `
+      <p class="home-products-empty">
+        We couldn't load our favourites
+        right now.
+      </p>
+    `;
+
+  }
+}
+
+
+loadBeautyLoftFavourites();
