@@ -445,8 +445,8 @@ function renderProduct(p) {
   'id="quantityInput" ' +
   'value="1" ' +
   'min="1" ' +
-  'max="3 ' +
-  'style="max-width:100px;">' +
+ 'max="' + Math.min(3, Number(p.stock_quantity || 0)) + '" ' +
+'style="max-width:100px;">' +
 
 '<p id="quantityMessage" ' +
   'style="display:none; margin-top:8px; font-size:12px; color:#98645c;">' +
@@ -912,16 +912,15 @@ const quantityInput =
 const quantityMessage =
   document.getElementById('quantityMessage');
 
-const MAX_QUANTITY = 3;
+const availableStock =
+  Number(p.stock_quantity || 0);
 
+const MAX_QUANTITY =
+  Math.min(3, availableStock);
 
 quantityInput.addEventListener(
   'input',
   function() {
-
-    let quantity =
-      parseInt(quantityInput.value, 10);
-
 
     // Allow empty field while typing
     if (quantityInput.value === '') {
@@ -931,6 +930,13 @@ quantityInput.addEventListener(
 
       return;
     }
+
+
+    let quantity =
+      parseInt(
+        quantityInput.value,
+        10
+      );
 
 
     // Prevent less than 1
@@ -948,14 +954,29 @@ quantityInput.addEventListener(
     }
 
 
-    // Prevent more than 10
+    // Prevent more than available stock
     if (quantity > MAX_QUANTITY) {
 
       quantityInput.value =
         MAX_QUANTITY;
 
-      quantityMessage.textContent =
-        'Maximum quantity is 3 sets per product. For larger orders, please contact us.';
+
+      if (availableStock < 3) {
+
+        quantityMessage.textContent =
+          'Only ' +
+          availableStock +
+          ' set' +
+          (availableStock === 1 ? '' : 's') +
+          ' currently available.';
+
+      } else {
+
+        quantityMessage.textContent =
+          'Maximum quantity is 3 sets per product. For larger orders, please contact us.';
+
+      }
+
 
       quantityMessage.style.display =
         'block';
@@ -964,7 +985,7 @@ quantityInput.addEventListener(
     }
 
 
-    // Valid quantity
+    // Quantity is valid
     quantityMessage.style.display =
       'none';
 
@@ -1134,13 +1155,45 @@ if (existingItem.nailType) {
     'click',
     function() {
 
-      const quantity =
-        parseInt(
-          document.getElementById(
-            'quantityInput'
-          ).value,
-          10
-        ) || 1;
+          const quantity =
+      parseInt(
+        document.getElementById(
+          'quantityInput'
+        ).value,
+        10
+      ) || 1;
+
+     if (availableStock <= 0) {
+
+  quantityMessage.textContent =
+    'This product is currently out of stock.';
+
+  quantityMessage.style.display =
+    'block';
+
+  return;
+}
+
+
+if (quantity > MAX_QUANTITY) {
+
+  quantityInput.value =
+    MAX_QUANTITY;
+
+  quantityMessage.textContent =
+    availableStock < 3
+      ? 'Only ' +
+        availableStock +
+        ' set' +
+        (availableStock === 1 ? '' : 's') +
+        ' currently available.'
+      : 'Maximum quantity is 3 sets per product.';
+
+  quantityMessage.style.display =
+    'block';
+
+  return;
+}
 
 
       const itemData = {
