@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Shop Orders — Admin — The BeautyLoft
+  </title>
+
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Inter:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+</head>
+
+
+<body>
+
+
+  <div class="admin-layout">
+
+
+    <!-- ==============================
+         SIDEBAR
+    =============================== -->
+
+    <aside class="admin-sidebar">
+
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        The <span>BeautyLoft</span>
+      </a>
+
+
+      <p class="admin-tag">
+        Admin
+      </p>
+
+
+      <nav class="admin-nav">
+
+
+        <a
+          href="admin-dashboard.html"
+          class="admin-nav-link"
+        >
+          Dashboard
+        </a>
+
+
+        <a
+          href="admin-appointments.html"
+          class="admin-nav-link"
+        >
+          Appointments
+        </a>
+
+
+        <a
+          href="admin-orders.html"
+          class="admin-nav-link active"
+        >
+          Shop Orders
+        </a>
+
+
+        <a
+          href="admin-products.html"
+          class="admin-nav-link"
+        >
+          Products
+        </a>
+
+
+        <a
+          href="admin-model-bookings.html"
+          class="admin-nav-link"
+        >
+          Model Bookings
+        </a>
+
+
+        <a
+          href="admin-model-availability.html"
+          class="admin-nav-link"
+        >
+          Model Availability
+        </a>
+
+
+        <a
+          href="admin-models.html"
+          class="admin-nav-link"
+        >
+          Model Applications
+        </a>
+
+
+        <a
+          href="admin-availability.html"
+          class="admin-nav-link"
+        >
+          Availability
+        </a>
+
+
+        <a
+          href="admin-settings.html"
+          class="admin-nav-link"
+        >
+          Settings
+        </a>
+
+
+      </nav>
+
+
+      <button
+        id="adminLogoutBtn"
+        class="admin-logout"
+      >
+        Log out
+      </button>
+
+
+    </aside>
+
+
+
+    <!-- ==============================
+         MOBILE MENU BUTTON
+    =============================== -->
+
+    <button
+      id="mobileSidebarToggle"
+      class="mobile-sidebar-toggle"
+    >
+      ☰ Menu
+    </button>
+
+
+
+    <!-- ==============================
+         MAIN CONTENT
+    =============================== -->
+
+    <main class="admin-main">
+
+
+      <div class="page-header-row">
+
+        <div>
+
+          <h1>
+            Shop Orders
+          </h1>
+
+          <p class="admin-page-description">
+            Manage paid BeautyLoft orders
+            and fulfilment.
+          </p>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- ==============================
+           ORDER SUMMARY
+      =============================== -->
+
+      <section class="orders-summary">
+
+
+        <div class="order-summary-card">
+
+          <span class="order-summary-label">
+            Paid Orders
+          </span>
+
+          <strong id="paidOrdersCount">
+            —
+          </strong>
+
+        </div>
+
+        <div class="order-summary-card">
+  <span>Pending</span>
+  <strong id="pendingOrdersCount">0</strong>
+</div>
+
+
+        <div class="order-summary-card">
+
+          <span class="order-summary-label">
+            Preparing
+          </span>
+
+          <strong id="preparingOrdersCount">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="order-summary-card">
+
+          <span class="order-summary-label">
+            Ready
+          </span>
+
+          <strong id="readyOrdersCount">
+            —
+          </strong>
+
+        </div>
+
+
+        <div class="order-summary-card">
+
+          <span class="order-summary-label">
+            Dispatched
+          </span>
+
+          <strong id="dispatchedOrdersCount">
+            —
+          </strong>
+
+        </div>
+
+
+      </section>
+
+
+
+      <!-- ==============================
+           ORDER FILTERS
+      =============================== -->
+
+      <section class="orders-toolbar">
+
+
+        <input
+          type="search"
+          id="orderSearch"
+          placeholder="Search order, customer or email..."
+        >
+
+
+        <select id="orderStatusFilter">
+
+          <option value="">
+            All statuses
+          </option>
+
+            <option value="pending">
+    Pending
+  </option>
+
+          <option value="confirmed">
+            Confirmed
+          </option>
+
+          <option value="preparing">
+            Preparing
+          </option>
+
+          <option value="ready">
+            Ready
+          </option>
+
+          <option value="dispatched">
+            Dispatched
+          </option>
+
+          <option value="delivered">
+            Delivered
+          </option>
+
+        </select>
+
+
+      </section>
+
+
+
+      <!-- ==============================
+           ORDERS TABLE
+      =============================== -->
+
+      <div class="table-scroll-wrap">
+
+
+        <div
+          id="ordersAdminTable"
+          class="orders-admin-table"
+        >
+          Loading orders...
+        </div>
+
+
+      </div>
+
+
+    </main>
+
+
+  </div>
+
+
+
+  <!-- ==============================
+       ORDER DETAILS MODAL
+  =============================== -->
+
+  <div
+    id="orderModal"
+    class="order-modal"
+    style="display:none;"
+  >
+
+
+    <div class="order-modal-card">
+
+
+      <button
+        type="button"
+        id="closeOrderModal"
+        class="order-modal-close"
+        aria-label="Close order"
+      >
+        &times;
+      </button>
+
+
+
+      <div class="order-modal-heading">
+
+        <p class="order-modal-kicker">
+          ORDER DETAILS
+        </p>
+
+        <h2 id="orderModalReference">
+          Order
+        </h2>
+
+        <p id="orderModalDate">
+        </p>
+
+      </div>
+
+
+
+      <!-- CUSTOMER -->
+
+      <section class="order-detail-section">
+
+        <h3>
+          Customer
+        </h3>
+
+        <div id="orderCustomerDetails">
+        </div>
+
+      </section>
+
+
+
+      <!-- DELIVERY -->
+
+      <section class="order-detail-section">
+
+        <h3>
+          Delivery
+        </h3>
+
+        <div id="orderDeliveryDetails">
+        </div>
+
+      </section>
+
+
+
+      <!-- PRODUCTS -->
+
+      <section class="order-detail-section">
+
+        <h3>
+          Items
+        </h3>
+
+        <div id="orderItems">
+        </div>
+
+      </section>
+
+
+
+      <!-- MEASUREMENTS -->
+
+      <section
+        class="order-detail-section"
+        id="orderMeasurementsSection"
+      >
+
+        <h3>
+          Nail Measurements
+        </h3>
+
+        <div id="orderMeasurements">
+        </div>
+
+      </section>
+
+
+
+      <!-- PAYMENT -->
+
+      <section class="order-detail-section">
+
+        <h3>
+          Payment
+        </h3>
+
+        <div id="orderPaymentDetails">
+        </div>
+
+      </section>
+
+
+
+      <!-- TOTALS -->
+
+      <section class="order-detail-section">
+
+        <h3>
+          Order Total
+        </h3>
+
+        <div id="orderTotals">
+        </div>
+
+      </section>
+
+
+
+      <!-- STATUS -->
+
+      <section class="order-detail-section">
+
+        <h3>
+          Fulfilment Status
+        </h3>
+
+
+        <div class="order-status-controls">
+
+
+          <select id="orderStatusSelect">
+
+            <option value="confirmed">
+              Confirmed
+            </option>
+
+            <option value="preparing">
+              Preparing
+            </option>
+
+            <option value="ready">
+              Ready
+            </option>
+
+            <option value="dispatched">
+              Dispatched
+            </option>
+
+            <option value="delivered">
+              Delivered
+            </option>
+
+          </select>
+
+
+          <button
+            type="button"
+            id="saveOrderStatusBtn"
+            class="admin-action-btn"
+          >
+            Update Status
+          </button>
+
+
+        </div>
+
+
+        <p
+          id="orderStatusMessage"
+          class="order-status-message"
+        ></p>
+
+
+      </section>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <script src="admin-orders.js"></script>
+
+
+</body>
+
+</html>
