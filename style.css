@@ -8858,3 +8858,85 @@ margin-top: 40px
   }
 
 }
+
+/* ========================================
+   MANUAL PAYMENT CONFIRMATION
+======================================== */
+
+.manual-payment-confirmation {
+  margin-top: 20px;
+  padding: 18px;
+
+  background: #faf6f3;
+
+  border: 1px solid #eadbd5;
+  border-radius: 14px;
+}
+
+
+.manual-payment-confirmation p:first-child {
+  margin: 0 0 14px;
+
+  color: #765b55;
+
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+
+.confirm-payment-button {
+  width: 100%;
+
+  padding: 12px 18px;
+
+  background: #68443d;
+  color: #ffffff;
+
+  border: 1px solid #68443d;
+  border-radius: 10px;
+
+  font-family: inherit;
+
+  font-size: 12px;
+  font-weight: 600;
+
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+
+
+.confirm-payment-button:hover:not(:disabled) {
+  background: transparent;
+  color: #68443d;
+}
+
+
+.confirm-payment-button:active:not(:disabled) {
+  transform: scale(0.98);
+}
+
+
+.confirm-payment-button:disabled {
+  cursor: default;
+  opacity: 0.65;
+}
+
+
+.payment-confirm-message {
+  margin: 12px 0 0 !important;
+
+  font-size: 12px !important;
+  font-weight: 600;
+
+  text-align: center;
+
+  color: #55705a !important;
+}

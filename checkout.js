@@ -754,7 +754,7 @@ document.getElementById(
         document.getElementById(
   'paymentOrderReference'
 ).textContent =
-  currentPendingOrder.order_ref;
+  currentPendingOrder.reference;
       }
 
 
@@ -1009,6 +1009,10 @@ const bankTransferMethod =
   );
 
 
+/* ========================================
+   PAYSTACK METHOD
+======================================== */
+
 paystackMethod.addEventListener(
   'click',
   function() {
@@ -1024,30 +1028,20 @@ paystackMethod.addEventListener(
       'active'
     );
 
-    document.getElementById(
-  'bankTransferPanel'
-).classList.add(
-  'show'
-);
 
-document.getElementById(
-  'bankTransferAmount'
-).textContent =
-  formatNaira(
-    getSubtotal() +
-    selectedDeliveryFee
-  );
+    const bankTransferPanel =
+      document.getElementById(
+        'bankTransferPanel'
+      );
 
-document.getElementById(
-  'bankTransferReference'
-).textContent =
-  currentPendingOrder.order_ref;
+    if (bankTransferPanel) {
 
-    document.getElementById(
-  'bankTransferPanel'
-).classList.remove(
-  'show'
-);
+      bankTransferPanel.classList.remove(
+        'show'
+      );
+
+    }
+
 
     document.getElementById(
       'payButton'
@@ -1065,6 +1059,10 @@ document.getElementById(
 );
 
 
+/* ========================================
+   BANK TRANSFER METHOD
+======================================== */
+
 bankTransferMethod.addEventListener(
   'click',
   function() {
@@ -1079,6 +1077,56 @@ bankTransferMethod.addEventListener(
     paystackMethod.classList.remove(
       'active'
     );
+
+
+    const bankTransferPanel =
+      document.getElementById(
+        'bankTransferPanel'
+      );
+
+
+    if (bankTransferPanel) {
+
+      bankTransferPanel.classList.add(
+        'show'
+      );
+
+    }
+
+
+    const bankTransferAmount =
+      document.getElementById(
+        'bankTransferAmount'
+      );
+
+
+    if (bankTransferAmount) {
+
+      bankTransferAmount.textContent =
+        formatNaira(
+          getSubtotal() +
+          selectedDeliveryFee
+        );
+
+    }
+
+
+    const bankTransferReference =
+      document.getElementById(
+        'bankTransferReference'
+      );
+
+
+    if (
+      bankTransferReference &&
+      currentPendingOrder
+    ) {
+
+      bankTransferReference.textContent =
+  currentPendingOrder.reference;
+
+    }
+
 
     document.getElementById(
       'payButton'
@@ -1172,15 +1220,66 @@ if (
   'bank-transfer'
 ) {
 
-  console.log(
-    'BANK TRANSFER SELECTED:',
-    currentPendingOrder
+  button.textContent =
+    'Submitting Transfer...';
+
+ const response = await fetch(
+  API_URL + '/payment/bank-transfer',
+      {
+        method: 'PATCH',
+
+        headers: {
+          'Content-Type':
+            'application/json',
+
+          'Authorization':
+            `Bearer ${localStorage.getItem(
+              'authToken'
+            )}`
+        },
+
+        body: JSON.stringify({
+          orderId:
+            currentPendingOrder.id
+        })
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      data.error ||
+      'Unable to submit your transfer.'
+    );
+
+  }
+
+
+  localStorage.setItem(
+    'pendingBeautyLoftOrder',
+    JSON.stringify({
+      order: data.order
+    })
   );
+
+
+  console.log(
+    'BANK TRANSFER SUBMITTED:',
+    data.order
+  );
+
+
+  window.location.href =
+    'payment-pending.html';
 
   return;
 
 }
-
 
     } catch (error) {
 
@@ -1215,7 +1314,7 @@ document.getElementById(
 
     if (
       !currentPendingOrder ||
-      !currentPendingOrder.order_ref
+      !currentPendingOrder.reference
     ) {
       return;
     }
@@ -1223,7 +1322,7 @@ document.getElementById(
     try {
 
       await navigator.clipboard.writeText(
-        currentPendingOrder.order_ref
+        currentPendingOrder.reference
       );
 
       const button = this;

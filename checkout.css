@@ -1402,3 +1402,104 @@ body {
 
   color: #7d6962;
 }
+
+/* ========================================
+   ORDER REFERENCE
+======================================== */
+
+.payment-reference-card {
+  margin: 24px 0;
+  padding: 20px;
+  background: #faf6f3;
+  border: 1px solid #eadbd5;
+  border-radius: 14px;
+}
+
+.payment-reference-label {
+  margin: 0 0 10px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.payment-reference-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+#paymentOrderReference {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  word-break: break-word;
+}
+
+.copy-reference-button {
+  flex-shrink: 0;
+
+  padding: 9px 16px;
+
+  background: transparent;
+  color: #68443d;
+
+  border: 1px solid #68443d;
+  border-radius: 999px;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.copy-reference-button:hover {
+  background: #68443d;
+  color: #ffffff;
+}
+
+.copy-reference-button:active {
+  transform: scale(0.96);
+}
+
+.payment-reference-note {
+  margin: 14px 0 0;
+
+  font-size: 12px;
+  line-height: 1.6;
+
+  color: #8b6861;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 650px) {
+
+  .payment-reference-card {
+    padding: 16px;
+  }
+
+  .payment-reference-row {
+    gap: 10px;
+  }
+
+  #paymentOrderReference {
+    font-size: 14px;
+  }
+
+  .copy-reference-button {
+    padding: 8px 12px;
+    font-size: 9px;
+  }
+
+}

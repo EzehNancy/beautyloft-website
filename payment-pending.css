@@ -1,0 +1,257 @@
+* {
+  box-sizing: border-box;
+}
+
+
+body {
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  background: #f8f4f2;
+  color: #44332e;
+}
+
+
+.pending-page {
+  min-height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 40px 20px;
+}
+
+
+.pending-card {
+  width: 100%;
+  max-width: 560px;
+
+  padding: 48px 40px;
+
+  text-align: center;
+
+  background: #ffffff;
+
+  border: 1px solid #eadfd9;
+  border-radius: 22px;
+
+  box-shadow:
+    0 20px 60px rgba(68, 51, 46, 0.08);
+}
+
+
+.pending-icon {
+  width: 58px;
+  height: 58px;
+
+  margin: 0 auto 22px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #f1e6e1;
+
+  font-size: 1.4rem;
+}
+
+
+.pending-eyebrow {
+  margin: 0 0 8px;
+
+  font-size: 0.7rem;
+  font-weight: 600;
+
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+
+  color: #a18074;
+}
+
+
+.pending-card h1 {
+  margin: 0 0 16px;
+
+  font-family: "Fraunces", serif;
+
+  font-size: clamp(
+    2rem,
+    5vw,
+    2.8rem
+  );
+
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+
+.pending-message {
+  max-width: 440px;
+
+  margin: 0 auto 30px;
+
+  font-size: 0.86rem;
+  line-height: 1.8;
+
+  color: #786760;
+}
+
+
+.pending-reference {
+  margin-bottom: 18px;
+  padding: 18px;
+
+  background: #faf7f5;
+
+  border-radius: 14px;
+}
+
+
+.pending-reference span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  font-size: 0.7rem;
+
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+
+  color: #947d74;
+}
+
+
+.pending-reference strong {
+  font-family: "Fraunces", serif;
+
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+
+.pending-status {
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+
+  margin-bottom: 18px;
+  padding: 18px;
+
+  text-align: left;
+
+  border: 1px solid #eadfd9;
+  border-radius: 14px;
+}
+
+
+.status-dot {
+  flex-shrink: 0;
+
+  width: 9px;
+  height: 9px;
+
+  margin-top: 5px;
+
+  border-radius: 50%;
+
+  background: #c59a69;
+}
+
+
+.pending-status strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 0.82rem;
+}
+
+
+.pending-status p {
+  margin: 0;
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+
+  color: #806e67;
+}
+
+
+.pending-note {
+  margin-bottom: 28px;
+  padding: 17px;
+
+  text-align: left;
+
+  background: #f5ece8;
+
+  border-radius: 14px;
+}
+
+
+.pending-note strong {
+  display: block;
+
+  margin-bottom: 5px;
+
+  font-size: 0.78rem;
+}
+
+
+.pending-note p {
+  margin: 0;
+
+  font-size: 0.73rem;
+  line-height: 1.6;
+
+  color: #786760;
+}
+
+
+.continue-shopping {
+  display: block;
+
+  width: 100%;
+
+  padding: 15px 20px;
+
+  text-decoration: none;
+
+  background: #44332e;
+  color: #ffffff;
+
+  border-radius: 50px;
+
+  font-size: 0.8rem;
+  font-weight: 600;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+
+.continue-shopping:hover {
+  opacity: 0.9;
+
+  transform: translateY(-1px);
+}
+
+
+@media (max-width: 600px) {
+
+  .pending-page {
+    padding: 24px 15px;
+  }
+
+
+  .pending-card {
+    padding: 38px 22px;
+  }
+
+}

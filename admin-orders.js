@@ -800,35 +800,238 @@ if (measurements) {
 }
 
 
-  /* ----------------------------------------
-     PAYMENT
-  ---------------------------------------- */
+/* ----------------------------------------
+   PAYMENT
+---------------------------------------- */
 
+const isPendingBankTransfer =
+  order.payment_method ===
+    'bank_transfer' &&
+  order.payment_status ===
+    'pending';
+
+
+document.getElementById(
+  'orderPaymentDetails'
+).innerHTML = `
+
+  <p>
+    <strong>Payment Method:</strong>
+
+    ${
+      order.payment_method ===
+      'bank_transfer'
+        ? 'Direct Bank Transfer'
+        : 'Paystack'
+    }
+  </p>
+
+
+  <p>
+    <strong>Payment Status:</strong>
+
+    ${escapeHtml(
+      formatStatus(
+        order.payment_status
+      )
+    )}
+  </p>
+
+
+  <p>
+    <strong>Order Reference:</strong>
+
+    ${escapeHtml(
+      order.order_ref ||
+      '—'
+    )}
+  </p>
+
+
+  ${
+    isPendingBankTransfer
+      ? `
+
+        <div class="manual-payment-confirmation">
+
+          <p>
+            Verify that this transfer has
+            arrived in the BeautyLoft bank
+            account before confirming it.
+          </p>
+
+          <button
+            type="button"
+            class="confirm-payment-button"
+            id="confirmBankTransferButton"
+          >
+            Confirm Payment
+          </button>
+
+          <p
+            class="payment-confirm-message"
+            id="confirmBankTransferMessage"
+          ></p>
+
+        </div>
+
+      `
+      : ''
+  }
+
+`;
+
+
+/* ----------------------------------------
+   CONFIRM MANUAL BANK TRANSFER
+---------------------------------------- */
+
+const confirmBankTransferButton =
   document.getElementById(
-    'orderPaymentDetails'
-  ).innerHTML = `
-
-    <p>
-      <strong>Payment:</strong>
-      ${escapeHtml(
-        formatStatus(
-          order.payment_status
-        )
-      )}
-    </p>
-
-    <p>
-      <strong>Reference:</strong>
-      ${escapeHtml(
-        order.payment_reference ||
-        '—'
-      )}
-    </p>
-
-  `;
+    'confirmBankTransferButton'
+  );
 
 
+if (confirmBankTransferButton) {
 
+  confirmBankTransferButton.addEventListener(
+    'click',
+    async function() {
+
+      const confirmed =
+        window.confirm(
+          'Have you verified that this payment has arrived in the BeautyLoft bank account?'
+        );
+
+
+      if (!confirmed) {
+        return;
+      }
+
+
+      const button = this;
+
+      const message =
+        document.getElementById(
+          'confirmBankTransferMessage'
+        );
+
+
+      try {
+
+        button.disabled = true;
+
+        button.textContent =
+          'Confirming Payment...';
+
+
+        if (message) {
+          message.textContent = '';
+        }
+
+
+        const response =
+          await fetch(
+            API_BASE +
+            '/admin/orders/' +
+            order.id +
+            '/confirm-bank-transfer',
+            {
+              method: 'PATCH',
+
+              headers: {
+                Authorization:
+                  'Bearer ' +
+                  localStorage.getItem(
+                    'authToken'
+                  )
+              }
+            }
+          );
+
+
+        const data =
+          await response.json();
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            data.error ||
+            'Unable to confirm payment.'
+          );
+
+        }
+
+
+        /*
+         * Update the order locally.
+         */
+
+        order.payment_status =
+          'paid';
+
+        order.order_status =
+          'confirmed';
+
+
+        if (message) {
+
+          message.textContent =
+            'Payment confirmed successfully.';
+
+        }
+
+
+        button.textContent =
+          'Payment Confirmed';
+
+        button.disabled = true;
+
+
+        /*
+         * Update status dropdown.
+         */
+
+        document.getElementById(
+          'orderStatusSelect'
+        ).value =
+          'confirmed';
+
+
+        console.log(
+          'BANK TRANSFER CONFIRMED:',
+          data
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          'CONFIRM BANK TRANSFER ERROR:',
+          error
+        );
+
+
+        if (message) {
+
+          message.textContent =
+            error.message;
+
+        }
+
+
+        button.disabled = false;
+
+        button.textContent =
+          'Confirm Payment';
+
+      }
+
+    }
+  );
+
+}
   /* ----------------------------------------
      TOTALS
   ---------------------------------------- */
