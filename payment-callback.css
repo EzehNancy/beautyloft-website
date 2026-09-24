@@ -4,139 +4,490 @@
   box-sizing: border-box;
 }
 
+
+html,
 body {
-  min-height: 100vh;
-  font-family: Arial, sans-serif;
-  background: #f8f5f2;
-  color: #222;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
+body {
+  background: #fbf6f3;
+  color: #704a43;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+/* =========================
+   PAGE
+========================= */
+
 .payment-page {
-  min-height: 100vh;
+  position: relative;
+
+  width: 100%;
+  height: 100vh;
+  height: 100svh;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 30px 20px;
+
+  overflow: hidden;
+
+  padding: 30px;
 }
 
-.payment-card {
+
+/* =========================
+   MAIN CONTENT
+========================= */
+
+.payment-content {
+  position: relative;
+  z-index: 2;
+
   width: 100%;
-  max-width: 520px;
-  background: #ffffff;
-  border-radius: 24px;
-  padding: 55px 40px;
+  max-width: 760px;
+
   text-align: center;
-  box-shadow:
-    0 15px 45px rgba(0, 0, 0, 0.08);
 }
+
+
+/* =========================
+   BRAND
+========================= */
 
 .payment-logo {
   display: inline-block;
-  margin-bottom: 35px;
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: 2px;
-  color: #111;
+
+  margin-bottom: 30px;
+
+  color: #a8665b;
+
   text-decoration: none;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
 }
 
+
+/* =========================
+   SUCCESS ICON
+========================= */
+
 .payment-icon {
-  width: 74px;
-  height: 74px;
-  margin: 0 auto 25px;
-  border-radius: 50%;
-  background: #f1ebe6;
+  width: 68px;
+  height: 68px;
+
+  margin: 0 auto 22px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  font-size: 34px;
+  border: 1px solid #c98f84;
+  border-radius: 50%;
+
+  background: #f5dfd8;
+
+  color: #a45f55;
+
+  font-family:
+    Georgia,
+    serif;
+
+  font-size: 25px;
+
+  box-shadow:
+    0 10px 35px
+    rgba(168, 102, 91, 0.08);
 }
 
-.payment-card h1 {
-  margin-bottom: 15px;
-  font-size: 30px;
-  line-height: 1.2;
+
+/* =========================
+   SMALL LABEL
+========================= */
+
+.payment-eyebrow {
+  margin-bottom: 18px;
+
+  color: #b7796e;
+
+  font-size: 10px;
   font-weight: 600;
+
+  letter-spacing: 4px;
 }
 
-.payment-card p {
-  max-width: 400px;
-  margin: 0 auto;
-  font-size: 15px;
-  line-height: 1.8;
-  color: #666;
+
+/* =========================
+   MAIN TITLE
+========================= */
+
+.payment-content h1 {
+  max-width: 750px;
+
+  margin:
+    0 auto
+    22px;
+
+  color: #9e6258;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 3rem;
+
+  font-weight: 400;
+
+  line-height: 0.98;
+
+  letter-spacing: -2px;
 }
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.payment-message {
+  max-width: 500px;
+
+  margin: 0 auto;
+
+  color: #76564f;
+
+  font-size: 14px;
+
+  line-height: 1.8;
+}
+
+
+/* =========================
+   DIVIDER
+========================= */
+
+.payment-divider {
+  width: 250px;
+
+  margin:
+    28px auto
+    18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+}
+
+
+.payment-divider > span:not(
+  .divider-heart
+) {
+  width: 80px;
+  height: 1px;
+
+  background: #dfbbb3;
+}
+
+
+.divider-heart {
+  color: #b87368;
+
+  font-size: 18px;
+}
+
+
+/* =========================
+   THANK YOU
+========================= */
+
+.thank-you-note {
+  color: #a86a5f;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 16px;
+
+  font-style: italic;
+}
+
+
+/* =========================
+   BUTTONS
+========================= */
 
 .payment-actions {
-  margin-top: 35px;
+  margin-top: 28px;
+
   display: flex;
+  align-items: center;
   justify-content: center;
+
   gap: 12px;
-  flex-wrap: wrap;
 }
 
+
 .payment-button {
-  min-width: 150px;
-  padding: 14px 22px;
-  border: 1px solid #111;
+  min-width: 190px;
+
+  padding: 15px 25px;
+
+  border:
+    1px solid
+    #a8665b;
+
   border-radius: 30px;
 
-  background: #111;
+  background: #a8665b;
+
   color: #fff;
 
   text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
 
   transition:
-    transform 0.2s ease,
-    background 0.2s ease;
+    transform 0.25s ease,
+    background 0.25s ease,
+    color 0.25s ease;
 }
 
+
 .payment-button:hover {
-  transform: translateY(-2px);
-  background: #333;
+  background: #92584f;
+
+  transform:
+    translateY(-2px);
 }
+
 
 .payment-button.secondary {
   background: transparent;
-  color: #111;
+
+  color: #a8665b;
+
+  border-color: #c99187;
 }
+
 
 .payment-button.secondary:hover {
-  background: #f4f4f4;
+  background: #f4dfd9;
+
+  color: #92584f;
 }
 
 
-/* MOBILE */
+/* =========================
+   SIDE BRAND
+========================= */
+
+.side-brand {
+  position: absolute;
+
+  left: 13px;
+  top: 50%;
+
+  transform:
+    translateY(-50%)
+    rotate(-90deg);
+
+  transform-origin: center;
+
+  color: #c18479;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+}
+
+
+/* =========================
+   SPARKLES
+========================= */
+
+.sparkle {
+  position: absolute;
+
+  color: #c88d82;
+
+  font-family:
+    Georgia,
+    serif;
+}
+
+
+.sparkle-one {
+  top: 12%;
+  left: 12%;
+
+  font-size: 18px;
+}
+
+
+.sparkle-two {
+  right: 13%;
+  bottom: 18%;
+
+  font-size: 28px;
+
+  opacity: 0.55;
+}
+
+
+/* =========================
+   BOTTOM NOTE
+========================= */
+
+.bottom-note {
+  position: absolute;
+
+  bottom: 28px;
+
+  color: #bf8277;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 10px;
+  font-style: italic;
+
+  letter-spacing: 2px;
+}
+
+
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 600px) {
 
   .payment-page {
-    padding: 20px 15px;
+  width: 100%;
+  height: 100svh;
+  min-height: 0;
+
+  padding:
+    25px 20px
+    45px;
+}
+
+  .payment-logo {
+    margin-bottom: 40px;
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
   }
 
-  .payment-card {
-    padding: 45px 22px;
-    border-radius: 20px;
+
+  .payment-icon {
+    width: 58px;
+    height: 58px;
+
+    margin-bottom: 26px;
+
+    font-size: 22px;
   }
 
-  .payment-card h1 {
-    font-size: 25px;
+
+  .payment-eyebrow {
+    font-size: 9px;
+
+    letter-spacing: 3px;
   }
 
-  .payment-card p {
-    font-size: 14px;
+
+  .payment-content h1 {
+    max-width: 350px;
+
+    font-size: 45px;
+
+    letter-spacing: -1.5px;
+
+    line-height: 1;
   }
+
+
+  .payment-message {
+    max-width: 320px;
+
+    font-size: 13px;
+  }
+
+
+  .payment-divider {
+    width: 200px;
+
+    margin-top: 32px;
+  }
+
+
+  .payment-divider > span:not(
+    .divider-heart
+  ) {
+    width: 60px;
+  }
+
 
   .payment-actions {
+    margin-top: 35px;
+
     flex-direction: column;
   }
 
+
   .payment-button {
     width: 100%;
+    max-width: 310px;
+  }
+
+
+  .side-brand {
+    display: none;
+  }
+
+
+  .sparkle-one {
+    top: 7%;
+    left: 8%;
+  }
+
+
+  .sparkle-two {
+    right: 8%;
+    bottom: 10%;
+  }
+
+
+  .bottom-note {
+    bottom: 22px;
+
+    font-size: 8px;
+
+    letter-spacing: 1.5px;
   }
 
 }
