@@ -632,9 +632,22 @@ async function loadBeautyLoftFavourites() {
       real sales-based ranking.
     */
 
-    const favourites =
-      activeProducts
-        .slice(0, 5);
+const favouritesResponse =
+  await fetch(
+    'https://beautyloft-backend.onrender.com/products/favourites'
+  );
+
+if (!favouritesResponse.ok) {
+  throw new Error(
+    'Failed to load favourites.'
+  );
+}
+
+const favouritesData =
+  await favouritesResponse.json();
+
+const favourites =
+  favouritesData.products || [];
 
 
     if (!favourites.length) {

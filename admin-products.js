@@ -64,7 +64,11 @@ function loadProducts() {
             '<td>' + (p.image_url ? '<img src="' + p.image_url + '" style="width:44px; height:44px; object-fit:cover; border-radius:8px;">' : '—') + '</td>' +
             '<td>' + p.name + '</td>' +
             '<td>' + (p.collection || '—') + '</td>' +
-            '<td>' + p.category + '</td>' +
+            '<td>' + (
+  Array.isArray(p.categories) && p.categories.length
+    ? p.categories.join(', ')
+    : '—'
+) + '</td>' +
             '<td>₦' + nairaPrice + '</td>' +
             '<td>' + p.stock_quantity + '</td>' +
             '<td><span class="status-badge status-' + (p.is_active ? 'confirmed' : 'cancelled') + '">' + (p.is_active ? 'Active' : 'Hidden') + '</span></td>' +
