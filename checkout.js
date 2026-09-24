@@ -860,6 +860,65 @@ async function createPendingOrder() {
 
 }
 
+async function initializePaystackPayment(
+  orderId
+) {
+
+  const token =
+    localStorage.getItem(
+      'authToken'
+    );
+
+
+  if (!token) {
+
+    throw new Error(
+      'Please log in before making payment.'
+    );
+
+  }
+
+
+  const response =
+    await fetch(
+      API_URL + '/payment/initialize',
+      {
+        method: 'POST',
+
+        headers: {
+          'Content-Type':
+            'application/json',
+
+          Authorization:
+            'Bearer ' + token
+        },
+
+        body:
+          JSON.stringify({
+            orderId: orderId
+          })
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      data.error ||
+      'Unable to initialize payment.'
+    );
+
+  }
+
+
+  return data;
+
+}
+
 
 /* ========================================
    PAYMENT
@@ -912,17 +971,10 @@ document.getElementById(
         await createPendingOrder();
 
 
-      /*
-       * Payment provider will be
-       * initialized here.
-       *
-       * IMPORTANT:
-       * Do not mark an order as paid
-       * from frontend JavaScript.
-       *
-       * Backend verification must confirm
-       * the payment first.
-       */
+      const payment =
+        await initializePaystackPayment(
+          order.order.id
+        );
 
 
       localStorage.setItem(
@@ -931,16 +983,8 @@ document.getElementById(
       );
 
 
-      console.log(
-        'Pending order created:',
-        order
-      );
-
-
-      showError(
-        'paymentError',
-        'Order created successfully. Payment provider connection is the next step.'
-      );
+      window.location.href =
+        payment.authorizationUrl;
 
 
     } catch (error) {
@@ -963,8 +1007,6 @@ document.getElementById(
 
   }
 );
-
-
 /* ========================================
    INITIALIZE
 ======================================== */
