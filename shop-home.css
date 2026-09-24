@@ -5962,3 +5962,52 @@ p:not(.section-kicker) {
   }
 
 }
+
+.home-product-arrow {
+  position: absolute;
+  right: 14px;
+  bottom: 14px;
+
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 50%;
+
+  z-index: 3;
+}
+
+
+/* TOP + RIGHT PART OF ARROW */
+
+.home-product-arrow::before {
+  content: '';
+
+  width: 9px;
+  height: 9px;
+
+  border-top: 1.5px solid #6b4640;
+  border-right: 1.5px solid #6b4640;
+
+  transform: translate(2px, -2px);
+}
+
+
+/* DIAGONAL STEM */
+
+.home-product-arrow::after {
+  content: '';
+
+  position: absolute;
+
+  width: 13px;
+  height: 1.5px;
+
+  background: #6b4640;
+
+  transform: rotate(-45deg);
+}

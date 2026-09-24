@@ -534,7 +534,7 @@ async function loadNewArrivals() {
                 </span>
 
                 <span class="home-product-arrow">
-                  ↗
+                
                 </span>
 
               </div>
@@ -704,7 +704,7 @@ const favourites =
                 </span>
 
                 <span class="home-product-arrow">
-                  ↗
+                
                 </span>
 
               </div>
