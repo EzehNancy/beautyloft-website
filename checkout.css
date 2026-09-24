@@ -1155,3 +1155,250 @@ body {
   }
 
 }
+
+/* ========================================
+   PAYMENT METHODS
+======================================== */
+
+.payment-method-section {
+  margin-bottom: 24px;
+}
+
+.payment-method-label {
+  margin: 0 0 12px;
+
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: #6f5a53;
+}
+
+.payment-method-options {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.payment-method-card {
+  position: relative;
+
+  width: 100%;
+  min-height: 140px;
+
+  padding: 20px;
+
+  text-align: left;
+
+  background: #fff;
+  border: 1px solid #e5d9d4;
+  border-radius: 16px;
+
+  color: inherit;
+  font: inherit;
+
+  cursor: pointer;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+.payment-method-card:hover {
+  border-color: #b99a90;
+}
+
+.payment-method-card.active {
+  background: #faf5f2;
+  border-color: #8b6258;
+}
+
+.payment-method-card h3 {
+  margin: 0 0 7px;
+
+  font-family: "Fraunces", serif;
+  font-size: 1rem;
+  font-weight: 500;
+
+  color: #44332e;
+}
+
+.payment-method-card p {
+  margin: 0;
+
+  font-size: 0.78rem;
+  line-height: 1.6;
+
+  color: #786760;
+}
+
+.payment-method-check {
+  display: block;
+
+  width: 16px;
+  height: 16px;
+
+  margin-bottom: 14px;
+
+  border: 1px solid #bca8a0;
+  border-radius: 50%;
+}
+
+.payment-method-card.active
+.payment-method-check {
+  border: 5px solid #6b4640;
+}
+
+
+@media (max-width: 600px) {
+
+  .payment-method-options {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-method-card {
+    min-height: auto;
+  }
+
+}
+
+.bank-transfer-panel {
+  display: none;
+
+  margin: 0 0 24px;
+  padding: 22px;
+
+  background: #faf7f5;
+  border: 1px solid #e7d9d3;
+  border-radius: 16px;
+}
+
+.bank-transfer-panel.show {
+  display: block;
+}
+
+.bank-transfer-heading {
+  margin-bottom: 20px;
+}
+
+.bank-transfer-heading h3 {
+  margin: 4px 0 7px;
+
+  font-family: "Fraunces", serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+
+  color: #44332e;
+}
+
+.bank-transfer-heading > p:last-child {
+  margin: 0;
+
+  font-size: 0.8rem;
+  line-height: 1.6;
+
+  color: #786760;
+}
+
+.bank-transfer-amount {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 18px;
+  padding: 16px;
+
+  background: #fff;
+  border-radius: 12px;
+}
+
+.bank-transfer-amount span {
+  font-size: 0.78rem;
+  color: #786760;
+}
+
+.bank-transfer-amount strong {
+  font-family: "Fraunces", serif;
+  font-size: 1.25rem;
+  font-weight: 500;
+
+  color: #44332e;
+}
+
+.bank-details {
+  display: grid;
+  gap: 1px;
+
+  overflow: hidden;
+
+  margin-bottom: 18px;
+
+  border: 1px solid #eadfd9;
+  border-radius: 12px;
+}
+
+.bank-details > div {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding: 14px 16px;
+
+  background: #fff;
+}
+
+.bank-details span {
+  font-size: 0.75rem;
+  color: #8a746c;
+}
+
+.bank-details strong {
+  font-size: 0.82rem;
+  font-weight: 600;
+
+  text-align: right;
+
+  color: #44332e;
+}
+
+.transfer-reference-warning {
+  margin-bottom: 16px;
+  padding: 16px;
+
+  background: #f5ece8;
+  border-radius: 12px;
+}
+
+.transfer-reference-warning > strong {
+  display: block;
+
+  margin-bottom: 7px;
+
+  font-size: 0.8rem;
+
+  color: #563d36;
+}
+
+.transfer-reference-warning p {
+  margin: 0;
+
+  font-size: 0.78rem;
+  line-height: 1.6;
+
+  color: #6e5750;
+}
+
+.transfer-reference-warning span {
+  font-weight: 700;
+  color: #44332e;
+}
+
+.bank-transfer-help {
+  margin: 0;
+
+  font-size: 0.75rem;
+  line-height: 1.6;
+
+  color: #7d6962;
+}

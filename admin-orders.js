@@ -378,7 +378,7 @@ document
    OPEN ORDER MODAL
 ======================================== */
 
-function openOrderModal(orderId) {
+async function openOrderModal(orderId) {
 
   const order =
     orders.find(
@@ -922,13 +922,77 @@ if (measurements) {
      SHOW MODAL
   ---------------------------------------- */
 
-  document.getElementById(
-    'orderModal'
-  ).style.display =
-    'flex';
+document.getElementById(
+  'orderModal'
+).style.display =
+  'flex';
+
+
+/* ----------------------------------------
+   MARK ORDER AS ATTENDED
+---------------------------------------- */
+
+try {
+
+  const response =
+    await fetch(
+      API_BASE +
+      '/admin/orders/' +
+      orderId +
+      '/seen',
+      {
+        method: 'PATCH',
+
+        headers: {
+          Authorization:
+            'Bearer ' +
+            localStorage.getItem(
+              'authToken'
+            )
+        }
+      }
+    );
+
+
+  const data =
+    await response.json();
+
+
+  if (!response.ok) {
+
+    throw new Error(
+      data.error ||
+      'Failed to mark order as attended.'
+    );
+
+  }
+
+
+  /* Update local order */
+
+  order.admin_seen = 1;
+
+
+  console.log(
+    'ORDER MARKED AS ATTENDED:',
+    data.order
+  );
+
+
+} catch (error) {
+
+  console.error(
+    'MARK ORDER SEEN ERROR:',
+    error
+  );
 
 }
 
+}
+
+/* ----------------------------------------
+   MARK ORDER AS ATTENDED
+---------------------------------------- */
 
 
 /* ========================================

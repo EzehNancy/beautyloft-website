@@ -729,27 +729,178 @@
               </p>
             </div>
 
+                    </div>
+
+
+          <!-- ORDER REFERENCE -->
+
+          <div class="payment-reference-card">
+
+            <p class="payment-reference-label">
+              Your Order Reference
+            </p>
+
+            <div class="payment-reference-row">
+
+              <strong id="paymentOrderReference">
+                Generating...
+              </strong>
+
+              <button
+                type="button"
+                id="copyOrderReference"
+                class="copy-reference-button"
+              >
+                Copy
+              </button>
+
+            </div>
+
+            <p class="payment-reference-note">
+              Keep this reference safe. If you choose
+              Direct Bank Transfer, you must include this
+              reference in your transfer narration so we
+              can match your payment to your order.
+            </p>
+
           </div>
 
 
-          <div class="payment-card">
+          <!-- PAYMENT METHOD -->
 
-            <div class="payment-lock">
-              ♡
-            </div>
+          <div class="payment-method-section">
 
-            <div>
-              <h3>Secure Payment</h3>
+      <div>
 
-              <p>
-                Your order will only be confirmed
-                after successful payment verification.
-              </p>
-            </div>
+        <h3>
+          Pay Online
+        </h3>
 
-          </div>
+        <p>
+          Pay securely with Paystack using
+          card, bank transfer, USSD or other
+          available payment options.
+        </p>
+
+      </div>
+
+    </button>
 
 
+
+    <!-- DIRECT TRANSFER -->
+
+    <button
+      type="button"
+      class="payment-method-card"
+      id="bankTransferMethod"
+      data-payment-method="bank-transfer"
+    >
+
+      <span class="payment-method-check"></span>
+
+      <div>
+
+        <h3>
+          Direct Bank Transfer
+        </h3>
+
+        <p>
+          Transfer directly to BeautyLoft
+          and submit your payment for
+          verification.
+        </p>
+
+      </div>
+
+    </button>
+
+
+  </div>
+
+</div>
+
+<!-- DIRECT BANK TRANSFER DETAILS -->
+
+<div
+  class="bank-transfer-panel"
+  id="bankTransferPanel"
+>
+
+  <div class="bank-transfer-heading">
+
+    <p class="step-eyebrow">
+      Direct Transfer
+    </p>
+
+    <h3>Make Your Bank Transfer</h3>
+
+    <p>
+      Transfer the exact amount below to
+      The BeautyLoft account.
+    </p>
+
+  </div>
+
+
+  <div class="bank-transfer-amount">
+
+    <span>Amount to Transfer</span>
+
+    <strong id="bankTransferAmount">
+      ₦0
+    </strong>
+
+  </div>
+
+
+  <div class="bank-details">
+
+    <div>
+      <span>Bank</span>
+      <strong>YOUR BANK NAME</strong>
+    </div>
+
+    <div>
+      <span>Account Number</span>
+      <strong>YOUR ACCOUNT NUMBER</strong>
+    </div>
+
+    <div>
+      <span>Account Name</span>
+      <strong>The BeautyLoft</strong>
+    </div>
+
+  </div>
+
+
+  <div class="transfer-reference-warning">
+
+    <strong>
+      Important — Use your order reference
+    </strong>
+
+    <p>
+      You must include
+      <span id="bankTransferReference">
+        BL-...
+      </span>
+      in your transfer narration/reference.
+      This allows us to match your payment
+      to your order.
+    </p>
+
+  </div>
+
+
+  <p class="bank-transfer-help">
+    After completing the transfer, continue
+    below to notify us that payment has been made.
+    Your payment will still need to be verified
+    by The BeautyLoft before your order is confirmed.
+  </p>
+
+</div>
           <label class="checkout-confirmation">
 
             <input

@@ -10,6 +10,9 @@ let checkoutCart =
 
 let currentCheckoutStep = 1;
 
+let currentPendingOrder = null;
+
+let selectedPaymentMethod = 'paystack';
 
 /* ========================================
    HELPERS
@@ -705,9 +708,81 @@ document.getElementById(
   'reviewContinue'
 ).addEventListener(
   'click',
-  function() {
+  async function() {
 
-    showCheckoutStep(4);
+    clearError('paymentError');
+
+    const button =
+      document.getElementById(
+        'reviewContinue'
+      );
+
+    const originalHTML =
+      button.innerHTML;
+
+    try {
+
+      button.disabled = true;
+
+      button.textContent =
+        'Preparing Order...';
+
+
+      /*
+        Only create the order once.
+      */
+
+      if (!currentPendingOrder) {
+
+        const result =
+          await createPendingOrder();
+
+        currentPendingOrder =
+          result.order;
+
+        localStorage.setItem(
+          'pendingBeautyLoftOrder',
+          JSON.stringify(result)
+        );
+
+
+        console.log(
+          'ORDER CREATED:',
+          currentPendingOrder
+        );
+
+        document.getElementById(
+  'paymentOrderReference'
+).textContent =
+  currentPendingOrder.order_ref;
+      }
+
+
+      showCheckoutStep(4);
+
+
+    } catch (error) {
+
+      console.error(
+        'CREATE ORDER ERROR:',
+        error
+      );
+
+      showError(
+        'paymentError',
+        error.message ||
+        'Unable to prepare your order.'
+      );
+
+
+    } finally {
+
+      button.disabled = false;
+
+      button.innerHTML =
+        originalHTML;
+
+    }
 
   }
 );
@@ -919,6 +994,100 @@ async function initializePaystackPayment(
 
 }
 
+/* ========================================
+   PAYMENT METHOD SELECTION
+======================================== */
+
+const paystackMethod =
+  document.getElementById(
+    'paystackMethod'
+  );
+
+const bankTransferMethod =
+  document.getElementById(
+    'bankTransferMethod'
+  );
+
+
+paystackMethod.addEventListener(
+  'click',
+  function() {
+
+    selectedPaymentMethod =
+      'paystack';
+
+    paystackMethod.classList.add(
+      'active'
+    );
+
+    bankTransferMethod.classList.remove(
+      'active'
+    );
+
+    document.getElementById(
+  'bankTransferPanel'
+).classList.add(
+  'show'
+);
+
+document.getElementById(
+  'bankTransferAmount'
+).textContent =
+  formatNaira(
+    getSubtotal() +
+    selectedDeliveryFee
+  );
+
+document.getElementById(
+  'bankTransferReference'
+).textContent =
+  currentPendingOrder.order_ref;
+
+    document.getElementById(
+  'bankTransferPanel'
+).classList.remove(
+  'show'
+);
+
+    document.getElementById(
+      'payButton'
+    ).innerHTML = `
+      Pay
+      <span id="payButtonTotal">
+        ${formatNaira(
+          getSubtotal() +
+          selectedDeliveryFee
+        )}
+      </span>
+    `;
+
+  }
+);
+
+
+bankTransferMethod.addEventListener(
+  'click',
+  function() {
+
+    selectedPaymentMethod =
+      'bank-transfer';
+
+    bankTransferMethod.classList.add(
+      'active'
+    );
+
+    paystackMethod.classList.remove(
+      'active'
+    );
+
+    document.getElementById(
+      'payButton'
+    ).innerHTML = `
+      Continue with Bank Transfer
+    `;
+
+  }
+);
 
 /* ========================================
    PAYMENT
@@ -967,24 +1136,50 @@ document.getElementById(
         'Preparing Payment...';
 
 
-      const order =
-        await createPendingOrder();
+     if (!currentPendingOrder) {
+
+  throw new Error(
+    'Your order could not be found. Please return to Review and try again.'
+  );
+
+}
 
 
-      const payment =
-        await initializePaystackPayment(
-          order.order.id
-        );
+/* PAYSTACK */
+
+if (
+  selectedPaymentMethod ===
+  'paystack'
+) {
+
+  const payment =
+    await initializePaystackPayment(
+      currentPendingOrder.id
+    );
+
+  window.location.href =
+    payment.authorizationUrl;
+
+  return;
+
+}
 
 
-      localStorage.setItem(
-        'pendingBeautyLoftOrder',
-        JSON.stringify(order)
-      );
+/* DIRECT BANK TRANSFER */
 
+if (
+  selectedPaymentMethod ===
+  'bank-transfer'
+) {
 
-      window.location.href =
-        payment.authorizationUrl;
+  console.log(
+    'BANK TRANSFER SELECTED:',
+    currentPendingOrder
+  );
+
+  return;
+
+}
 
 
     } catch (error) {
@@ -1002,6 +1197,51 @@ document.getElementById(
 
       button.innerHTML =
         originalHTML;
+
+    }
+
+  }
+);
+
+/* ========================================
+   COPY ORDER REFERENCE
+======================================== */
+
+document.getElementById(
+  'copyOrderReference'
+).addEventListener(
+  'click',
+  async function() {
+
+    if (
+      !currentPendingOrder ||
+      !currentPendingOrder.order_ref
+    ) {
+      return;
+    }
+
+    try {
+
+      await navigator.clipboard.writeText(
+        currentPendingOrder.order_ref
+      );
+
+      const button = this;
+
+      button.textContent = 'Copied';
+
+      setTimeout(function() {
+
+        button.textContent = 'Copy';
+
+      }, 1500);
+
+    } catch (error) {
+
+      console.error(
+        'COPY REFERENCE ERROR:',
+        error
+      );
 
     }
 
