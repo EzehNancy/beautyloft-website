@@ -88,6 +88,11 @@ function renderProduct(p) {
     '/upload/f_auto,q_auto,w_' + width + ',c_limit/'
   );
 }
+  const availableStock =
+  Number(p.stock_quantity || 0);
+
+const isOutOfStock =
+  availableStock <= 0;
 
   const nairaPrice =
     (p.price / 100).toLocaleString(
@@ -97,6 +102,7 @@ function renderProduct(p) {
       }
     );
 
+    
 
   // ========================================
   // GET PRODUCT IMAGES
@@ -280,6 +286,14 @@ function renderProduct(p) {
           nairaPrice +
         '</p>' +
 
+        (
+  isOutOfStock
+    ? '<div class="product-stock-status out">' +
+        '<strong>Out of Stock</strong>' +
+        '<span>This set is currently unavailable.</span>' +
+      '</div>'
+    : ''
+) +
 
         '<p class="product-detail-desc">' +
           (p.description || '') +
@@ -511,13 +525,20 @@ function renderProduct(p) {
               
         // ADD TO CART BUTTON
         '<button ' +
-          'class="submit-btn" ' +
-          'id="addToCartBtn" ' +
-          'style="margin-top:10px;">' +
+  'class="submit-btn' +
+  (isOutOfStock ? ' product-out-of-stock-btn' : '') +
+  '" ' +
+  'id="addToCartBtn" ' +
+  (isOutOfStock ? 'disabled ' : '') +
+  'style="margin-top:10px;">' +
 
-          'Add to cart' +
+  (
+    isOutOfStock
+      ? 'Out of Stock'
+      : 'Add to cart'
+  ) +
 
-        '</button>' +
+'</button>' +
 
 
      '</div>' +
@@ -911,9 +932,6 @@ const quantityInput =
 
 const quantityMessage =
   document.getElementById('quantityMessage');
-
-const availableStock =
-  Number(p.stock_quantity || 0);
 
 const MAX_QUANTITY =
   Math.min(3, availableStock);

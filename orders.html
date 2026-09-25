@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>My Orders | The BeautyLoft</title>
+
+  <link
+    rel="stylesheet"
+    href="orders.css"
+  >
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+  <!-- ========================================
+       NAVBAR
+  ========================================= -->
+
+  <header>
+
+     <a href="#top" class="logo">The <span>BeautyLoft</span></a>
+
+
+    <button
+      id="menuToggle"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <nav>
+
+      <ul id="navList">
+
+        <li>
+          <a href="shop-home.html">
+            Shop
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#work">
+            Work
+          </a>
+        </li>
+
+        <li class="wishlist-nav-item">
+
+          <a
+            href="wishlist.html"
+            class="wishlist-nav-link"
+            aria-label="Wishlist"
+          >
+
+            <span class="wishlist-nav-icon">
+              ♡
+            </span>
+
+            <span class="wishlist-nav-text">
+              Wishlist
+            </span>
+
+          </a>
+
+        </li>
+
+        <li>
+          <a
+            href="models.html"
+            id="modelsNavLink"
+          >
+            Models
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#contact">
+            Contact
+          </a>
+        </li>
+
+        <li class="bottom-nav-duplicate">
+
+          <a href="booking.html">
+            Book Now
+          </a>
+
+        </li>
+
+        <li
+          id="authNavItem"
+          class="bottom-nav-duplicate"
+        >
+
+          <a href="login.html">
+            Log In
+          </a>
+
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- ========================================
+       ACCOUNT PAGE
+  ========================================= -->
+
+  <main class="account-page">
+
+
+    <!-- ACCOUNT HEADER -->
+
+    <section class="account-heading">
+
+  <p class="account-eyebrow">
+    YOUR BEAUTYLOFT
+  </p>
+
+  <h1>
+    Your orders,
+    <em>all in one place.</em>
+  </h1>
+
+</section>
+
+
+
+    <div class="account-layout">
+
+
+      <!-- ========================================
+           ACCOUNT SIDEBAR
+      ========================================= -->
+
+      <aside class="account-sidebar">
+
+        <div class="account-user">
+
+          <div
+            class="account-avatar"
+            id="accountAvatar"
+          >
+            B
+          </div>
+
+          <div>
+
+            <p class="account-user-label">
+              Signed in as
+            </p>
+
+            <strong id="accountUserName">
+              BeautyLoft Customer
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <nav class="account-navigation">
+
+          <a href="profile.html">
+
+            <span>
+              Profile
+            </span>
+
+            <span>→</span>
+
+          </a>
+
+
+          <a
+            href="orders.html"
+            class="active"
+          >
+
+            <span>
+              My Orders
+            </span>
+
+            <span>→</span>
+
+          </a>
+
+
+          <a href="measurements.html">
+
+            <span>
+              Measurements
+            </span>
+
+            <span>→</span>
+
+          </a>
+
+
+          <a href="wishlist.html">
+
+            <span>
+              Wishlist
+            </span>
+
+            <span>→</span>
+
+          </a>
+
+
+          <button
+            type="button"
+            id="logoutButton"
+            class="account-logout"
+          >
+
+            <span>
+              Log Out
+            </span>
+
+            <span>→</span>
+
+          </button>
+
+        </nav>
+
+      </aside>
+
+
+
+      <!-- ========================================
+           ORDERS CONTENT
+      ========================================= -->
+
+      <section class="account-content">
+
+
+        <div class="content-heading">
+
+          <div>
+
+            <p class="content-eyebrow">
+              ORDER HISTORY
+            </p>
+
+            <h2>
+              My Orders
+            </h2>
+
+          </div>
+
+
+          <span
+            class="order-count"
+            id="orderCount"
+          >
+            —
+          </span>
+
+        </div>
+
+
+
+        <!-- ORDER FILTERS -->
+
+        <div class="order-filters">
+
+          <button
+            type="button"
+            class="order-filter active"
+            data-filter="all"
+          >
+            All
+          </button>
+
+          <button
+            type="button"
+            class="order-filter"
+            data-filter="pending"
+          >
+            Pending
+          </button>
+
+          <button
+            type="button"
+            class="order-filter"
+            data-filter="confirmed"
+          >
+            Confirmed
+          </button>
+
+          <button
+            type="button"
+            class="order-filter"
+            data-filter="delivered"
+          >
+            Delivered
+          </button>
+
+        </div>
+
+
+
+        <!-- ORDERS -->
+
+        <div
+          class="orders-list"
+          id="ordersList"
+        >
+
+          <div class="orders-loading">
+
+            <span
+              class="loading-line"
+            ></span>
+
+            <p>
+              Loading your orders...
+            </p>
+
+          </div>
+
+        </div>
+
+
+      </section>
+
+    </div>
+
+  </main>
+
+
+
+  <!-- ========================================
+       ORDER DETAILS MODAL
+  ========================================= -->
+
+  <div
+    class="order-modal"
+    id="orderModal"
+  >
+
+    <div
+      class="order-modal-overlay"
+      id="orderModalOverlay"
+    ></div>
+
+
+    <div class="order-modal-panel">
+
+
+      <div class="modal-header">
+
+        <div>
+
+          <p class="content-eyebrow">
+            ORDER DETAILS
+          </p>
+
+          <h2 id="modalOrderReference">
+            Order
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="modal-close"
+          id="closeOrderModal"
+          aria-label="Close order details"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div
+        class="modal-content"
+        id="modalOrderContent"
+      >
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <script src="orders.js"></script>
+
+</body>
+
+</html>

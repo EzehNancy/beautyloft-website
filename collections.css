@@ -1,0 +1,1043 @@
+/* ========================================
+   RESET
+======================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html {
+  scroll-behavior: smooth;
+}
+
+
+body {
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+
+  background: #fdfbf9;
+  color: #2e2725;
+}
+
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+button {
+  font: inherit;
+}
+
+
+
+/* ========================================
+   NAVBAR
+======================================== */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
+  background: rgba(
+    253,
+    251,
+    249,
+    0.96
+  );
+
+  border-bottom:
+    1px solid #eee7e3;
+}
+
+
+.nav-container {
+  width: min(1400px, 94%);
+  height: 76px;
+
+  margin: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
+.brand {
+  font-size: 18px;
+  font-weight: 700;
+
+  letter-spacing: 3px;
+}
+
+
+.desktop-nav {
+  display: flex;
+  align-items: center;
+
+  gap: 34px;
+}
+
+
+.desktop-nav a {
+  position: relative;
+
+  padding: 28px 0;
+
+  font-size: 12px;
+  letter-spacing: 1px;
+
+  text-transform: uppercase;
+}
+
+
+.desktop-nav a::after {
+  content: '';
+
+  position: absolute;
+
+  left: 0;
+  bottom: 20px;
+
+  width: 0;
+  height: 1px;
+
+  background: #68443d;
+
+  transition: width 0.25s ease;
+}
+
+
+.desktop-nav a:hover::after,
+.desktop-nav a.active::after {
+  width: 100%;
+}
+
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+
+  gap: 18px;
+
+  font-size: 13px;
+}
+
+
+.nav-icon {
+  font-size: 23px;
+}
+
+
+.cart-link {
+  display: flex;
+  align-items: center;
+
+  gap: 6px;
+}
+
+
+#cartCount {
+  min-width: 19px;
+  height: 19px;
+
+  padding: 0 5px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  background: #68443d;
+  color: white;
+
+  font-size: 10px;
+}
+
+
+.mobile-menu-btn {
+  display: none;
+
+  border: 0;
+  background: transparent;
+
+  font-size: 20px;
+
+  cursor: pointer;
+}
+
+
+.mobile-menu {
+  display: none;
+}
+
+
+
+/* ========================================
+   HERO
+======================================== */
+
+.collections-hero {
+  min-height: 520px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 90px 24px;
+
+  text-align: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      #f4ebe6 0%,
+      #f9f4f1 45%,
+      #eadbd5 100%
+    );
+}
+
+
+.collections-hero-inner {
+  max-width: 760px;
+}
+
+
+.eyebrow,
+.section-eyebrow {
+  margin-bottom: 20px;
+
+  color: #98645c;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
+}
+
+
+.collections-hero h1 {
+  margin-bottom: 25px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size:
+    clamp(52px, 8vw, 105px);
+
+  font-weight: 400;
+  line-height: 0.95;
+
+  letter-spacing: -4px;
+}
+
+
+.hero-copy {
+  max-width: 570px;
+
+  margin: 0 auto 35px;
+
+  color: #675d59;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+
+.hero-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 12px;
+
+  padding-bottom: 6px;
+
+  border-bottom:
+    1px solid #68443d;
+
+  color: #68443d;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+
+/* ========================================
+   INTRO
+======================================== */
+
+.collection-intro {
+  padding: 65px 24px;
+
+  display: flex;
+  justify-content: center;
+
+  background: #fdfbf9;
+}
+
+
+.collection-intro p {
+  max-width: 700px;
+
+  text-align: center;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size:
+    clamp(17px, 2vw, 24px);
+
+  line-height: 1.6;
+
+  color: #675d59;
+}
+
+
+
+/* ========================================
+   COLLECTION SECTION
+======================================== */
+
+.collections-section {
+  width: min(1400px, 92%);
+
+  margin: auto;
+
+  padding: 30px 0 120px;
+}
+
+
+.section-heading {
+  margin-bottom: 42px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 30px;
+}
+
+
+.section-heading
+.section-eyebrow {
+  margin-bottom: 10px;
+}
+
+
+.section-heading h2 {
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size:
+    clamp(38px, 5vw, 65px);
+
+  font-weight: 400;
+}
+
+
+.view-all-link {
+  padding-bottom: 5px;
+
+  border-bottom:
+    1px solid #68443d;
+
+  color: #68443d;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+
+
+/* ========================================
+   COLLECTION GRID
+======================================== */
+
+.collections-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(12, 1fr);
+
+  gap: 24px;
+}
+
+
+.collection-card {
+  position: relative;
+
+  min-height: 540px;
+
+  overflow: hidden;
+
+  background: #eee5e0;
+}
+
+
+.collection-card:nth-child(4n + 1),
+.collection-card:nth-child(4n + 4) {
+  grid-column: span 7;
+}
+
+
+.collection-card:nth-child(4n + 2),
+.collection-card:nth-child(4n + 3) {
+  grid-column: span 5;
+}
+
+
+.collection-card-image {
+  position: absolute;
+
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+
+  transition:
+    transform 0.7s ease;
+}
+
+
+.collection-card:hover
+.collection-card-image {
+  transform: scale(1.035);
+}
+
+
+.collection-card-placeholder {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 30px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #c9a876,
+      #98645c
+    );
+
+  color: white;
+
+  text-align: center;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 30px;
+}
+
+
+.collection-card-overlay {
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(25, 17, 15, 0.7),
+      rgba(25, 17, 15, 0.03) 60%
+    );
+}
+
+
+.collection-card-content {
+  position: absolute;
+
+  left: 32px;
+  right: 32px;
+  bottom: 30px;
+
+  z-index: 2;
+
+  color: white;
+}
+
+
+.collection-number {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  opacity: 0.8;
+}
+
+
+.collection-card-content h3 {
+  margin-bottom: 15px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size:
+    clamp(30px, 3.4vw, 50px);
+
+  font-weight: 400;
+}
+
+
+.collection-shop-link {
+  display: inline-flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding-bottom: 4px;
+
+  border-bottom:
+    1px solid rgba(
+      255,
+      255,
+      255,
+      0.8
+    );
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+
+/* ========================================
+   LOADING / EMPTY
+======================================== */
+
+.collections-loading,
+.collections-empty {
+  grid-column: 1 / -1;
+
+  min-height: 300px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 15px;
+
+  color: #82746e;
+
+  text-align: center;
+}
+
+
+.loading-line {
+  width: 50px;
+  height: 1px;
+
+  background: #98645c;
+
+  animation:
+    loadingPulse 1.2s
+    ease-in-out infinite;
+}
+
+
+@keyframes loadingPulse {
+
+  0%,
+  100% {
+    transform: scaleX(0.4);
+    opacity: 0.4;
+  }
+
+  50% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+
+}
+
+
+
+/* ========================================
+   EDITORIAL
+======================================== */
+
+.collection-editorial {
+  min-height: 620px;
+
+  padding: 100px 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: #68443d;
+  color: white;
+}
+
+
+.editorial-content {
+  max-width: 780px;
+}
+
+
+.collection-editorial
+.section-eyebrow {
+  color: #e9d8d1;
+}
+
+
+.editorial-content h2 {
+  margin-bottom: 28px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size:
+    clamp(45px, 7vw, 85px);
+
+  font-weight: 400;
+
+  line-height: 1.03;
+
+  letter-spacing: -2px;
+}
+
+
+.editorial-content h2 em {
+  font-weight: 400;
+}
+
+
+.editorial-content > p:not(
+  .section-eyebrow
+) {
+  max-width: 500px;
+
+  margin:
+    0 auto 35px;
+
+  color: #eadbd5;
+
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+
+.editorial-button {
+  display: inline-block;
+
+  padding: 15px 28px;
+
+  border: 1px solid white;
+
+  font-size: 10px;
+  font-weight: 600;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+
+  transition:
+    background 0.25s ease,
+    color 0.25s ease;
+}
+
+
+.editorial-button:hover {
+  background: white;
+  color: #68443d;
+}
+
+
+
+/* ========================================
+   PROMISE
+======================================== */
+
+.beautyloft-promise {
+  width: min(1300px, 90%);
+
+  margin: auto;
+
+  padding: 110px 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 60px;
+}
+
+
+.promise-item {
+  padding-top: 20px;
+
+  border-top:
+    1px solid #d9cfca;
+}
+
+
+.promise-item > span {
+  display: block;
+
+  margin-bottom: 45px;
+
+  color: #98645c;
+
+  font-size: 10px;
+  letter-spacing: 2px;
+}
+
+
+.promise-item h3 {
+  margin-bottom: 15px;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 25px;
+
+  font-weight: 400;
+}
+
+
+.promise-item p {
+  max-width: 320px;
+
+  color: #776b66;
+
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+
+
+/* ========================================
+   FOOTER
+======================================== */
+
+.site-footer {
+  padding:
+    80px max(5%, 30px)
+    30px;
+
+  background: #2e2725;
+  color: #f8f3f0;
+}
+
+
+.footer-brand {
+  margin-bottom: 70px;
+}
+
+
+.footer-brand h2 {
+  margin-bottom: 10px;
+
+  font-size:
+    clamp(25px, 4vw, 50px);
+
+  letter-spacing: 4px;
+}
+
+
+.footer-brand p {
+  color: #bcaeaa;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 16px;
+}
+
+
+.footer-links {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(130px, 200px));
+
+  gap: 60px;
+
+  margin-bottom: 70px;
+}
+
+
+.footer-links h3 {
+  margin-bottom: 18px;
+
+  color: #bcaeaa;
+
+  font-size: 10px;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+.footer-links a {
+  display: block;
+
+  margin-bottom: 10px;
+
+  font-size: 13px;
+}
+
+
+.footer-bottom {
+  padding-top: 25px;
+
+  border-top:
+    1px solid rgba(
+      255,
+      255,
+      255,
+      0.15
+    );
+
+  color: #a89a95;
+
+  font-size: 11px;
+}
+
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+  .desktop-nav {
+    display: none;
+  }
+
+
+  .mobile-menu-btn {
+    display: block;
+  }
+
+
+  .mobile-menu {
+    padding: 0 5% 20px;
+
+    background: #fdfbf9;
+  }
+
+
+  .mobile-menu.open {
+    display: flex;
+    flex-direction: column;
+
+    gap: 4px;
+  }
+
+
+  .mobile-menu a {
+    padding: 13px 0;
+
+    border-bottom:
+      1px solid #eee7e3;
+
+    font-size: 12px;
+
+    letter-spacing: 1px;
+
+    text-transform: uppercase;
+  }
+
+
+  .collections-grid {
+    grid-template-columns:
+      repeat(2, 1fr);
+  }
+
+
+  .collection-card,
+  .collection-card:nth-child(n) {
+    grid-column: span 1;
+
+    min-height: 480px;
+  }
+
+
+  .beautyloft-promise {
+    gap: 30px;
+  }
+
+}
+
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+
+  .nav-container {
+    width: 92%;
+    height: 66px;
+  }
+
+
+  .brand {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+
+  .nav-icon {
+    display: none;
+  }
+
+
+  .collections-hero {
+    min-height: 500px;
+
+    padding:
+      80px 24px;
+  }
+
+
+  .collections-hero h1 {
+    letter-spacing: -2px;
+  }
+
+
+  .hero-copy {
+    font-size: 15px;
+  }
+
+
+  .collection-intro {
+    padding:
+      70px 22px;
+  }
+
+
+  .collections-section {
+    width: 92%;
+
+    padding:
+      10px 0 80px;
+  }
+
+
+  .section-heading {
+    align-items: flex-end;
+  }
+
+
+  .view-all-link {
+    white-space: nowrap;
+  }
+
+
+  .collections-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+
+  .collection-card,
+  .collection-card:nth-child(n) {
+    grid-column: 1;
+
+    min-height: 460px;
+  }
+
+
+  .collection-card-content {
+    left: 22px;
+    right: 22px;
+    bottom: 24px;
+  }
+
+
+  .collection-editorial {
+    min-height: 520px;
+
+    padding:
+      80px 24px;
+  }
+
+
+  .beautyloft-promise {
+    padding:
+      75px 0;
+
+    grid-template-columns: 1fr;
+
+    gap: 55px;
+  }
+
+
+  .promise-item > span {
+    margin-bottom: 25px;
+  }
+
+
+  .footer-links {
+    grid-template-columns:
+      repeat(2, 1fr);
+
+    gap: 30px;
+  }
+
+}

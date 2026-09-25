@@ -754,7 +754,7 @@ document.getElementById(
         document.getElementById(
   'paymentOrderReference'
 ).textContent =
-  currentPendingOrder.reference;
+  currentPendingOrder.order_ref;
       }
 
 
