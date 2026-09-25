@@ -405,6 +405,9 @@ function renderShopGrid(productsToRender = products) {
 
   productsToRender.forEach(function(p) {
 
+    const isOutOfStock =
+  Number(p.stock_quantity || 0) <= 0;
+
     const nairaPrice = (p.price / 100).toLocaleString('en-NG', {
       minimumFractionDigits: 2
     });
@@ -422,6 +425,16 @@ function renderShopGrid(productsToRender = products) {
         : `<div class="ph" style="background:linear-gradient(160deg,#C9A876,#98645C);">${p.name}</div>`
     }
   </a>
+
+    ${
+  isOutOfStock
+    ? `
+      <div class="out-of-stock-badge">
+        Out of Stock
+      </div>
+    `
+    : ''
+}
 
   <button
     type="button"
@@ -445,7 +458,16 @@ function renderShopGrid(productsToRender = products) {
 
         <p class="product-price">₦${nairaPrice}</p>
 
-        <button class="add-cart-btn">Add to Cart</button>
+        <button
+  class="add-cart-btn"
+  ${isOutOfStock ? 'disabled' : ''}
+>
+  ${
+    isOutOfStock
+      ? 'Out of Stock'
+      : 'Add to Cart'
+  }
+</button>
 
       </div>
     `;
