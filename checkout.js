@@ -761,21 +761,20 @@ document.getElementById(
       showCheckoutStep(4);
 
 
-    } catch (error) {
+    }catch (error) {
 
-      console.error(
-        'CREATE ORDER ERROR:',
-        error
-      );
-
-      showError(
-        'paymentError',
-        error.message ||
-        'Unable to prepare your order.'
-      );
+  console.error(
+    'CREATE ORDER ERROR:',
+    error
+  );
 
 
-    } finally {
+  alert(
+    error.message ||
+    'Unable to prepare your order.'
+  );
+
+}finally {
 
       button.disabled = false;
 
