@@ -1,47 +1,85 @@
 /* ========================================
-   ACCOUNT PAGE
+   RESET
 ======================================== */
 
-.account-page {
-  width: min(1400px, 92%);
-  margin: auto;
-
-  padding:
-    90px 0 130px;
-
-  color: #352925;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+
+button,
+input {
+  font: inherit;
+}
+
+
+button {
+  cursor: pointer;
+}
+
+
+
 /* ========================================
-   HERO
+   PAGE
 ======================================== */
 
-.account-hero {
-  max-width: 900px;
+body {
+  background: #fdfbf9;
+  color: #352925;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
+}
+
+
+.account-page {
+  width: min(1200px, 92%);
+  margin: auto;
 
   padding:
-    30px 0 80px;
+    80px 0 120px;
+}
+
+
+
+/* ========================================
+   HEADING
+======================================== */
+
+.account-heading {
+  padding:
+    35px 0 65px;
 }
 
 
 .account-eyebrow,
-.section-eyebrow {
-  margin-bottom: 14px;
-
+.content-eyebrow,
+.account-user-label {
   color: #a6675e;
 
   font-size: 10px;
   font-weight: 600;
 
-  letter-spacing: 2.4px;
+  letter-spacing: 2.2px;
 
   text-transform: uppercase;
 }
 
 
-.account-hero h1 {
-  max-width: 850px;
+.account-heading h1 {
+  max-width: 700px;
+
+  margin-top: 12px;
 
   font-family:
     Georgia,
@@ -49,283 +87,460 @@
     serif;
 
   font-size:
-    clamp(50px, 7vw, 90px);
+    clamp(46px, 6vw, 70px);
 
   font-weight: 400;
 
-  line-height: 0.98;
+  line-height: 1;
 
-  letter-spacing: -3px;
+  letter-spacing: -2px;
 
   color: #332824;
 }
 
 
-.account-hero h1 em {
+.account-heading h1 em {
   color: #a6675e;
 
   font-weight: 400;
 }
 
 
-.account-intro {
-  max-width: 500px;
 
-  margin-top: 28px;
+/* ========================================
+   LAYOUT
+======================================== */
 
-  color: #786963;
+.account-layout {
+  display: grid;
 
-  font-size: 14px;
-  line-height: 1.8;
+  grid-template-columns:
+    240px minmax(0, 1fr);
+
+  gap: 70px;
+
+  align-items: start;
 }
+
 
 
 /* ========================================
-   ACCOUNT NAV
+   SIDEBAR
 ======================================== */
 
-.account-tabs {
-  display: flex;
-  align-items: center;
+.account-sidebar {
+  position: sticky;
+  top: 120px;
+}
 
-  gap: 35px;
 
-  padding:
-    18px 0;
-
-  margin-bottom: 55px;
-
-  border-top:
-    1px solid #d8cec9;
+.account-user {
+  padding-bottom: 24px;
 
   border-bottom:
-    1px solid #d8cec9;
-
-  overflow-x: auto;
-
-  scrollbar-width: none;
+    1px solid #ddd2cd;
 }
 
 
-.account-tabs::-webkit-scrollbar {
-  display: none;
+.account-user-label {
+  display: block;
+
+  margin-bottom: 8px;
 }
 
 
-.account-tabs a,
-.account-tabs button {
-  flex-shrink: 0;
+.account-user strong {
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
 
-  position: relative;
+  font-size: 16px;
+  font-weight: 400;
 
-  padding: 6px 0;
+  color: #392d29;
+}
+
+
+.account-navigation {
+  display: flex;
+  flex-direction: column;
+
+  margin-top: 14px;
+}
+
+
+.account-navigation a,
+.account-logout {
+  width: 100%;
+
+  padding:
+    14px 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 
   border: 0;
+  border-bottom:
+    1px solid #e4dbd7;
 
   background: transparent;
 
-  color: #74645e;
+  color: #6e5c56;
 
-  font-size: 10px;
+  font-size: 13px;
+
+  text-align: left;
+}
+
+
+.account-navigation a.active {
+  color: #a6675e;
+
   font-weight: 600;
-
-  letter-spacing: 1.5px;
-
-  text-transform: uppercase;
-
-  cursor: pointer;
 }
 
 
-.account-tabs a.active {
+.account-navigation a span:last-child,
+.account-logout span:last-child {
+  transition:
+    transform .25s ease;
+}
+
+
+.account-navigation a:hover span:last-child,
+.account-logout:hover span:last-child {
+  transform:
+    translateX(4px);
+}
+
+
+.account-logout {
   color: #a6675e;
 }
 
-
-.account-tabs a.active::after {
-  content: '';
-
-  position: absolute;
-
-  left: 0;
-  right: 0;
-  bottom: -7px;
-
-  height: 1px;
-
-  background: #a6675e;
-}
-
-
-.account-tabs button {
-  margin-left: auto;
-
-  color: #a6675e;
-}
 
 
 /* ========================================
-   GRID
+   CONTENT
 ======================================== */
 
-.account-grid {
+.account-content {
+  min-width: 0;
+}
+
+
+.settings-section {
+  padding:
+    0 0 55px;
+
+  margin-bottom: 55px;
+
+  border-bottom:
+    1px solid #d8cec9;
+}
+
+
+.settings-section:last-child {
+  margin-bottom: 0;
+}
+
+
+
+/* ========================================
+   SECTION HEADING
+======================================== */
+
+.section-heading {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 25px;
+
+  margin-bottom: 30px;
+}
+
+
+.content-eyebrow {
+  margin-bottom: 8px;
+}
+
+
+.section-heading h2 {
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size:
+    clamp(29px, 3vw, 38px);
+
+  font-weight: 400;
+
+  letter-spacing: -1px;
+
+  color: #332824;
+}
+
+
+.section-description {
+  max-width: 540px;
+
+  margin:
+    -14px 0 28px;
+
+  color: #88756e;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+}
+
+
+
+/* ========================================
+   TEXT BUTTON
+======================================== */
+
+.text-button {
+  padding:
+    0 0 4px;
+
+  border: 0;
+
+  border-bottom:
+    1px solid #a6675e;
+
+  background: transparent;
+
+  color: #a6675e;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.4px;
+
+  text-transform: uppercase;
+}
+
+
+
+/* ========================================
+   FORMS
+======================================== */
+
+.details-form,
+.address-form,
+.password-form {
+  max-width: 680px;
+}
+
+
+.form-row {
   display: grid;
 
   grid-template-columns:
     repeat(2, minmax(0, 1fr));
 
-  border-top:
-    1px solid #d8cec9;
-
-  border-left:
-    1px solid #d8cec9;
+  gap: 25px;
 }
 
 
-.account-section {
-  position: relative;
+.form-field {
+  margin-bottom: 22px;
+}
 
-  min-height: 470px;
 
-  padding: 42px;
+.form-field label {
+  display: block;
 
-  display: flex;
-  flex-direction: column;
+  margin-bottom: 8px;
 
-  border-right:
-    1px solid #d8cec9;
+  color: #907b74;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.3px;
+
+  text-transform: uppercase;
+}
+
+
+.form-field input {
+  width: 100%;
+
+  padding:
+    12px 0;
+
+  border: 0;
 
   border-bottom:
-    1px solid #d8cec9;
+    1px solid #cfc2bc;
 
-  background: #fdfbf9;
-}
+  outline: none;
 
+  background: transparent;
 
-.section-number {
-  margin-bottom: 70px;
-
-  color: #aa9188;
-
-  font-size: 10px;
-
-  letter-spacing: 2px;
-}
-
-
-.section-heading h2 {
-  max-width: 430px;
+  color: #3f322e;
 
   font-family:
     Georgia,
     'Times New Roman',
     serif;
 
-  font-size:
-    clamp(35px, 4vw, 54px);
+  font-size: 15px;
 
-  font-weight: 400;
-
-  line-height: 1.03;
-
-  letter-spacing: -1.5px;
-
-  color: #332824;
+  transition:
+    border-color .25s ease;
 }
 
 
-.section-heading h2 em {
-  color: #a6675e;
-
-  font-weight: 400;
+.form-field input:focus {
+  border-color: #a6675e;
 }
 
 
-.section-copy {
-  max-width: 400px;
+.form-field input:disabled {
+  color: #5c4d48;
 
-  margin-top: 25px;
+  opacity: 1;
 
-  color: #786963;
-
-  font-size: 13px;
-
-  line-height: 1.8;
+  cursor: default;
 }
+
 
 
 /* ========================================
-   ACTION LINK
+   BUTTONS
 ======================================== */
 
-.account-action {
-  width: fit-content;
+.form-actions {
+  display: flex;
 
-  margin-top: auto;
+  gap: 10px;
 
-  padding-bottom: 6px;
+  margin-top: 15px;
+}
 
-  display: inline-flex;
-  align-items: center;
 
-  gap: 14px;
+.primary-button,
+.secondary-button {
+  min-width: 135px;
 
-  border-bottom:
-    1px solid #a6675e;
+  padding:
+    12px 18px;
 
-  color: #8f5c54;
-
-  font-size: 10px;
+  font-size: 9px;
   font-weight: 600;
 
-  letter-spacing: 1.7px;
+  letter-spacing: 1.4px;
 
   text-transform: uppercase;
 }
 
 
-.account-action span {
-  transition:
-    transform 0.25s ease;
+.primary-button {
+  border:
+    1px solid #a6675e;
+
+  background: #a6675e;
+
+  color: white;
 }
 
 
-.account-action:hover span {
-  transform:
-    translateX(5px);
+.secondary-button {
+  border:
+    1px solid #cfc2bc;
+
+  background: transparent;
+
+  color: #725f59;
 }
+
+
+.primary-button:hover {
+  opacity: .9;
+}
+
+
+.secondary-button:hover {
+  border-color: #a6675e;
+}
+
 
 
 /* ========================================
-   DETAILS
+   MESSAGES
 ======================================== */
 
-.details-list {
-  margin-top: 35px;
+.form-message {
+  min-height: 18px;
 
-  border-top:
-    1px solid #e3d9d4;
+  margin-top: 14px;
+
+  color: #a6675e;
+
+  font-size: 11px;
 }
 
 
-.detail-row {
-  padding:
-    17px 0;
 
+/* ========================================
+   EMPTY SETTINGS
+======================================== */
+
+.empty-setting {
+  padding:
+    25px 0 5px;
+}
+
+
+.empty-setting p {
+  margin-bottom: 16px;
+
+  color: #786963;
+
+  font-size: 13px;
+
+  line-height: 1.7;
+}
+
+
+
+/* ========================================
+   MEASUREMENTS
+======================================== */
+
+.measurements-loading {
+  color: #88756e;
+
+  font-size: 12px;
+}
+
+
+.measurement-hands {
   display: grid;
 
   grid-template-columns:
-    120px minmax(0, 1fr);
+    repeat(2, minmax(0, 1fr));
 
-  gap: 20px;
+  gap: 55px;
 
-  border-bottom:
-    1px solid #e3d9d4;
+  max-width: 680px;
 }
 
 
-.detail-label {
-  color: #9a8179;
+.measurement-hand h3 {
+  padding-bottom: 12px;
+
+  border-bottom:
+    1px solid #d8cec9;
+
+  color: #a6675e;
 
   font-size: 9px;
   font-weight: 600;
@@ -336,116 +551,12 @@
 }
 
 
-.detail-value {
-  color: #493b36;
-
-  font-family:
-    Georgia,
-    'Times New Roman',
-    serif;
-
-  font-size: 15px;
-}
-
-
-/* ========================================
-   ACCENT CARD
-======================================== */
-
-.orders-section {
-  background: #6b4740;
-  color: white;
-}
-
-
-.orders-section
-.section-number,
-.orders-section
-.section-eyebrow {
-  color: #e0bbb2;
-}
-
-
-.orders-section
-.section-heading h2 {
-  color: #fffaf7;
-}
-
-
-.orders-section
-.section-heading h2 em {
-  color: #e7bdb3;
-}
-
-
-.orders-section
-.section-copy {
-  color: #e6d7d2;
-}
-
-
-.orders-section
-.account-action {
-  border-color: #e7bdb3;
-
-  color: #fff7f4;
-}
-
-
-/* ========================================
-   MEASUREMENTS
-======================================== */
-
-.measurements-section {
-  grid-column: span 2;
-
-  min-height: auto;
-}
-
-
-.measurements-loading {
-  margin-top: 30px;
-
-  color: #8d7c75;
-
-  font-size: 12px;
-}
-
-
-.hand-grid {
-  margin-top: 35px;
-
-  display: grid;
-
-  grid-template-columns:
-    repeat(2, 1fr);
-
-  gap: 70px;
-}
-
-
-.hand-title {
-  padding-bottom: 13px;
-
-  border-bottom:
-    1px solid #d8cec9;
-
-  color: #a6675e;
-
-  font-size: 10px;
-  font-weight: 600;
-
-  letter-spacing: 1.8px;
-
-  text-transform: uppercase;
-}
-
-
 .finger-row {
-  padding: 13px 0;
+  padding:
+    12px 0;
 
   display: flex;
-  align-items: center;
+
   justify-content: space-between;
 
   gap: 20px;
@@ -453,7 +564,7 @@
   border-bottom:
     1px solid #e8e0dc;
 
-  color: #675852;
+  color: #6d5d57;
 
   font-size: 12px;
 }
@@ -465,34 +576,87 @@
     'Times New Roman',
     serif;
 
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 400;
 
   color: #392e2a;
 }
 
 
-.saved-measurements
-.account-action,
-.no-measurements
-.account-action {
-  margin-top: 35px;
+
+/* ========================================
+   MEASUREMENT EDITING
+======================================== */
+
+.measurement-input-row {
+  min-height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  border-bottom:
+    1px solid #e8e0dc;
 }
 
 
-.no-measurements {
-  max-width: 500px;
+.measurement-input-row label {
+  color: #6d5d57;
 
-  margin-top: 30px;
+  font-size: 12px;
 }
 
 
-.no-measurements p {
-  color: #786963;
+.measurement-input-row input {
+  width: 80px;
 
-  font-size: 13px;
-  line-height: 1.8;
+  padding:
+    8px 4px;
+
+  border: 0;
+
+  border-bottom:
+    1px solid #cfc2bc;
+
+  outline: none;
+
+  background: transparent;
+
+  color: #392e2a;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  text-align: right;
 }
+
+
+.measurement-input-row input:focus {
+  border-color: #a6675e;
+}
+
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+
+  .account-layout {
+    grid-template-columns:
+      190px minmax(0, 1fr);
+
+    gap: 40px;
+  }
+
+}
+
 
 
 /* ========================================
@@ -502,68 +666,1125 @@
 @media (max-width: 700px) {
 
   .account-page {
-    width: 92%;
+    width: 90%;
 
     padding:
-      55px 0 90px;
+      50px 0 80px;
   }
 
 
-  .account-hero {
+  .account-heading {
     padding:
-      25px 0 55px;
+      30px 0 45px;
   }
 
 
-  .account-hero h1 {
-    letter-spacing: -2px;
+  .account-heading h1 {
+    font-size: 46px;
+
+    letter-spacing: -1.5px;
   }
 
 
-  .account-tabs {
-    gap: 24px;
-
-    margin-bottom: 35px;
+  .account-layout {
+    display: block;
   }
 
 
-  .account-tabs button {
-    margin-left: 0;
+  .account-sidebar {
+    position: static;
+
+    margin-bottom: 55px;
   }
 
 
-  .account-grid {
+  .account-user {
+    padding-bottom: 18px;
+  }
+
+
+  .account-navigation a,
+  .account-logout {
+    padding:
+      13px 0;
+  }
+
+
+  .settings-section {
+    padding-bottom: 42px;
+
+    margin-bottom: 42px;
+  }
+
+
+  .section-heading {
+    align-items: center;
+
+    margin-bottom: 25px;
+  }
+
+
+  .section-heading h2 {
+    font-size: 30px;
+  }
+
+
+  .form-row {
     grid-template-columns: 1fr;
+
+    gap: 0;
   }
 
 
-  .account-section {
-    min-height: 420px;
-
-    padding: 28px 22px;
-  }
-
-
-  .section-number {
-    margin-bottom: 50px;
-  }
-
-
-  .measurements-section {
-    grid-column: span 1;
-  }
-
-
-  .hand-grid {
+  .measurement-hands {
     grid-template-columns: 1fr;
 
     gap: 35px;
   }
 
 
-  .detail-row {
-    grid-template-columns:
-      90px minmax(0, 1fr);
+  .form-actions {
+    flex-wrap: wrap;
   }
 
+
+  .primary-button,
+  .secondary-button {
+    flex: 1;
+  }
+
+}
+
+/* ========================================
+   BEAUTYLOFT ACCOUNT POLISH
+======================================== */
+
+body {
+  background: #f7f1ed;
+  color: #40322e;
+}
+
+
+.account-page {
+  width: min(1180px, 91%);
+}
+
+
+/* Main title */
+
+.account-heading h1 {
+  color: #342824;
+}
+
+.account-heading h1 em {
+  color: #a96f67;
+}
+
+
+/* Sidebar */
+
+.account-sidebar {
+  padding: 26px 24px;
+
+  background: rgba(255, 252, 249, 0.55);
+
+  border: 1px solid #dfd2cc;
+}
+
+
+.account-user {
+  border-bottom: 1px solid #dfd2cc;
+}
+
+
+.account-navigation a,
+.account-logout {
+  border-bottom: 1px solid #e5dad5;
+}
+
+
+/* Main settings */
+
+.settings-section {
+  padding: 0 0 42px;
+  margin-bottom: 42px;
+
+  border-bottom: 1px solid #d8cbc5;
+}
+
+
+.section-heading h2 {
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: clamp(27px, 3vw, 36px);
+
+  font-weight: 400;
+
+  color: #392c28;
+}
+
+
+.section-description {
+  color: #786762;
+}
+
+
+.content-eyebrow,
+.account-eyebrow,
+.account-user-label {
+  color: #a96f67;
+}
+
+
+/* Read-only details */
+
+.form-field input:disabled {
+  color: #4e3e39;
+
+  -webkit-text-fill-color: #4e3e39;
+}
+
+
+/* Links */
+
+.text-button {
+  color: #9f655d;
+
+  border-color: #b98279;
+}
+
+/* ========================================
+   BEAUTYLOFT ACCOUNT TYPOGRAPHY
+======================================== */
+
+/* Main page text */
+
+body {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  color: #5f504b;
+}
+
+
+/* Small BeautyLoft labels */
+
+.account-eyebrow,
+.content-eyebrow,
+.account-user-label,
+.form-field label,
+.measurement-hand h3,
+.overlay-eyebrow {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 500;
+
+  letter-spacing: 2px;
+
+  text-transform: uppercase;
+}
+
+
+/* Main account heading */
+
+.account-heading h1 {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(44px, 5vw, 64px);
+
+  font-weight: 400;
+
+  line-height: 1.02;
+
+  letter-spacing: -1.8px;
+
+  color: #332824;
+}
+
+
+.account-heading h1 em {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-weight: 400;
+  font-style: italic;
+
+  color: #a6675e;
+}
+
+
+/* Section headings */
+
+.section-heading h2 {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(27px, 3vw, 36px);
+
+  font-weight: 400;
+
+  line-height: 1.1;
+
+  letter-spacing: -0.8px;
+
+  color: #332824;
+}
+
+
+/* Sidebar customer name */
+
+.account-user strong {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+  font-weight: 400;
+
+  letter-spacing: 0;
+
+  color: #392d29;
+}
+
+
+/* Sidebar navigation */
+
+.account-navigation a,
+.account-logout {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  letter-spacing: 0.2px;
+}
+
+
+/* Description text */
+
+.section-description,
+.empty-setting p {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 1.7;
+
+  letter-spacing: 0;
+
+  color: #806f69;
+}
+
+
+/* Account values */
+
+.form-field input {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 15px;
+  font-weight: 400;
+
+  letter-spacing: 0;
+
+  color: #443631;
+}
+
+
+/* Measurement finger names */
+
+.finger-row {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+}
+
+
+/* Measurement values */
+
+.finger-row strong {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 14px;
+  font-weight: 400;
+}
+
+
+/* Buttons / links */
+
+.text-button,
+.primary-button,
+.secondary-button {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.5px;
+
+  text-transform: uppercase;
+}
+
+
+/* Overlay heading */
+
+.overlay-title {
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(30px, 4vw, 40px);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -1px;
+
+  color: #332824;
+}
+
+
+/* Overlay description */
+
+.overlay-description {
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+
+  line-height: 1.7;
+
+  color: #806f69;
+}
+
+/* ========================================
+   ACCOUNT OVERLAY
+======================================== */
+
+.account-overlay {
+  position: fixed !important;
+  inset: 0;
+
+  z-index: 99999;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 32px;
+
+  overflow-y: auto;
+}
+
+
+.account-overlay[hidden] {
+  display: none !important;
+}
+
+
+
+/* ========================================
+   BLURRED BACKGROUND
+======================================== */
+
+.account-overlay-backdrop {
+  position: fixed;
+  inset: 0;
+
+  z-index: 1;
+
+  background:
+    rgba(62, 48, 43, 0.30);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+
+
+/* ========================================
+   MAIN OVERLAY
+======================================== */
+
+.account-overlay-panel {
+  position: relative;
+
+  z-index: 2;
+
+  width: min(640px, 100%);
+
+  /* No scrolling */
+  max-height: none;
+  overflow: visible;
+
+  padding:
+    48px 54px 38px;
+
+  background: #fbf5f1;
+
+  border:
+    1px solid #cfaea5;
+
+  border-radius: 22px;
+
+  box-shadow:
+    0 25px 70px
+    rgba(54, 37, 32, 0.17);
+}
+
+
+
+
+/* ========================================
+   CLOSE BUTTON
+======================================== */
+
+.overlay-close {
+  position: absolute;
+
+  top: 21px;
+  right: 24px;
+
+  z-index: 5;
+
+  width: 32px;
+  height: 32px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 0;
+
+  border-radius: 50%;
+
+  background: transparent;
+
+  color: #74554d;
+
+  font-family:
+    Arial,
+    sans-serif;
+
+  font-size: 24px;
+  font-weight: 300;
+
+  line-height: 1;
+
+  transition:
+    background .25s ease,
+    transform .25s ease;
+}
+
+
+.overlay-close:hover {
+  background:
+    rgba(166, 103, 94, 0.09);
+
+  transform:
+    rotate(5deg);
+}
+
+
+
+/* ========================================
+   OVERLAY HEADING
+======================================== */
+
+.overlay-eyebrow {
+  margin:
+    0 0 12px;
+
+  color: #a6675e;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 2.5px;
+
+  text-transform: uppercase;
+}
+
+
+.overlay-title {
+  margin:
+    0 0 13px;
+
+  max-width: 500px;
+
+  color: #382a26;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size:
+    clamp(34px, 4vw, 43px);
+
+  font-weight: 400;
+
+  line-height: 1.05;
+
+  letter-spacing: -1.4px;
+}
+
+
+.overlay-description {
+  max-width: 430px;
+
+  margin:
+    0 0 28px;
+
+  color: #816c65;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 12px;
+  font-weight: 400;
+
+  line-height: 1.7;
+}
+
+
+
+/* ========================================
+   FORM FIELDS
+======================================== */
+
+.overlay-content .form-field {
+  position: relative;
+
+  margin-bottom: 19px;
+}
+
+
+.overlay-content .form-field label {
+  display: block;
+
+  margin-bottom: 9px;
+
+  color: #9d675e;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+
+
+/* INPUTS NOW LOOK LIKE ACTUAL FIELDS */
+
+.overlay-content .form-field input {
+  width: 100%;
+
+  min-height: 48px;
+
+  padding:
+    12px 15px;
+
+  border:
+    1px solid #dac8c1;
+
+  border-radius: 10px;
+
+  outline: none;
+
+  background:
+    rgba(255, 252, 250, 0.75);
+
+  color: #44332e;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 13px;
+
+  transition:
+    border-color .25s ease,
+    box-shadow .25s ease,
+    background .25s ease;
+}
+
+
+.overlay-content .form-field input:hover {
+  border-color:
+    #c9aaa1;
+}
+
+
+.overlay-content .form-field input:focus {
+  border-color:
+    #b7776c;
+
+  background:
+    #fffaf7;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(183, 119, 108, 0.08);
+}
+
+
+
+/* ========================================
+   FORM ACTIONS
+======================================== */
+
+.overlay-content .form-actions {
+  display: flex;
+
+  justify-content: flex-end;
+
+  gap: 12px;
+
+  margin-top: 26px;
+}
+
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.overlay-content .primary-button,
+.overlay-content .secondary-button {
+  min-width: 150px;
+
+  min-height: 46px;
+
+  padding:
+    13px 20px;
+
+  border-radius: 9px;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.7px;
+
+  text-transform: uppercase;
+
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease;
+}
+
+
+
+/* PRIMARY */
+
+.overlay-content .primary-button {
+  border:
+    1px solid #b16f65;
+
+  background:
+    #b16f65;
+
+  color: #ffffff;
+}
+
+
+.overlay-content .primary-button:hover {
+  background:
+    #9f6259;
+
+  border-color:
+    #9f6259;
+
+  transform:
+    translateY(-1px);
+}
+
+
+
+/* SECONDARY */
+
+.overlay-content .secondary-button {
+  border:
+    1px solid #d2bbb4;
+
+  background:
+    rgba(255, 255, 255, 0.25);
+
+  color: #755b54;
+}
+
+
+.overlay-content .secondary-button:hover {
+  border-color:
+    #b9857b;
+
+  background:
+    rgba(255, 255, 255, 0.55);
+
+  transform:
+    translateY(-1px);
+}
+
+
+
+/* ========================================
+   FORM MESSAGE
+======================================== */
+
+.overlay-content .form-message {
+  margin-top: 15px;
+
+  color: #a6675e;
+
+  font-size: 11px;
+
+  line-height: 1.5;
+}
+
+
+
+/* ========================================
+   MEASUREMENTS INSIDE OVERLAY
+======================================== */
+
+.overlay-content .measurement-hands {
+  display: grid;
+
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+
+  gap: 22px;
+
+  max-width: none;
+}
+
+
+.overlay-content .measurement-hand {
+  padding:
+    20px;
+
+  border:
+    1px solid #decac4;
+
+  border-radius: 13px;
+
+  background:
+    rgba(255, 252, 250, 0.45);
+}
+
+
+.overlay-content .measurement-hand h3 {
+  margin-bottom: 8px;
+
+  padding-bottom: 12px;
+
+  border-bottom:
+    1px solid #ddcbc5;
+
+  color: #a6675e;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.8px;
+
+  text-transform: uppercase;
+}
+
+
+.overlay-content .measurement-input-row {
+  min-height: 49px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  border-bottom:
+    1px solid #eaded9;
+}
+
+
+.overlay-content
+.measurement-input-row:last-child {
+  border-bottom: 0;
+}
+
+
+.overlay-content
+.measurement-input-row label {
+  color: #705c56;
+
+  font-size: 12px;
+}
+
+
+.overlay-content
+.measurement-input-row input {
+  width: 82px;
+
+  padding:
+    8px 10px;
+
+  border:
+    1px solid #dac8c1;
+
+  border-radius: 7px;
+
+  outline: none;
+
+  background:
+    #fffaf7;
+
+  color: #44332e;
+
+  text-align: center;
+}
+
+
+.overlay-content
+.measurement-input-row input:focus {
+  border-color:
+    #b7776c;
+
+  box-shadow:
+    0 0 0 3px
+    rgba(183, 119, 108, 0.07);
+}
+
+
+
+/* ========================================
+   PREVENT BACKGROUND SCROLL
+======================================== */
+
+body.overlay-open {
+  overflow: hidden;
+}
+
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 650px) {
+
+  .account-overlay {
+    align-items: flex-end;
+
+    padding: 0;
+  }
+
+
+  .account-overlay-panel {
+    width: 100%;
+
+    max-height: 92vh;
+
+    padding:
+      52px 23px 30px;
+
+    border-radius:
+      24px 24px 0 0;
+
+    border-bottom: 0;
+  }
+
+
+  .account-overlay-panel::before {
+    border-radius:
+      18px 18px 0 0;
+
+    border-bottom: 0;
+  }
+
+
+  .overlay-close {
+    top: 17px;
+    right: 19px;
+  }
+
+
+  .overlay-title {
+    font-size: 33px;
+  }
+
+
+  .overlay-description {
+    margin-bottom: 30px;
+  }
+
+
+  .overlay-content
+  .measurement-hands {
+    grid-template-columns: 1fr;
+
+    gap: 15px;
+  }
+
+
+  .overlay-content
+  .form-actions {
+    flex-direction: column-reverse;
+
+    gap: 9px;
+  }
+
+
+  .overlay-content
+  .primary-button,
+  .overlay-content
+  .secondary-button {
+    width: 100%;
+  }
+
+}
+
+/* ========================================
+   SHOW / HIDE PASSWORD
+======================================== */
+
+.password-input-wrap {
+  position: relative;
+}
+
+
+.password-input-wrap input {
+  padding-right: 70px !important;
+}
+
+
+.password-toggle {
+  position: absolute;
+
+  top: 50%;
+  right: 15px;
+
+  transform: translateY(-50%);
+
+  padding: 5px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #a6675e;
+
+  font-family:
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    color .2s ease,
+    opacity .2s ease;
+}
+
+
+.password-toggle:hover {
+  color: #7f4e47;
+}
+
+
+.password-toggle:focus-visible {
+  outline:
+    1px solid #a6675e;
+
+  outline-offset: 2px;
 }

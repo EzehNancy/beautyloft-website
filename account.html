@@ -10,14 +10,13 @@
     content="width=device-width, initial-scale=1.0"
   >
 
-  <title>My Orders | The BeautyLoft</title>
+  <title>My Account | The BeautyLoft</title>
 
   <link
     rel="stylesheet"
-    href="orders.css"
+    href="account.css"
   >
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="account.css">
 
 </head>
 
@@ -26,7 +25,7 @@
 
 
   <!-- ========================================
-       NAVBAR
+       YOUR EXISTING BEAUTYLOFT NAVBAR
   ========================================= -->
 
   <header>
@@ -116,345 +115,1019 @@
     </nav>
 
   </header>
+  <!-- ========================================
+       ACCOUNT PAGE
+  ========================================= -->
 
   <main class="account-page">
 
-  <!-- ========================================
-       ACCOUNT HERO
-  ========================================= -->
 
- <section class="account-hero">
+    <!-- PAGE HEADING -->
 
-  <p class="account-eyebrow">
-    YOUR BEAUTYLOFT
-  </p>
+    <section class="account-heading">
 
-  <h1>
-    Hi,
-    <em id="welcomeName">beautiful.</em>
-  </h1>
-
-  <p class="account-intro">
-    Manage your details and
-    saved nail measurements.
-  </p>
-
-</section>
-
-
-  <!-- ========================================
-       ACCOUNT NAVIGATION
-  ========================================= -->
-
-  <nav class="account-tabs">
-
-    <a
-      href="account.html"
-      class="active"
-    >
-      Account
-    </a>
-
-    <a href="orders.html">
-      My Orders
-    </a>
-
-    <a href="wishlist.html">
-      Wishlist
-    </a>
-
-    <button
-      type="button"
-      id="logoutButton"
-    >
-      Log Out
-    </button>
-
-  </nav>
-
-
-  <!-- ========================================
-       ACCOUNT GRID
-  ========================================= -->
-
-  <section class="account-grid">
-
-
-    <!-- PERSONAL DETAILS -->
-
-    <article class="account-section details-section">
-
-      <div class="section-number">
-        01
-      </div>
-
-      <div class="section-heading">
-
-        <p class="section-eyebrow">
-          YOUR DETAILS
-        </p>
-
-        <h2>
-          A little about
-          <em>you.</em>
-        </h2>
-
-      </div>
-
-
-      <div class="details-list">
-
-        <div class="detail-row">
-
-          <span class="detail-label">
-            Name
-          </span>
-
-          <span
-            class="detail-value"
-            id="customerName"
-          >
-            Loading...
-          </span>
-
-        </div>
-
-
-        <div class="detail-row">
-
-          <span class="detail-label">
-            Email
-          </span>
-
-          <span
-            class="detail-value"
-            id="customerEmail"
-          >
-            Loading...
-          </span>
-
-        </div>
-
-      </div>
-
-
-      <a
-        href="profile.html"
-        class="account-action"
-      >
-        Edit Details
-        <span>→</span>
-      </a>
-
-    </article>
-
-
-
-    <!-- ORDERS -->
-
-    <article class="account-section orders-section">
-
-      <div class="section-number">
-        02
-      </div>
-
-      <div class="section-heading">
-
-        <p class="section-eyebrow">
-          YOUR ORDERS
-        </p>
-
-        <h2>
-          From cart to
-          <em>you.</em>
-        </h2>
-
-      </div>
-
-
-      <p class="section-copy">
-        Keep up with your BeautyLoft
-        orders and revisit the sets
-        you've loved.
+      <p class="account-eyebrow">
+        YOUR BEAUTYLOFT
       </p>
 
+      <h1>
+        Your account,
+        <em>your way.</em>
+      </h1>
 
-      <a
-        href="orders.html"
-        class="account-action"
-      >
-        View My Orders
-        <span>→</span>
-      </a>
-
-    </article>
+    </section>
 
 
 
     <!-- ========================================
-         MEASUREMENTS
+         ACCOUNT LAYOUT
     ========================================= -->
 
-    <article class="account-section measurements-section">
-
-      <div class="section-number">
-        03
-      </div>
+    <section class="account-layout">
 
 
-      <div class="section-heading">
+      <!-- ========================================
+           SIDEBAR
+      ========================================= -->
 
-        <p class="section-eyebrow">
-          YOUR FIT
-        </p>
-
-        <h2>
-          Made to fit
-          <em>you.</em>
-        </h2>
-
-      </div>
+      <aside class="account-sidebar">
 
 
-      <!-- LOADING -->
+        <div class="account-user">
 
-      <div
-        class="measurements-loading"
-        id="measurementsLoading"
-      >
-        Loading your saved fit...
-      </div>
+          <span class="account-user-label">
+            SIGNED IN AS
+          </span>
 
-
-      <!-- SAVED MEASUREMENTS -->
-
-      <div
-        class="saved-measurements"
-        id="savedMeasurements"
-        hidden
-      >
-
-        <div class="hand-grid">
-
-          <div class="hand">
-
-            <p class="hand-title">
-              Left Hand
-            </p>
-
-            <div
-              class="finger-list"
-              id="leftHandMeasurements"
-            ></div>
-
-          </div>
-
-
-          <div class="hand">
-
-            <p class="hand-title">
-              Right Hand
-            </p>
-
-            <div
-              class="finger-list"
-              id="rightHandMeasurements"
-            ></div>
-
-          </div>
+          <strong id="sidebarUserName">
+            Loading...
+          </strong>
 
         </div>
 
 
-        <a
-          href="checkout.html"
-          class="account-action"
+        <nav class="account-navigation">
+
+          <a
+            href="account.html"
+            class="active"
+          >
+            <span>Account</span>
+            <span>→</span>
+          </a>
+
+
+          <a href="orders.html">
+
+            <span>My Orders</span>
+            <span>→</span>
+
+          </a>
+
+
+          <a href="wishlist.html">
+
+            <span>Wishlist</span>
+            <span>→</span>
+
+          </a>
+
+        </nav>
+
+
+        <button
+          type="button"
+          class="account-logout"
+          id="logoutButton"
         >
-          Update Measurements
+          <span>Log Out</span>
           <span>→</span>
-        </a>
-
-      </div>
+        </button>
 
 
-      <!-- NO MEASUREMENTS -->
+      </aside>
 
-      <div
-        class="no-measurements"
-        id="noMeasurements"
-        hidden
-      >
 
-        <p>
-          Save your nail measurements
-          once and we'll have your fit
-          ready whenever it's time for
-          your next set.
-        </p>
 
-        <a
-          href="shop.html"
-          class="account-action"
+      <!-- ========================================
+           MAIN CONTENT
+      ========================================= -->
+
+      <div class="account-content">
+
+
+        <!-- ========================================
+             PERSONAL DETAILS
+        ========================================= -->
+
+        <section
+          class="settings-section"
+          id="personalDetails"
         >
-          Find Your Next Set
-          <span>→</span>
-        </a>
 
-      </div>
+          <div class="section-heading">
 
-    </article>
+            <div>
 
+              <p class="content-eyebrow">
+                PROFILE
+              </p>
 
+              <h2>
+                Personal Details
+              </h2>
 
-    <!-- WISHLIST -->
-
-    <article class="account-section wishlist-section">
-
-      <div class="section-number">
-        04
-      </div>
-
-      <div class="section-heading">
-
-        <p class="section-eyebrow">
-          YOUR FAVOURITES
-        </p>
-
-        <h2>
-          Still thinking
-          <em>about it?</em>
-        </h2>
-
-      </div>
+            </div>
 
 
-      <p class="section-copy">
-        All the BeautyLoft sets you've
-        been eyeing, waiting right where
-        you left them.
+            <button
+              type="button"
+              class="text-button"
+              id="editDetailsButton"
+            >
+              Edit
+            </button>
+
+          </div>
+
+
+
+         <div id="detailsEditor">
+             <div class="details-form">
+
+
+            <div class="form-field">
+
+              <label for="accountName">
+                Name
+              </label>
+
+              <input
+                type="text"
+                id="accountName"
+                disabled
+              >
+
+            </div>
+
+
+
+            <div class="form-field">
+
+              <label for="accountEmail">
+                Email Address
+              </label>
+
+              <input
+                type="email"
+                id="accountEmail"
+                disabled
+              >
+
+            </div>
+
+
+          </div>
+
+
+
+          <div
+            class="form-actions"
+            id="detailsActions"
+            hidden
+          >
+
+            <button
+              type="button"
+              class="secondary-button"
+              id="cancelDetailsButton"
+            >
+              Cancel
+            </button>
+
+            <button
+              type="button"
+              class="primary-button"
+              id="saveDetailsButton"
+            >
+              Save Changes
+            </button>
+
+          </div>
+
+
+          <p
+            class="form-message"
+            id="detailsMessage"
+          ></p>
+         </div>
+
+
+        </section>
+
+
+
+        <!-- ========================================
+             SAVED ADDRESS
+        ========================================= -->
+
+        <section
+          class="settings-section"
+          id="addressSection"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <p class="content-eyebrow">
+                DELIVERY
+              </p>
+
+              <h2>
+                Saved Address
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <p class="section-description">
+            Keep your delivery details ready
+            for a smoother checkout.
+          </p>
+
+
+          <div
+            class="empty-setting"
+            id="addressEmpty"
+          >
+
+            <p>
+              You don't have a saved
+              delivery address yet.
+            </p>
+
+            <button
+              type="button"
+              class="text-button"
+              id="addAddressButton"
+            >
+              Add Address →
+            </button>
+
+          </div>
+
+
+          <div
+            class="address-form"
+            id="addressForm"
+            hidden
+          >
+
+
+            <div class="form-row">
+
+
+              <div class="form-field">
+
+                <label for="addressFirstName">
+                  First Name
+                </label>
+
+                <input
+                  type="text"
+                  id="addressFirstName"
+                >
+
+              </div>
+
+
+              <div class="form-field">
+
+                <label for="addressLastName">
+                  Last Name
+                </label>
+
+                <input
+                  type="text"
+                  id="addressLastName"
+                >
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+              <div class="form-field">
+
+                <label for="addressPhone">
+                  Phone Number
+                </label>
+
+                <input
+                  type="tel"
+                  id="addressPhone"
+                >
+
+              </div>
+
+
+              <div class="form-field">
+
+                <label for="addressArea">
+                  Delivery Area
+                </label>
+
+                <input
+                  type="text"
+                  id="addressArea"
+                >
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="form-field">
+
+              <label for="addressStreet">
+                Address
+              </label>
+
+              <input
+                type="text"
+                id="addressStreet"
+              >
+
+            </div>
+
+
+
+            <div class="form-row">
+
+
+              <div class="form-field">
+
+                <label for="addressCity">
+                  City
+                </label>
+
+                <input
+                  type="text"
+                  id="addressCity"
+                  value="Lagos"
+                >
+
+              </div>
+
+
+              <div class="form-field">
+
+                <label for="addressState">
+                  State
+                </label>
+
+                <input
+                  type="text"
+                  id="addressState"
+                  value="Lagos"
+                >
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="cancelAddressButton"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                class="primary-button"
+                id="saveAddressButton"
+              >
+                Save Address
+              </button>
+
+            </div>
+
+
+            <p
+              class="form-message"
+              id="addressMessage"
+            ></p>
+
+
+          </div>
+
+
+        </section>
+
+
+
+        <!-- ========================================
+             MEASUREMENTS
+        ========================================= -->
+
+        <section
+          class="settings-section"
+          id="measurementsSection"
+        >
+
+
+          <div class="section-heading">
+
+            <div>
+
+              <p class="content-eyebrow">
+                YOUR FIT
+              </p>
+
+              <h2>
+                Nail Measurements
+              </h2>
+
+            </div>
+
+
+            <button
+              type="button"
+              class="text-button"
+              id="editMeasurementsButton"
+              hidden
+            >
+              Edit
+            </button>
+
+          </div>
+
+
+
+          <p class="section-description">
+            Your saved measurements make
+            ordering your next set easier.
+          </p>
+
+
+
+          <p
+            class="measurements-loading"
+            id="measurementsLoading"
+          >
+            Loading measurements...
+          </p>
+
+
+
+          <!-- SAVED MEASUREMENTS -->
+
+          <div
+            class="saved-measurements"
+            id="savedMeasurements"
+            hidden
+          >
+
+
+            <div class="measurement-hands">
+
+
+              <!-- LEFT -->
+
+              <div class="measurement-hand">
+
+                <h3>
+                  Left Hand
+                </h3>
+
+                <div
+                  id="leftHandMeasurements"
+                ></div>
+
+              </div>
+
+
+
+              <!-- RIGHT -->
+
+              <div class="measurement-hand">
+
+                <h3>
+                  Right Hand
+                </h3>
+
+                <div
+                  id="rightHandMeasurements"
+                ></div>
+
+              </div>
+
+
+            </div>
+
+
+          </div>
+
+
+
+          <!-- NO MEASUREMENTS -->
+
+          <div
+            class="empty-setting"
+            id="noMeasurements"
+            hidden
+          >
+
+            <p>
+              You haven't saved your
+              nail measurements yet.
+            </p>
+
+            <button
+              type="button"
+              class="text-button"
+              id="addMeasurementsButton"
+            >
+              Add Measurements →
+            </button>
+
+          </div>
+
+
+
+          <!-- EDIT MEASUREMENTS -->
+
+          <div
+            class="measurement-form"
+            id="measurementForm"
+            hidden
+          >
+
+
+            <div class="measurement-hands">
+
+
+              <!-- LEFT FORM -->
+
+              <div class="measurement-hand">
+
+                <h3>
+                  Left Hand
+                </h3>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="leftThumb">
+                    Thumb
+                  </label>
+
+                  <input
+                    type="number"
+                    id="leftThumb"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="leftIndex">
+                    Index
+                  </label>
+
+                  <input
+                    type="number"
+                    id="leftIndex"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="leftMiddle">
+                    Middle
+                  </label>
+
+                  <input
+                    type="number"
+                    id="leftMiddle"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="leftRing">
+                    Ring
+                  </label>
+
+                  <input
+                    type="number"
+                    id="leftRing"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="leftPinky">
+                    Pinky
+                  </label>
+
+                  <input
+                    type="number"
+                    id="leftPinky"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+              </div>
+
+
+
+              <!-- RIGHT FORM -->
+
+              <div class="measurement-hand">
+
+                <h3>
+                  Right Hand
+                </h3>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="rightThumb">
+                    Thumb
+                  </label>
+
+                  <input
+                    type="number"
+                    id="rightThumb"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="rightIndex">
+                    Index
+                  </label>
+
+                  <input
+                    type="number"
+                    id="rightIndex"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="rightMiddle">
+                    Middle
+                  </label>
+
+                  <input
+                    type="number"
+                    id="rightMiddle"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="rightRing">
+                    Ring
+                  </label>
+
+                  <input
+                    type="number"
+                    id="rightRing"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+                <div class="measurement-input-row">
+
+                  <label for="rightPinky">
+                    Pinky
+                  </label>
+
+                  <input
+                    type="number"
+                    id="rightPinky"
+                    step="0.1"
+                  >
+
+                </div>
+
+
+              </div>
+
+
+            </div>
+
+
+
+            <div class="form-actions">
+
+              <button
+                type="button"
+                class="secondary-button"
+                id="cancelMeasurementsButton"
+              >
+                Cancel
+              </button>
+
+              <button
+                type="button"
+                class="primary-button"
+                id="saveMeasurementsButton"
+              >
+                Save Measurements
+              </button>
+
+            </div>
+
+
+            <p
+              class="form-message"
+              id="measurementsMessage"
+            ></p>
+
+
+          </div>
+
+
+        </section>
+
+
+
+<!-- ========================================
+     PASSWORD
+========================================= -->
+
+<section
+  class="settings-section"
+  id="securitySection"
+>
+
+  <div class="section-heading">
+
+    <div>
+
+      <p class="content-eyebrow">
+        SECURITY
       </p>
 
+      <h2>
+        Password
+      </h2>
 
-      <a
-        href="wishlist.html"
-        class="account-action"
+    </div>
+
+
+    <button
+      type="button"
+      class="text-button"
+      id="changePasswordButton"
+    >
+      Change Password
+    </button>
+
+  </div>
+
+
+  <p class="section-description">
+    Keep your BeautyLoft account
+    secure with a password only
+    you know.
+  </p>
+
+
+  <!-- PASSWORD FORM -->
+
+  <div
+    class="password-form"
+    id="passwordForm"
+    hidden
+  >
+
+
+    <!-- CURRENT PASSWORD -->
+
+    <div class="form-field">
+
+      <label for="currentPassword">
+        Current Password
+      </label>
+
+      <div class="password-input-wrap">
+
+        <input
+          type="password"
+          id="currentPassword"
+          autocomplete="current-password"
+        >
+
+        <button
+          type="button"
+          class="password-toggle"
+          aria-label="Show password"
+        >
+          Show
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- NEW PASSWORD -->
+
+    <div class="form-field">
+
+      <label for="newPassword">
+        New Password
+      </label>
+
+      <div class="password-input-wrap">
+
+        <input
+          type="password"
+          id="newPassword"
+          autocomplete="new-password"
+        >
+
+        <button
+          type="button"
+          class="password-toggle"
+          aria-label="Show password"
+        >
+          Show
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- CONFIRM PASSWORD -->
+
+    <div class="form-field">
+
+      <label for="confirmPassword">
+        Confirm New Password
+      </label>
+
+      <div class="password-input-wrap">
+
+        <input
+          type="password"
+          id="confirmPassword"
+          autocomplete="new-password"
+        >
+
+        <button
+          type="button"
+          class="password-toggle"
+          aria-label="Show password"
+        >
+          Show
+        </button>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- ACTIONS -->
+
+    <div class="form-actions">
+
+      <button
+        type="button"
+        class="secondary-button"
+        id="cancelPasswordButton"
       >
-        View Wishlist
-        <span>→</span>
-      </a>
-
-    </article>
+        Cancel
+      </button>
 
 
-  </section>
+      <button
+        type="button"
+        class="primary-button"
+        id="savePasswordButton"
+      >
+        Update Password
+      </button>
 
-</main>
+    </div>
 
 
-  <script src="orders.js"></script>
+
+    <!-- MESSAGE -->
+
+    <p
+      class="form-message"
+      id="passwordMessage"
+    ></p>
+
+
+  </div>
+
+</section>
+
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+
+  <!-- ========================================
+       YOUR EXISTING BEAUTYLOFT FOOTER
+  ========================================= -->
+
+  <!-- COPY THE SAME FOOTER FROM orders.html HERE -->
+<!-- ========================================
+     ACCOUNT OVERLAY
+======================================== -->
+
+<div
+  class="account-overlay"
+  id="accountOverlay"
+  hidden
+>
+
+  <div
+    class="account-overlay-backdrop"
+    id="overlayBackdrop"
+  ></div>
+
+
+  <div class="account-overlay-panel">
+
+    <button
+      type="button"
+      class="overlay-close"
+      id="overlayClose"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+
+    <div
+      class="overlay-content"
+      id="overlayContent"
+    ></div>
+
+  </div>
+
+</div>
+
   <script src="account.js"></script>
 
 </body>
 
 </html>
-
