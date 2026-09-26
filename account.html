@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>My Orders | The BeautyLoft</title>
+
+  <link
+    rel="stylesheet"
+    href="orders.css"
+  >
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="account.css">
+
+</head>
+
+
+<body>
+
+
+  <!-- ========================================
+       NAVBAR
+  ========================================= -->
+
+  <header>
+
+     <a href="#top" class="logo">The <span>BeautyLoft</span></a>
+
+
+    <button
+      id="menuToggle"
+      type="button"
+    >
+      ☰
+    </button>
+
+    <nav>
+
+      <ul id="navList">
+
+        <li>
+          <a href="shop-home.html">
+            Shop
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#work">
+            Work
+          </a>
+        </li>
+
+        <li class="wishlist-nav-item">
+
+          <a
+            href="wishlist.html"
+            class="wishlist-nav-link"
+            aria-label="Wishlist"
+          >
+
+            <span class="wishlist-nav-icon">
+              ♡
+            </span>
+
+            <span class="wishlist-nav-text">
+              Wishlist
+            </span>
+
+          </a>
+
+        </li>
+
+        <li>
+          <a
+            href="models.html"
+            id="modelsNavLink"
+          >
+            Models
+          </a>
+        </li>
+
+        <li>
+          <a href="index.html#contact">
+            Contact
+          </a>
+        </li>
+
+        <li class="bottom-nav-duplicate">
+
+          <a href="booking.html">
+            Book Now
+          </a>
+
+        </li>
+
+        <li
+          id="authNavItem"
+          class="bottom-nav-duplicate"
+        >
+
+          <a href="login.html">
+            Log In
+          </a>
+
+        </li>
+
+      </ul>
+
+    </nav>
+
+  </header>
+
+  <main class="account-page">
+
+  <!-- ========================================
+       ACCOUNT HERO
+  ========================================= -->
+
+ <section class="account-hero">
+
+  <p class="account-eyebrow">
+    YOUR BEAUTYLOFT
+  </p>
+
+  <h1>
+    Hi,
+    <em id="welcomeName">beautiful.</em>
+  </h1>
+
+  <p class="account-intro">
+    Manage your details and
+    saved nail measurements.
+  </p>
+
+</section>
+
+
+  <!-- ========================================
+       ACCOUNT NAVIGATION
+  ========================================= -->
+
+  <nav class="account-tabs">
+
+    <a
+      href="account.html"
+      class="active"
+    >
+      Account
+    </a>
+
+    <a href="orders.html">
+      My Orders
+    </a>
+
+    <a href="wishlist.html">
+      Wishlist
+    </a>
+
+    <button
+      type="button"
+      id="logoutButton"
+    >
+      Log Out
+    </button>
+
+  </nav>
+
+
+  <!-- ========================================
+       ACCOUNT GRID
+  ========================================= -->
+
+  <section class="account-grid">
+
+
+    <!-- PERSONAL DETAILS -->
+
+    <article class="account-section details-section">
+
+      <div class="section-number">
+        01
+      </div>
+
+      <div class="section-heading">
+
+        <p class="section-eyebrow">
+          YOUR DETAILS
+        </p>
+
+        <h2>
+          A little about
+          <em>you.</em>
+        </h2>
+
+      </div>
+
+
+      <div class="details-list">
+
+        <div class="detail-row">
+
+          <span class="detail-label">
+            Name
+          </span>
+
+          <span
+            class="detail-value"
+            id="customerName"
+          >
+            Loading...
+          </span>
+
+        </div>
+
+
+        <div class="detail-row">
+
+          <span class="detail-label">
+            Email
+          </span>
+
+          <span
+            class="detail-value"
+            id="customerEmail"
+          >
+            Loading...
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <a
+        href="profile.html"
+        class="account-action"
+      >
+        Edit Details
+        <span>→</span>
+      </a>
+
+    </article>
+
+
+
+    <!-- ORDERS -->
+
+    <article class="account-section orders-section">
+
+      <div class="section-number">
+        02
+      </div>
+
+      <div class="section-heading">
+
+        <p class="section-eyebrow">
+          YOUR ORDERS
+        </p>
+
+        <h2>
+          From cart to
+          <em>you.</em>
+        </h2>
+
+      </div>
+
+
+      <p class="section-copy">
+        Keep up with your BeautyLoft
+        orders and revisit the sets
+        you've loved.
+      </p>
+
+
+      <a
+        href="orders.html"
+        class="account-action"
+      >
+        View My Orders
+        <span>→</span>
+      </a>
+
+    </article>
+
+
+
+    <!-- ========================================
+         MEASUREMENTS
+    ========================================= -->
+
+    <article class="account-section measurements-section">
+
+      <div class="section-number">
+        03
+      </div>
+
+
+      <div class="section-heading">
+
+        <p class="section-eyebrow">
+          YOUR FIT
+        </p>
+
+        <h2>
+          Made to fit
+          <em>you.</em>
+        </h2>
+
+      </div>
+
+
+      <!-- LOADING -->
+
+      <div
+        class="measurements-loading"
+        id="measurementsLoading"
+      >
+        Loading your saved fit...
+      </div>
+
+
+      <!-- SAVED MEASUREMENTS -->
+
+      <div
+        class="saved-measurements"
+        id="savedMeasurements"
+        hidden
+      >
+
+        <div class="hand-grid">
+
+          <div class="hand">
+
+            <p class="hand-title">
+              Left Hand
+            </p>
+
+            <div
+              class="finger-list"
+              id="leftHandMeasurements"
+            ></div>
+
+          </div>
+
+
+          <div class="hand">
+
+            <p class="hand-title">
+              Right Hand
+            </p>
+
+            <div
+              class="finger-list"
+              id="rightHandMeasurements"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <a
+          href="checkout.html"
+          class="account-action"
+        >
+          Update Measurements
+          <span>→</span>
+        </a>
+
+      </div>
+
+
+      <!-- NO MEASUREMENTS -->
+
+      <div
+        class="no-measurements"
+        id="noMeasurements"
+        hidden
+      >
+
+        <p>
+          Save your nail measurements
+          once and we'll have your fit
+          ready whenever it's time for
+          your next set.
+        </p>
+
+        <a
+          href="shop.html"
+          class="account-action"
+        >
+          Find Your Next Set
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </article>
+
+
+
+    <!-- WISHLIST -->
+
+    <article class="account-section wishlist-section">
+
+      <div class="section-number">
+        04
+      </div>
+
+      <div class="section-heading">
+
+        <p class="section-eyebrow">
+          YOUR FAVOURITES
+        </p>
+
+        <h2>
+          Still thinking
+          <em>about it?</em>
+        </h2>
+
+      </div>
+
+
+      <p class="section-copy">
+        All the BeautyLoft sets you've
+        been eyeing, waiting right where
+        you left them.
+      </p>
+
+
+      <a
+        href="wishlist.html"
+        class="account-action"
+      >
+        View Wishlist
+        <span>→</span>
+      </a>
+
+    </article>
+
+
+  </section>
+
+</main>
+
+
+  <script src="orders.js"></script>
+  <script src="account.js"></script>
+
+</body>
+
+</html>
+
