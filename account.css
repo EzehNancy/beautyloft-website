@@ -1788,3 +1788,44 @@ body.overlay-open {
 
   outline-offset: 2px;
 }
+
+/* ========================================
+   SAVED ADDRESS
+======================================== */
+
+.saved-address-preview {
+  padding:
+    5px 0;
+}
+
+
+.saved-address-preview p {
+  margin:
+    0 0 6px;
+
+  color: #66544e;
+
+  font-size: 12px;
+
+  line-height: 1.6;
+}
+
+
+.saved-address-preview p:first-child {
+  margin-bottom: 10px;
+
+  color: #3e302c;
+
+  font-family:
+    Georgia,
+    "Times New Roman",
+    serif;
+
+  font-size: 16px;
+}
+
+
+.saved-address-preview
+.text-button {
+  margin-top: 12px;
+}
