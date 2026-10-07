@@ -281,7 +281,7 @@ function showCheckoutStep(step) {
 
 
   currentCheckoutStep = step;
-
+  saveCheckoutProgress();
 
   window.scrollTo({
     top: 0,
@@ -455,6 +455,216 @@ instructions:
 
 }
 
+/* ========================================
+   CHECKOUT PROGRESS STORAGE
+======================================== */
+
+const CHECKOUT_PROGRESS_KEY =
+  'beautyLoftCheckoutProgress';
+
+
+function saveCheckoutProgress() {
+
+  const data = {
+    step: currentCheckoutStep,
+
+    measurements: getMeasurements(),
+
+    saveMeasurements:
+      document.getElementById(
+        'saveMeasurements'
+      ).checked,
+
+    delivery: getDeliveryDetails(),
+
+    paymentMethod:
+      selectedPaymentMethod
+  };
+
+  localStorage.setItem(
+    CHECKOUT_PROGRESS_KEY,
+    JSON.stringify(data)
+  );
+}
+
+
+function restoreCheckoutProgress() {
+
+  const saved =
+    localStorage.getItem(
+      CHECKOUT_PROGRESS_KEY
+    );
+
+  if (!saved) {
+    showCheckoutStep(1);
+    return;
+  }
+
+  try {
+
+    const data = JSON.parse(saved);
+
+
+    /* RESTORE MEASUREMENTS */
+
+    if (data.measurements) {
+
+      measurementFields.forEach(
+        function(field) {
+
+          if (
+            data.measurements[field] !== null &&
+            data.measurements[field] !== undefined
+          ) {
+
+            document.getElementById(
+              field
+            ).value =
+              data.measurements[field];
+
+          }
+
+        }
+      );
+
+    }
+
+
+    /* RESTORE SAVE MEASUREMENTS */
+
+    document.getElementById(
+      'saveMeasurements'
+    ).checked =
+      !!data.saveMeasurements;
+
+
+    /* RESTORE DELIVERY DETAILS */
+
+    if (data.delivery) {
+
+      const fields = {
+        firstName: 'firstName',
+        lastName: 'lastName',
+        email: 'email',
+        phone: 'phone',
+        address: 'address',
+        city: 'city',
+        state: 'state',
+        area: 'deliveryArea',
+        instructions:
+          'deliveryInstructions'
+      };
+
+
+      Object.entries(fields).forEach(
+        function([key, id]) {
+
+          const element =
+            document.getElementById(id);
+
+          if (
+            element &&
+            data.delivery[key] !== undefined &&
+            data.delivery[key] !== null
+          ) {
+
+            element.value =
+              data.delivery[key];
+
+          }
+
+        }
+      );
+
+
+      selectedDeliveryFee =
+        getSelectedDeliveryFee();
+
+      updateCheckoutTotal();
+
+    }
+
+
+    /* RESTORE PAYMENT METHOD */
+
+    if (
+      data.paymentMethod ===
+      'bank-transfer'
+    ) {
+
+      bankTransferMethod.click();
+
+    } else {
+
+      paystackMethod.click();
+
+    }
+
+
+    /* RESTORE STEP */
+
+    let savedStep =
+      Number(data.step) || 1;
+
+    /*
+      Do not restore directly to Payment
+      unless an order already exists.
+    */
+
+    if (
+      savedStep === 4 &&
+      !currentPendingOrder
+    ) {
+
+      savedStep = 3;
+
+    }
+
+
+    if (savedStep >= 3) {
+      renderReview();
+    }
+
+
+    showCheckoutStep(savedStep);
+
+
+  } catch (error) {
+
+    console.error(
+      'CHECKOUT RESTORE ERROR:',
+      error
+    );
+
+    localStorage.removeItem(
+      CHECKOUT_PROGRESS_KEY
+    );
+
+    showCheckoutStep(1);
+
+  }
+
+}
+
+document
+  .querySelectorAll(
+    '.checkout-step input, ' +
+    '.checkout-step textarea, ' +
+    '.checkout-step select'
+  )
+  .forEach(function(field) {
+
+    field.addEventListener(
+      'input',
+      saveCheckoutProgress
+    );
+
+    field.addEventListener(
+      'change',
+      saveCheckoutProgress
+    );
+
+  });
 
 function validateDelivery() {
 
@@ -1786,5 +1996,5 @@ populateDeliveryAreas();
 
 renderCheckoutSummary();
 
-showCheckoutStep(1);
+restoreCheckoutProgress();
 

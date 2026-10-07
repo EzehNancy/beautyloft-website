@@ -855,6 +855,125 @@ function openOrderModal(
 
 
 
+    <div class="modal-delivery">
+
+      <h3>
+        Delivery Details
+      </h3>
+
+
+      <div class="modal-delivery-grid">
+
+        <div>
+          <span class="modal-label">
+            Recipient
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              [
+                order.first_name,
+                order.last_name
+              ]
+                .filter(Boolean)
+                .join(' ') || '—'
+            )}
+          </strong>
+        </div>
+
+
+        <div>
+          <span class="modal-label">
+            Phone
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              order.phone || '—'
+            )}
+          </strong>
+        </div>
+
+
+        <div>
+          <span class="modal-label">
+            Delivery Area
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              order.delivery_area || '—'
+            )}
+          </strong>
+        </div>
+
+
+        <div>
+          <span class="modal-label">
+            Address
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              order.delivery_address ||
+              '—'
+            )}
+          </strong>
+        </div>
+
+
+        <div>
+          <span class="modal-label">
+            City
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              order.city || '—'
+            )}
+          </strong>
+        </div>
+
+
+        <div>
+          <span class="modal-label">
+            State
+          </span>
+
+          <strong>
+            ${escapeHtml(
+              order.state || '—'
+            )}
+          </strong>
+        </div>
+
+      </div>
+
+
+      ${
+        order.delivery_instructions
+          ? `
+              <div class="modal-delivery-note">
+
+                <span class="modal-label">
+                  Delivery Instructions
+                </span>
+
+                <p>
+                  ${escapeHtml(
+                    order.delivery_instructions
+                  )}
+                </p>
+
+              </div>
+            `
+          : ''
+      }
+
+    </div>
+
+
+
     <div class="modal-items">
 
       <h3>

@@ -39,6 +39,42 @@ document.getElementById('mobileSidebarToggle').addEventListener('click', functio
 
 let allProducts = [];
 
+function getStockBadge(stockQuantity) {
+
+  const stock = Number(stockQuantity) || 0;
+
+  if (stock <= 0) {
+    return `
+      <div class="inventory-stock">
+        <strong>${stock}</strong>
+        <span class="inventory-badge out-of-stock">
+          Out of Stock
+        </span>
+      </div>
+    `;
+  }
+
+  if (stock <= 5) {
+    return `
+      <div class="inventory-stock">
+        <strong>${stock}</strong>
+        <span class="inventory-badge low-stock">
+          Low Stock
+        </span>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="inventory-stock">
+      <strong>${stock}</strong>
+      <span class="inventory-badge in-stock">
+        In Stock
+      </span>
+    </div>
+  `;
+}
+
 function loadProducts() {
   fetch('https://beautyloft-backend.onrender.com/admin/products', {
     headers: { 'Authorization': 'Bearer ' + authToken },
@@ -70,7 +106,7 @@ function loadProducts() {
     : '—'
 ) + '</td>' +
             '<td>₦' + nairaPrice + '</td>' +
-            '<td>' + p.stock_quantity + '</td>' +
+            '<td>' + getStockBadge(p.stock_quantity) + '</td>' +
             '<td><span class="status-badge status-' + (p.is_active ? 'confirmed' : 'cancelled') + '">' + (p.is_active ? 'Active' : 'Hidden') + '</span></td>' +
             '<td>' +
               '<button class="admin-action-btn edit-product-btn" data-id="' + p.id + '">Edit</button>' +

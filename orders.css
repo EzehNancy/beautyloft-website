@@ -1782,3 +1782,54 @@ button {
   font-weight: 400 !important;
   letter-spacing: 0.2px !important;
 }
+
+.modal-delivery {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid #ead8d3;
+}
+
+.modal-delivery h3 {
+  margin: 0 0 20px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.modal-delivery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px 30px;
+}
+
+.modal-delivery-grid > div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-delivery-grid strong {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.modal-delivery-note {
+  margin-top: 20px;
+  padding: 15px 18px;
+  background: #faf4f1;
+  border-radius: 8px;
+}
+
+.modal-delivery-note p {
+  margin: 7px 0 0;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+@media (max-width: 600px) {
+  .modal-delivery-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}

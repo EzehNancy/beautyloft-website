@@ -9111,3 +9111,52 @@ margin-top: 40px
 
   stroke-linejoin: round;
 }
+
+/* =========================
+   INVENTORY STOCK
+========================= */
+
+.inventory-stock {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.inventory-stock strong {
+  min-width: 22px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.inventory-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 9px;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+  font-weight: 600;
+
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+
+  white-space: nowrap;
+}
+
+.inventory-badge.in-stock {
+  background: #eef4ee;
+  color: #58705a;
+}
+
+.inventory-badge.low-stock {
+  background: #fff4df;
+  color: #9a6a28;
+}
+
+.inventory-badge.out-of-stock {
+  background: #f7e7e4;
+  color: #a45148;
+}
