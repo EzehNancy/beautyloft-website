@@ -320,3 +320,60 @@ body {
   max-width: 310px;
 }
 }
+
+/* =========================
+   SIDE BRAND
+========================= */
+
+.side-brand {
+  position: fixed;
+
+  left: 18px;
+  top: 50%;
+
+  transform:
+    translateY(-50%)
+    rotate(-90deg);
+
+  transform-origin: center;
+
+  color: #c18479;
+
+  font-size: 8px;
+  font-weight: 600;
+
+  letter-spacing: 4px;
+
+  white-space: nowrap;
+
+  z-index: 1;
+}
+
+/* =========================
+   BOTTOM NOTE
+========================= */
+
+.bottom-note {
+  position: fixed;
+
+  left: 50%;
+  bottom: 28px;
+
+  transform: translateX(-50%);
+
+  color: #bf8277;
+
+  font-family:
+    Georgia,
+    'Times New Roman',
+    serif;
+
+  font-size: 10px;
+  font-style: italic;
+
+  letter-spacing: 2px;
+
+  white-space: nowrap;
+
+  z-index: 1;
+}
