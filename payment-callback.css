@@ -242,20 +242,20 @@ body {
 }
 
 
-.payment-button {
+/* Both buttons */
+
+.payment-primary-button,
+.payment-secondary-button {
   min-width: 190px;
 
   padding: 15px 25px;
 
-  border:
-    1px solid
-    #a8665b;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 
+  border: 1px solid #a8665b;
   border-radius: 30px;
-
-  background: #a8665b;
-
-  color: #fff;
 
   text-decoration: none;
 
@@ -263,25 +263,41 @@ body {
   font-weight: 600;
 
   letter-spacing: 1.5px;
-
   text-transform: uppercase;
+
+  cursor: pointer;
+
+  font-family:
+    Arial,
+    Helvetica,
+    sans-serif;
 
   transition:
     transform 0.25s ease,
     background 0.25s ease,
-    color 0.25s ease;
+    color 0.25s ease,
+    border-color 0.25s ease;
 }
 
 
-.payment-button:hover {
+/* Primary button */
+
+.payment-primary-button {
+  background: #a8665b;
+  color: #fff;
+}
+
+.payment-primary-button:hover {
   background: #92584f;
+  border-color: #92584f;
 
-  transform:
-    translateY(-2px);
+  transform: translateY(-2px);
 }
 
 
-.payment-button.secondary {
+/* Secondary button */
+
+.payment-secondary-button {
   background: transparent;
 
   color: #a8665b;
@@ -289,211 +305,18 @@ body {
   border-color: #c99187;
 }
 
-
-.payment-button.secondary:hover {
+.payment-secondary-button:hover {
   background: #f4dfd9;
 
   color: #92584f;
+
+  transform: translateY(-2px);
 }
-
-
-/* =========================
-   SIDE BRAND
-========================= */
-
-.side-brand {
-  position: absolute;
-
-  left: 13px;
-  top: 50%;
-
-  transform:
-    translateY(-50%)
-    rotate(-90deg);
-
-  transform-origin: center;
-
-  color: #c18479;
-
-  font-size: 8px;
-  font-weight: 600;
-
-  letter-spacing: 4px;
-}
-
-
-/* =========================
-   SPARKLES
-========================= */
-
-.sparkle {
-  position: absolute;
-
-  color: #c88d82;
-
-  font-family:
-    Georgia,
-    serif;
-}
-
-
-.sparkle-one {
-  top: 12%;
-  left: 12%;
-
-  font-size: 18px;
-}
-
-
-.sparkle-two {
-  right: 13%;
-  bottom: 18%;
-
-  font-size: 28px;
-
-  opacity: 0.55;
-}
-
-
-/* =========================
-   BOTTOM NOTE
-========================= */
-
-.bottom-note {
-  position: absolute;
-
-  bottom: 28px;
-
-  color: #bf8277;
-
-  font-family:
-    Georgia,
-    'Times New Roman',
-    serif;
-
-  font-size: 10px;
-  font-style: italic;
-
-  letter-spacing: 2px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
 
 @media (max-width: 600px) {
-
-  .payment-page {
+  .payment-primary-button,
+.payment-secondary-button {
   width: 100%;
-  height: 100svh;
-  min-height: 0;
-
-  padding:
-    25px 20px
-    45px;
+  max-width: 310px;
 }
-
-  .payment-logo {
-    margin-bottom: 40px;
-
-    font-size: 10px;
-
-    letter-spacing: 3px;
-  }
-
-
-  .payment-icon {
-    width: 58px;
-    height: 58px;
-
-    margin-bottom: 26px;
-
-    font-size: 22px;
-  }
-
-
-  .payment-eyebrow {
-    font-size: 9px;
-
-    letter-spacing: 3px;
-  }
-
-
-  .payment-content h1 {
-    max-width: 350px;
-
-    font-size: 45px;
-
-    letter-spacing: -1.5px;
-
-    line-height: 1;
-  }
-
-
-  .payment-message {
-    max-width: 320px;
-
-    font-size: 13px;
-  }
-
-
-  .payment-divider {
-    width: 200px;
-
-    margin-top: 32px;
-  }
-
-
-  .payment-divider > span:not(
-    .divider-heart
-  ) {
-    width: 60px;
-  }
-
-
-  .payment-actions {
-    margin-top: 35px;
-
-    flex-direction: column;
-  }
-
-
-  .payment-button {
-    width: 100%;
-    max-width: 310px;
-  }
-
-
-  .side-brand {
-    display: none;
-  }
-
-
-  .sparkle-one {
-    top: 7%;
-    left: 8%;
-  }
-
-
-  .sparkle-two {
-    right: 8%;
-    bottom: 10%;
-  }
-
-
-  .bottom-note {
-    bottom: 22px;
-
-    font-size: 8px;
-
-    letter-spacing: 1.5px;
-  }
-
-}
-
-.payment-status-icon.attention {
-  border-color: #c28f55;
-  color: #9b6c38;
-  background: #fff8ef;
 }
