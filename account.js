@@ -476,6 +476,27 @@ async function loadUser() {
 
     }
 
+    const accountUserAvatar =
+  document.getElementById(
+    'accountUserAvatar'
+  );
+
+
+if (accountUserAvatar) {
+
+  const displayName =
+    currentUser.name ||
+    'BeautyLoft Customer';
+
+
+  accountUserAvatar.textContent =
+    displayName
+      .trim()
+      .charAt(0)
+      .toUpperCase();
+
+}
+
 
     /* PERSONAL DETAILS */
 

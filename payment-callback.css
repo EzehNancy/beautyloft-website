@@ -491,3 +491,9 @@ body {
   }
 
 }
+
+.payment-status-icon.attention {
+  border-color: #c28f55;
+  color: #9b6c38;
+  background: #fff8ef;
+}

@@ -153,27 +153,44 @@
       <aside class="account-sidebar">
 
 
-        <div class="account-user">
+       <div class="account-user">
 
-          <span class="account-user-label">
-            SIGNED IN AS
-          </span>
+  <div
+    class="account-user-avatar"
+    id="accountUserAvatar"
+  >
+    B
+  </div>
 
-          <strong id="sidebarUserName">
-            Loading...
-          </strong>
 
-        </div>
+  <div class="account-user-info">
+
+    <p class="account-user-label">
+      Signed in as
+    </p>
+
+    <p
+      class="account-user-name"
+      id="sidebarUserName"
+    >
+      BeautyLoft Customer
+    </p>
+
+  </div>
+
+</div>
 
 
         <nav class="account-navigation">
 
-          <a
-            href="account.html"
-            class="active"
-          >
-            <span>Account</span>
+          <a href="my-appointments.html">
+
+            <span>
+              My Appointments
+            </span>
+
             <span>→</span>
+
           </a>
 
 
@@ -184,6 +201,19 @@
 
           </a>
 
+
+          <a
+            href="account.html"
+            class="active"
+          >
+
+            <span>
+              My Account
+            </span>
+
+            <span>→</span>
+
+          </a>
 
           <a href="wishlist.html">
 
@@ -1127,6 +1157,8 @@
 </div>
 
   <script src="account.js"></script>
+  <script src="auth-nav.js"></script>
+  
 
 </body>
 

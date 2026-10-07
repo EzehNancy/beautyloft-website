@@ -151,53 +151,10 @@ let navHtml = `
   `;
 
 
-  // LOGOUT BUTTON
-
-  navHtml += `
-    <button id="logoutBtn">
-      Log out
-    </button>
-  `;
-
-
   authNavItem.innerHTML = navHtml;
 
 
-  // ========================================
-  // LOGOUT
-  // ========================================
-
-  document
-    .getElementById('logoutBtn')
-    .addEventListener(
-      'click',
-      function() {
-
-        fetch(
-          'https://beautyloft-backend.onrender.com/logout',
-          {
-            method: 'POST',
-
-            headers: {
-              'Authorization':
-                'Bearer ' + token
-            }
-          }
-        )
-          .then(function() {
-
-            localStorage.removeItem(
-              'authToken'
-            );
-
-            window.location.href =
-              'index.html';
-
-          });
-
-      }
-    );
-
+ 
 
   // ========================================
   // MODEL STATUS
